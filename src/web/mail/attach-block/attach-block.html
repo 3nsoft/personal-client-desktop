@@ -1,0 +1,27 @@
+<section class="attach-block" 
+  layout="row"
+  layout-align="start stretch">
+  <div class="btn-group">
+    <md-button class="md-raised"
+      ng-class="{disabled: $ctrl.disable}"
+      ng-click="$ctrl.attachFiles()" 
+      aria-label="attach">
+      <ng-md-icon icon="attach_file" 
+        size="24">
+      </ng-md-icon>
+    </md-button>
+  </div>
+
+  <div class="attach-group" 
+    layout="row" 
+    layout-wrap>
+    <attach-item ng-repeat="fileInfo in $ctrl.attached"
+      ng-hide="fileInfo.mode === 'delete'"   
+      file-info="fileInfo"
+      msg-key="$ctrl.msgKey"
+      file-action="$ctrl.attachItemAction(action, folderId, msgKey, fileName)" 
+      disable="$ctrl.disable">
+    </attach-item>
+  </div>
+
+</section>

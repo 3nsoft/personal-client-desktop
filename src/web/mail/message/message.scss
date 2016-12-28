@@ -1,0 +1,204 @@
+@import "../../config";
+.message {
+  .disabled {
+    pointer-events: none;
+  }
+
+  input[disabled="disabled"] {
+    background-color: white;
+  }
+
+  .field-name {
+    position: relative;
+    height: 48px;
+    width: 104px;
+    padding-bottom: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: $color01;
+  }
+
+  .subject, .send-from {
+    height: 48px;
+    padding: 0 16px;
+
+    .single {
+      position: relative;
+      border-style: none none solid;
+      border-bottom-width: 1px;
+      border-bottom-color: rgba(0, 0, 0, 0.117647);
+      width: calc(100% - 104px);
+      margin-bottom: 6px;
+      height: 35px;
+      font-size: 16px;
+      color: $color01;
+    }
+
+    .single:focus {
+      outline-color: white;
+      box-shadow: rgb(63, 81, 181) 0px 2px;
+    }
+
+  }
+
+  .send-from {
+    input {
+      color: $color12;
+    }
+
+    input[disabled] {
+      background-color: white;
+    }
+  }
+
+  .send-to, .copy, .hidden-copy {
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  md-chips {
+    position: relative;
+    width: calc(100% - 104px);
+    box-sizing: border-box;
+
+    md-chips-wrap {
+      padding-left: 0;
+      padding-bottom: 0;
+      min-height: 36px;
+
+      md-chip {
+        margin-right: 4px;
+        margin-top: 6px;
+        margin-bottom: 4px;
+        color: $color12;
+        height: 24px;
+        line-height: 24px;
+
+        .md-chip-remove-container {
+          height: 24px;
+          right: 2px;
+
+          .md-chip-remove {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .attached-header {
+    min-height: 44px;
+    height: 44px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 16px;
+  }
+
+  .attached-wrap {
+    attach-block {
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .editor {
+    position: relative;
+    padding: 0 16px;
+
+    button[aria-label="toogle_toolbar"] {
+      position: absolute;
+      min-width: 38px;
+      width: 38px;
+      min-height: 38px;
+      height: 38px;
+      margin: 0;
+      top: 0;
+      right: 16px;
+    }
+
+    ng-quill-editor {
+      .toolbar {
+        background-color: $color03;
+      }
+
+      .editor-container {
+        padding: 12px 0;
+      }
+    }
+  }
+}
+
+.msg-toast {
+  width: 400px;
+  padding: 0;
+  margin: 5px;
+  background-color: black;
+
+  .md-toast-content {
+    position: relative;
+    width: 100%;
+    padding: 10px 28px 8px 12px;
+    height: auto;
+
+    .md-toast-text {
+      position: relative;
+      width: 100%;
+      padding: 0;
+      font-size: 14px;
+
+      p {
+        margin: 0 0 4px 0;
+      }
+    }
+
+    .msgSuccess {
+      color: $color06;
+    }
+
+    .msgError {
+      color: $color05;
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 24px;
+      min-height: 24px;
+      height: 24px;
+      padding: 0;
+      margin: 2px;
+    }
+  }
+}
+
+.msg-move-dialog {
+
+  md-toolbar {
+    min-height: $box-height-01;
+    height: $box-height-01;
+    padding: 0 15px;
+
+    h4 {
+      margin: 0;
+    }
+
+    button {
+      position: absolute;
+      margin: 0 !important;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  md-dialog-content, md-dialog-actions {
+    padding: 15px;
+  }
+}
+
+md-select-menu {
+  md-content {
+    margin-right: 3px;
+  }
+}

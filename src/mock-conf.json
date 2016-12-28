@@ -1,0 +1,25 @@
+{
+	"users": [0],
+	"mail": {
+	    "existingUsers": [ {
+			"address": "joe.black@3nweb.com"
+		}, {
+			"address": "captain@3nweb.com"
+		}, {
+			"address": "philip@3nweb.com"
+		}, {
+			"address": "test@3nweb.com",
+			"inboxIsFull": true
+		} ],
+		"knownDomains": [ "3nweb.com", "3nweb.ru", "3nweb.by" ],
+		"misconfiguredDomains": [ "yahoo.com", "gmail.com" ],
+		"network": {
+			"latencyMillis": 100,
+			"downSpeedKBs": 2000,
+			"upSpeedKBs": 500
+		}
+	},
+	"storage": {
+		"apps": [ "computer.3nweb.mail", "computer.3nweb.contacts" ]
+	}
+}

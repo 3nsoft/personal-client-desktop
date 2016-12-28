@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="40" height="40">
+  <clipPath id="svgClip">
+    <path id="svgPath" d="M2.68,10 L2.68,30 20,40 37.32,30 37.32,10 20,0 z"/>
+  </clipPath>
+  <path id="svgMask" d="M2.68,10 L2.68,30 20,40 37.32,30 37.32,10 20,0 z"  />
+</svg>

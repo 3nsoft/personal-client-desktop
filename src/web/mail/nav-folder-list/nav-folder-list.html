@@ -1,0 +1,88 @@
+<section layout="column"
+  layout-align="start stretch"
+  class="folders-list">
+
+  <md-toolbar layout="row" 
+    layout-align="center center"
+    md-colors="{background: 'grey-50'}"
+    class="toolbar-xs">
+    <span ng-if="$ctrl.folders.modeSelect === 'normal'"
+      class="toolbar-title">
+      Folders
+    </span>
+    <div ng-if="$ctrl.folders.modeSelect !== 'normal'" 
+      class="folder-name-edit">
+      <input type="text" 
+        ng-model="$ctrl.folders.editName" 
+        id="editFolder" 
+        ng-keyup="$ctrl.preSaveCreateFolder($event)">
+      <md-button class="md-icon-button ok" 
+        ng-if="$ctrl.folders.editName.length > 0"
+        ng-click="$ctrl.saveEditFolder()"
+        aria-label="save created folder">
+        <ng-md-icon icon="done" size="24"></ng-md-icon>
+      </md-button>
+      <md-button class="md-icon-button cancel" 
+        ng-click="$ctrl.cancelCreateFolder()"
+        aria-label="cancel created folder">
+        <ng-md-icon icon="clear" size="24"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  
+  <md-toolbar layout="row" 
+    layout-align="space-between center"
+    md-colors="{background: 'blue-grey-100'}"
+    class="toolbar-xs">
+    
+    <div class="btn-group">
+      <md-button class="md-icon-button"
+        aria-label="create"
+        ng-click="$ctrl.createFolder()">
+        <ng-md-icon icon="create_new_folder" size="24"></ng-md-icon>
+      </md-button>
+       <md-button class="md-icon-button"
+        aria-label="receipt">
+        <ng-md-icon icon="receipt" size="24"></ng-md-icon>
+      </md-button>     
+      <md-button class="md-icon-button"
+        aria-label="edit"
+        ng-click="$ctrl.editFolder()">
+        <ng-md-icon icon="edit" size="24"></ng-md-icon>
+      </md-button>      
+    </div>
+    
+    <md-button class="md-icon-button"
+      aria-label="delete"
+      ng-click="$ctrl.deleteFolder($event)">
+      <ng-md-icon icon="delete" size="24"></ng-md-icon>
+    </md-button>
+    
+  </md-toolbar>
+  
+  <div class="folders-list-content" 
+    layout="column"
+    layout-align="start stretch">
+    <div layout="row"
+      layout-align="start center"
+      ng-repeat="(key, folder) in $ctrl.folders.list track by folder.folderId | orderBy:'orderNum'"
+      class="folders-item"
+      ng-class="{systemFolder: folder.isSystem, otherFolder: !folder.isSystem, selectFolder: folder.folderId === $ctrl.$stateParams.folderId}"
+      ng-click="$ctrl.selectFolder(folder.folderId)">
+      <!--ng-class="{systemFolder: folder.isSystem, otherFolder: !folder.isSystem, selectFolder: (folder.folderId === $ctrl.folders.idSelect) || (folder.folderId === $ctrl.$stateParams.folderId)}"-->
+      <ng-md-icon icon="folder_open" size="24"></ng-md-icon>
+      <span class="folder-name">
+        <span class="folder-name-map">
+          {{folder.folderName}}
+        </span>
+        <span>({{folder.messageIds.length}})</span>
+      </span>
+      <span ng-if="folder.qtNoRead > 0"
+        class="folder-no-read">
+        {{folder.qtNoRead}}
+      </span>
+    </div>
+  </div>
+
+</section>
+  

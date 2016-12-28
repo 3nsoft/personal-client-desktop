@@ -1,0 +1,159 @@
+@import "config";
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./lib-ext/fonts/opensans-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./lib-ext/fonts/opensans-italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./lib-ext/fonts/opensans-semibold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./lib-ext/fonts/opensans-semibolditalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+body {
+  background-color: white;
+}
+
+.general {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: OpenSans, Roboto, Helvetica Neue, Verdana, sans-serif;
+}
+
+div, button, section, p {
+  box-sizing: border-box;
+}
+
+.md-scroll-mask {
+  position: initial;
+}
+
+.hexMask {
+	-webkit-clip-path: polygon(20px 40px, 2.68px 30px, 2.68px 10px, 20px 0px, 37.32px 10px, 37.32px 30px);
+}
+
+.hex2Mask {
+	-webkit-clip-path: polygon(20px 40px, 15.36px 37.32px, 10px 37.32px, 7.32px 32.68px, 2.68px 30px, 2.68px 24.64px, 0px 20px, 2.68px 15.36px, 2.68px 10px, 7.32px 7.32px, 10px 2.68px, 15.36px 2.68px, 20px 0px, 24.64px 2.68px, 30px 2.68px, 32.68px 7.32px, 37.32px 10px, 37.32px 15.36px, 40px 20px, 37.32px 24.64px, 37.32px 30px, 32.68px 32.68px, 30px 37.32px, 24.64px 37.32px);
+}
+
+.elementHide {
+  display: none !important;
+}
+
+.elementBlock {
+  pointer-events: none !important;
+}
+
+md-dialog {
+  md-dialog-actions {
+    button.md-cancel-button {
+      background-color: $color08 !important;
+      opacity: 0.8;
+      color: white !important;
+
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+
+    button.md-confirm-button {
+      background-color: $color05 !important;
+      opacity: 0.8;
+      color: white !important;
+
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+  }
+}
+
+.btnRed {
+  background-color: $color05 !important;
+  color: white !important;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1 !important;
+    background-color: $color05 !important;
+  }
+
+  ng-md-icon {
+    fill: white;
+  }
+}
+
+.btnGreen {
+  background-color: $color06 !important;
+  color: white !important;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1 !important;
+    background-color: $color06 !important;
+  }
+
+  ng-md-icon {
+    fill: white;
+  }
+}
+
+.btnBlue {
+  background-color: $color12 !important;
+  color: white !important;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 11 !important;
+    background-color: $color12 !important;
+  }
+}
+
+button[disabled="disabled"] {
+  cursor: not-allowed !important;
+}
+
+.quote {
+  margin-left: 10px !important;
+  padding-left: 15px !important;
+  border-left: 1px solid $color13;
+}
+
+
+md-chips {
+  md-chips-wrap {
+    min-height: 40px;
+
+    md-chip {
+      md-chip-template {
+        .mailWrong {
+          text-decoration: line-through;
+          font-style: italic;
+          color: red;
+        }
+      }
+    }
+  }
+}

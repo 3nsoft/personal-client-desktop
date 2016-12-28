@@ -1,0 +1,116 @@
+<section class="basis"
+  ng-class="{blockUI: $ctrl.cacheSrv.general.blockUI}"
+  layout="column"
+  layout-align="start stretch">
+
+  <md-toolbar class="basisHeader"
+    layout="row"
+    layout-align="center center">
+
+    <div class="basisInfo"
+      layout="row"
+      layout-align="start center">
+        <div class="logo hexMask"
+          md-colors="{backgroundColor: 'light-blue-A400'}"
+          layout="row"
+          layout-align="center center">
+            <span>{{::$ctrl.username.substr(0, 2)}}</span>
+        </div>
+        <div class="username"
+          layout="column"
+          layout-align="center start">
+          <span>
+            {{::$ctrl.username.split("@")[0]}}
+          </span>
+          <span>
+            @{{::$ctrl.username.split("@")[1]}}
+          </span>
+        </div>
+    </div>
+
+    <div class="basisTab"
+      layout="row"
+      layout-align="center center">
+      <md-tabs md-selected="$ctrl.appSelected"
+        md-stretch-tabs="always"
+        md-no-ink-bar
+        md-no-pagination="true">
+        <md-tab ng-click="$ctrl.goApp('chat')"
+          ng-disabled="false">
+          <md-tab-label>
+            <ng-md-icon icon="chat" size="24"></ng-md-icon>
+          </md-tab-label>
+        </md-tab>
+        <md-tab ng-click="$ctrl.goApp('mail')">
+          <md-tab-label>
+            <ng-md-icon icon="mail_outline"
+              size="24">
+            </ng-md-icon>
+          </md-tab-label>
+        </md-tab>
+        <md-tab ng-click="$ctrl.goApp('contacts')"
+          ng-disabled="false">
+          <md-tab-label>
+            <ng-md-icon icon="person_outline"
+              size="24">
+            </ng-md-icon>
+          </md-tab-label>
+        </md-tab>
+        <md-tab ng-click="$ctrl.goApp('storage')"
+          ng-disabled="false">
+          <md-tab-label>
+            <ng-md-icon icon="cloud_queue"
+              size="24">
+            </ng-md-icon>
+          </md-tab-label>
+        </md-tab>
+      </md-tabs>
+    </div>
+
+    <div class="basisAction"
+      layout="row"
+      layout-align="end center">
+      <md-button class="md-icon-button"
+        aria-label="notifications"
+        ng-disabled="$ctrl.cacheSrv.notifications.list.length === 0"
+        ng-click="$ctrl.toggleSideNav('notifications')">
+        <ng-md-icon icon="report_problem" size="24"></ng-md-icon>
+      </md-button>
+      <md-button class="md-icon-button"
+        aria-label="search"
+        ng-disabled="true">
+        <ng-md-icon icon="search" size="24"></ng-md-icon>
+      </md-button>
+      <md-button class="md-icon-button"
+        aria-label="hash"
+        ng-disabled="true">
+        <ng-md-icon icon="label_outline" size="24"></ng-md-icon>
+      </md-button>
+      <md-button ng-if="$ctrl.appSelected === 1"
+        class="md-icon-button"
+        aria-label="folder"
+        ng-click="$ctrl.toggleSideNav('folders')">
+        <ng-md-icon icon="folder_open" size="24"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <section class="sidenav md-whiteframe-4dp"
+    ng-class="{sidenavOpen: $ctrl.sideNav.isOpen}">
+
+    <nav-folder-list ng-if="$ctrl.sideNav.isShow && ($ctrl.sideNav.content === 'folders')">
+    </nav-folder-list>
+
+    <notifications ng-if="$ctrl.sideNav.isShow &&  ($ctrl.sideNav.content === 'notifications')">
+    </notifications>
+
+  </section>
+
+
+  <div class="basisContent" ui-view></div>
+
+  <md-progress-linear md-mode="indeterminate"
+    ng-if="$ctrl.cacheSrv.general.progressBar"
+    class="prBar">
+  </md-progress-linear>
+</section>

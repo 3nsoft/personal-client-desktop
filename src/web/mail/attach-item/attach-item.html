@@ -1,0 +1,34 @@
+<section class="attach-item" 
+  layout="column"
+  layout-align="start stretch">
+  <div class="attach-item-pic" 
+    layout="column"
+    layout-align="end center" 
+    style="background-color: {{::$ctrl.moreInfo.color}}">
+    {{::$ctrl.moreInfo.fileSize}}
+    <md-button ng-hide="$ctrl.disable"
+      class="md-icon-button del" 
+      aria-label="delete_attach_item"
+      ng-click="$ctrl.delAttach()">
+      <ng-md-icon size="24" 
+        icon="clear">
+      </ng-md-icon>
+    </md-button>
+    <div class="attach-item-ext">
+      {{::$ctrl.moreInfo.fileExt}}
+    </div>
+    <md-button class="md-icon-button dwnload" 
+      aria-label="download_attach_item"
+      ng-if="$ctrl.fileInfo.mode === 'saved'" 
+      ng-click="$ctrl.downloadAttach()">
+      <ng-md-icon size="48" 
+        icon="file_download">
+      </ng-md-icon>
+    </md-button>
+  </div>
+  <div class="attach-item-name" 
+    layout="row"
+    layout-align="center center">
+      {{::$ctrl.fileInfo.name}}
+  </div>
+</section>

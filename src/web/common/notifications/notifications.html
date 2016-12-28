@@ -1,0 +1,42 @@
+<section class="notifs">
+
+  <md-toolbar layout="row"
+    layout-align="center center"
+    md-colors="{background: 'grey-50'}"
+    class="toolbar-xs">
+    <span>
+      Notifications
+    </span>
+  </md-toolbar>
+
+  <div class="notifs-list"
+    layout="column"
+    layout-align="start stretch">
+    <p ng-repeat="notif in $ctrl.notifs"
+      class="notifs-list-item"
+      ng-class="{typeAction: notif.type === 'action', typeInfo: notif.type === 'info'}"
+      ng-click="$ctrl.runNotifAction($index)">
+      <ng-md-icon icon="close"
+        ng-click="$ctrl.delNotif($index)"
+        class="notif-delete">
+      </ng-md-icon>
+      <ng-md-icon icon="chat"
+        ng-if="notif.app === 'messenger'"
+        class="notif-app">
+      </ng-md-icon>
+      <ng-md-icon icon="mail_outline"
+        ng-if="notif.app === 'mail'"
+        class="notif-app">
+      </ng-md-icon>
+      <ng-md-icon icon="person_outline"
+        ng-if="notif.app === 'contact'"
+        class="notif-app">
+      </ng-md-icon>
+      <ng-md-icon icon="cloud_queue"
+        ng-if="notif.app === 'storage'"
+        class="notif-app">
+      </ng-md-icon>
+      {{::notif.text}}
+    </p>
+  </div>
+</section>

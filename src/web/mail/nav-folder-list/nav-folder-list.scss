@@ -1,0 +1,151 @@
+@import "../../config";
+.folders-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  .toolbar-xs {
+    min-height: 48px;
+    max-height: 48px;
+    height: 48px;
+
+    .folder-name-edit {
+      width: 100%;
+      padding-left: 10px;
+
+      input {
+        position: relative;
+        width: calc(100% - 40px);
+        border: none;
+        outline-width: 0;
+        background-color: inherit;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      
+      .ok {
+        position: absolute;
+        margin: 0;
+        top: 5px;
+        right: 40px;
+      }
+
+      .cancel {
+        position: absolute;
+        margin: 0;
+        top: 5px;
+        right: 0;
+
+        ng-md-icon {
+          fill: $color05;
+        }
+      }
+    }
+    
+    .btn-group {
+      position: relative;
+      margin-left: 4px;
+    }
+    
+    .md-icon-button {
+      margin: 0;
+      
+      ng-md-icon {
+        fill: rgba(0, 0, 0, 0.54);
+      }
+    }
+    
+    button[aria-label="delete"] {
+      margin-right: 4px;
+    }
+  }
+  
+  .toolbar-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.67);
+  }
+  
+  .folders-list-content {
+    position: relative;
+    padding: 0;
+    height: calc(100% - 96px);
+    overflow-y: auto;
+    
+    .folders-item {
+      position: relative;
+      min-height: 44px;
+      height: 44px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      cursor: pointer;   
+      
+      ng-md-icon {
+        margin: 0 12px 0 16px;
+        -webkit-user-select: none;
+      }
+      
+      .folder-name {
+        display: block;
+        position: relative;
+        width: calc(100% - 98px);
+        font-size: 16px;
+        font-weight: 500;
+        -webkit-user-select: none;
+        
+        // input {
+        //   position: relative;
+        //   width: calc(100% - 20px);
+        //   border: none;
+        //   outline-width: 0;
+        //   background-color: inherit;
+        // }
+        
+        // button {
+        //   position: absolute;
+        //   margin: 0;
+        //   top: -10px;
+        //   right: -40px;
+        // }
+      }
+      
+      .folder-no-read {
+        display: block;
+        position: relative;
+        width: 30px;
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+        margin: 0 16px 0 0;
+        text-align: right;
+        -webkit-user-select: none;
+      }    
+    }
+    
+    .systemFolder {
+      ng-md-icon {
+        fill: #3675a8;
+      }
+      
+      .folder-name {
+        color: #3675a8;
+      }
+    }      
+
+    .otherFolder {  
+      ng-md-icon {
+        fill: #4caf50;
+      }
+      
+      .folder-name {
+        color: #4caf50;
+      }
+    }
+    
+    .selectFolder {
+      background-color: rgba(79, 170, 244, 0.54);
+      outline-width: 0; 
+    }  
+    
+  }
+  
+}

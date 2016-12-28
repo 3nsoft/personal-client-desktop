@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "removeComments": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noEmitOnError": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

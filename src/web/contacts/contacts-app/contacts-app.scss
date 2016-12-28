@@ -1,0 +1,18 @@
+.contactApp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+
+  .contact-list {
+    position: relative;
+    width: 380px;
+  }
+
+  .contacts-content {
+    position: relative;
+    width: calc(100% - 380px);
+  }
+}
