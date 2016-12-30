@@ -71,14 +71,14 @@
           {{$ctrl.msgMap.timeCr | date:"dd MMM"}}
         </span>       
         <span class="lopped">
-          {{$ctrl.msgMap.subject}}
+          {{(!!$ctrl.msgMap.subject) ? $ctrl.msgMap.subject : ""}}
         </span>
       </div>
       <div class="info-03"
         layout="row" 
         layout-align="start center">
         <span class="lopped">
-          {{$ctrl.msgMap.body}}
+          {{(!!$ctrl.msgMap.body) ? $ctrl.msgMap.body : ""}}
         </span>
       </div>
   </div>

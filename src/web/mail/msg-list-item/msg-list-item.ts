@@ -16,7 +16,7 @@ class Controller {
   constructor(
     private $scope: angular.IScope, 
     private $timeout: angular.ITimeoutService
-    ) {}
+  ) {}
 
   isToday(): boolean {
     let now = new Date();

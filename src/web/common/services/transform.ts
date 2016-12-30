@@ -208,7 +208,7 @@ export function getColor(initials: string): string {
   };
 
 	let code: number = (initials.charCodeAt(0) + initials.charCodeAt(1)) % 32;
-	let codeStr = (initials[0] == "?") ? "?" : code.toFixed();
+	let codeStr = (initials[0] === "?") ? "?" : code.toFixed();
 
 	return COLOR_AVATAR[codeStr];
 }
@@ -265,9 +265,9 @@ export function msgJsonToMapping(msgJSON: client3N.MessageJSON, folderId: string
   let result: client3N.MessageMapping = {
       msgId: tmpMsgId,
       msgKey: tmpKey,
-      mailAddress: msgJSON.mailAddressTO[0],
-      subject: (msgJSON.subject.length > 47) ? msgJSON.subject.substr(0, 47) + "..." : msgJSON.subject,
-      body: (html2text(msgJSON.bodyHTML).length > 47) ? html2text(msgJSON.bodyHTML).substr(0, 47) + "..." : html2text(msgJSON.bodyHTML),
+      mailAddress: (msgJSON.mailAddressTO.length > 0) ? msgJSON.mailAddressTO[0] : "",
+      subject: !!msgJSON.subject ? ((msgJSON.subject.length > 47) ? msgJSON.subject.substr(0, 47) + "..." : msgJSON.subject) : "",
+      body: (!!html2text(msgJSON.bodyHTML)) ? (html2text(msgJSON.bodyHTML).length > 47) ? html2text(msgJSON.bodyHTML).substr(0, 47) + "..." : html2text(msgJSON.bodyHTML) : "",
       timeCr: Number(tmpMsgId),
       // isAttached: (msgJSON.attached.length > 0) ? true : false,
       isAttached: _isAttached(msgJSON.attached),
@@ -280,8 +280,8 @@ export function msgJsonToMapping(msgJSON: client3N.MessageJSON, folderId: string
       isGroup: ((msgJSON.mailAddressTO.length + msgJSON.mailAddressCC.length) > 1) ? true : false,
       isSendError: (msgJSON.mailAddressErrors) ? true : false,
       //contactId:
-      initials: msgJSON.mailAddressTO[0].substr(0, 2),
-      color: getColor(msgJSON.mailAddressTO[0].substr(0, 2))
+      initials: (msgJSON.mailAddressTO.length > 0) ? msgJSON.mailAddressTO[0].substr(0, 2) : "??",
+      color: (msgJSON.mailAddressTO.length > 0) ? getColor(msgJSON.mailAddressTO[0].substr(0, 2)) : getColor("??")
   };
 
   return result;
@@ -300,13 +300,14 @@ export function msgJsonToMapping(msgJSON: client3N.MessageJSON, folderId: string
      tmpMsgMap.msgId = inMsg.msgId;
      tmpMsgMap.msgKey = newMsgKey("in", inMsg.msgId);
      tmpMsgMap.mailAddress = inMsg.sender;
-     tmpMsgMap.subject = (inMsg.subject.length > 47) ? inMsg.subject.substr(0, 47) + "..." : inMsg.subject;
+     tmpMsgMap.subject = !!inMsg.subject ? ((inMsg.subject.length > 47) ? inMsg.subject.substr(0, 47) + "..." : inMsg.subject) : "";
      if ("htmlTxtBody" in inMsg) {
        tmpMsgMap.body = (html2text(inMsg.htmlTxtBody).length > 47) ? html2text(inMsg.htmlTxtBody).substr(0, 47) + "..." : html2text(inMsg.htmlTxtBody);
-     } else {
+     }
+     if ("plainTxtBody" in inMsg) {
        tmpMsgMap.body = (html2text(inMsg.plainTxtBody).length > 47) ? html2text(inMsg.plainTxtBody).substr(0, 47) + "..." : html2text(inMsg.plainTxtBody);
      }
-     tmpMsgMap.body = (tmpMsgMap.body === undefined) ? "" : tmpMsgMap.body;
+     tmpMsgMap.body = (!!tmpMsgMap.body) ? tmpMsgMap.body: "";
      tmpMsgMap.timeCr = inMsg.deliveryTS;
      tmpMsgMap.isAttached = ("attachments" in inMsg) ? true : false;
      tmpMsgMap.folderId = Constants.SYS_MAIL_FOLDERS.inbox;

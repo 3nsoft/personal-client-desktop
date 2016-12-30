@@ -104,9 +104,10 @@ class Controller {
      * обработка события "запущенного" в контроллере компонента "folder"
      */
     private async saveMsgInDraft(): Promise<void> {
-      if ((this.msg.mailAddressTO.length + this.msg.mailAddressCC.length + this.msg.mailAddressBC.length) !== 0) {
-        await this.mailActionSrv.saveMsgInDraftFolder(this.msg, this.attachedFiles);
-      }
+      // if ((this.msg.mailAddressTO.length + this.msg.mailAddressCC.length + this.msg.mailAddressBC.length) !== 0) {
+      //   await this.mailActionSrv.saveMsgInDraftFolder(this.msg, this.attachedFiles);
+      // }
+      await this.mailActionSrv.saveMsgInDraftFolder(this.msg, this.attachedFiles);
     };
 
     /**
