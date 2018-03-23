@@ -1,0 +1,87 @@
+<section class="chat-content-msg"
+  id="{{$ctrl.mId}}"
+  ng-class="{'chat-content-msg_in': $ctrl.msgIn, 'chat-content-msg_out': !$ctrl.msgIn}">
+  <div ng-if="!$ctrl.sameDates()"
+    class="chat-content-msg__date">
+    {{$ctrl.getMsgDate()}}
+  </div>
+
+  <div class="chat-content-msg__title"
+    ng-class="{'chat-content-msg__title-offset': $ctrl.isGroup}">
+    <div ng-if="$ctrl.isGroup && $ctrl.msgIn && !$ctrl.sameDateTime()"
+      class="chat-content-msg__title--name">
+        {{::$ctrl.creator.name}}
+    </div>
+    <div ng-if="!$ctrl.sameDateTime()"
+      class="chat-content-msg__title--timestamp">
+      {{$ctrl.getTimestamp()}}
+    </div>
+  </div>
+
+  <div class="chat-content-msg__body">
+    <div ng-if="$ctrl.isGroup && $ctrl.msgIn"
+      class="chat-content-msg__body--avatar">
+      <div ng-if="!$ctrl.sameDateTime()"
+        class="chat-content-msg__body--avatar-content hexMask"
+        ng-style="{'background-color': $ctrl.creator.bgColor, 'color': $ctrl.creator.color}">
+        {{::$ctrl.creator.initials | uppercase}}
+      </div>
+    </div>
+    <div ng-if="!$ctrl.msgIn"
+      class="chat-content-msg__body--flags">
+      <ng-md-icon ng-if="$ctrl.msg.outMsg === 'sended'"
+        icon="done"
+        size="18">
+      </ng-md-icon>
+      <ng-md-icon ng-if="$ctrl.msg.outMsg === 'read'"
+        icon="done_all"
+        size="18">
+      </ng-md-icon>
+    </div>
+    <div ng-if="$ctrl.msg.attached.length === 0"
+      class="chat-content-msg__body--content"
+      ng-style="{'max-width: 100%': $ctrl.msgIn && !$ctrl.msg.isGroup, 'max-width: calc(100% - 44px)': $ctrl.msgIn && $ctrl.msg.isGroup}"
+      ng-bind-html="$ctrl.msg.text | embed">
+    </div>
+
+    <div ng-if="$ctrl.msg.attached.length > 0"
+      ng-style="{'max-width: 100%': $ctrl.msgIn && !$ctrl.msg.isGroup, 'max-width: calc(100% - 44px)': $ctrl.msgIn && $ctrl.msg.isGroup}"
+      class="chat-content-msg__body--attach">
+      <div ng-if="$ctrl.msg.attached.length === 1"
+        class="chat-content-msg__body--attach-item"
+        ng-click="$ctrl.download(0)">
+        {{$ctrl.msg.attached[0].name}}
+        <span>&nbsp;{{$ctrl.getFileSize($ctrl.msg.attached[0].size)}}</span>
+        <ng-md-icon ng-if="ctrl.msg.attached[0].mode === 'saved'"
+          icon="file_download">
+        </ng-md-icon>
+      </div>
+
+      <div ng-if="$ctrl.msg.attached.length > 1"
+        class="chat-content-msg__body--attach-group">
+        <div class="chat-content-msg__body--attach-group-title">
+          <span>Attached files ({{$ctrl.msg.attached.length}}):</span>
+          <md-button class="md-icon-button"
+            aria-label="Open"
+            ng-click="$ctrl.attachWrapOpen = !$ctrl.attachWrapOpen">
+            <ng-md-icon ng-if="!$ctrl.attachWrapOpen" icon="expand_more">
+            </ng-md-icon>
+            <ng-md-icon ng-if="$ctrl.attachWrapOpen" icon="expand_less">
+            </ng-md-icon>
+        </div>
+        
+        <div ng-repeat="item in $ctrl.msg.attached"
+          class="chat-content-msg__body--attach-group-item"
+          ng-class="{'chat-content-msg__body--attach-group-item-open': $ctrl.attachWrapOpen, 'chat-content-msg__body--attach-group-item-close': !$ctrl.attachWrapOpen}"
+          ng-click="$ctrl.download($index)">
+          {{item.name}}
+          <span>&nbsp;{{$ctrl.getFileSize(item.size)}}</span>
+          <ng-md-icon ng-if="item.mode === 'saved'"
+            icon="file_download">
+          </ng-md-icon>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

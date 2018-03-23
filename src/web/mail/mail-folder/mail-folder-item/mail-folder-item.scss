@@ -1,0 +1,139 @@
+@import '../../../config';
+
+.folder-item {
+  position: relative;
+  width: 100%;
+  height: 72px;
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  &:focus {
+    outline-width: 0;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    width: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    .avatar {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      transform: scale(0.8, 0.8);
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 1px $color03, 0 -1px $color03;
+    }
+  }
+
+  .content-wrap {
+    position: relative;
+    width: calc(100% - 48px);
+    padding: 8px 0;
+
+    .info01 {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      height: 24px;
+
+      .noRead {
+        font-weight: bold;
+      }
+
+      .contact {
+        position: relative;
+        width: calc(100% - 80px);
+        height: 23px;
+        line-height: 23px;
+        font-size: 14px;
+        color: $color01;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        float: left;
+      }
+
+      .flags {
+        position: relative;
+        width: 80px;
+        height: 18px;
+        float: right;
+
+        ng-md-icon {
+          margin: 0 0 0 2px;
+          height: 18px;
+          width: 18px;
+
+          svg {
+            height: 18px;
+            width: 18px;
+          }
+        }
+
+      }
+    }
+
+    .info02, .info03 {
+      position: relative;
+      width: 100%;
+      height: 16px;
+    }
+
+    .info02 {
+      .subj {
+        position: relative;
+        width: calc(100% - 48px);
+        height: 16px;
+        line-height: 16px;
+        font-size: 12px;
+        font-weight: bold;
+        color: $color01;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        float: left;
+
+        &_no {
+          color: $color02;
+          font-style: italic;
+        }
+      }
+
+      .time {
+        position: relative;
+        width: 48px;
+        height: 16px;
+        line-height: 16px;
+        text-align: right;
+        color: $color01;
+        font-size: 12px;
+        font-weight: bold;
+        font-style: italic;
+        float: right;
+      }
+    }
+
+    .info03 {
+      line-height: 16px;
+      font-size: 12px;
+      color: $color01;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

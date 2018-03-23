@@ -1,25 +1,27 @@
 {
   "name": "3n-client",
   "version": "0.2.1",
-  "description": "3N Desktop Client",
-  "author": "3N Soft",
+  "description": "3NWeb platform desktop client",
+  "author": "3NSoft Inc.",
   "license": "GPL-3.0",
   "dependencies": {
+    "rxjs": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "",
     "browser-sync": "2.11.1",
     "browserify": "^13.0.0",
     "del": "2.2.0",
-    "gulp-concat-css": "^2.3.0",
-    "gulp-sass": "^2.3.0",
-    "gulp-shell": "^0.5.2",
+    "gulp": "^4.0.0",
+    "gulp-concat-css": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.2.0",
-    "gulp-typescript": "^3.1.2",
+    "gulp-typescript": "^4.0.1",
     "gulp-uglify": "^2.0.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "devDependencies": {
-    "gulp": "github:gulpjs/gulp#4.0",
-    "typescript": "^2.0.3"
+    "typescript": "^2.7.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
     "gulp": "./node_modules/.bin/gulp"

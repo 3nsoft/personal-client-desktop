@@ -1,0 +1,206 @@
+@import "../../config";
+
+.person {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .person-activity {
+    position: relative;
+    width: calc(100% - 285px);
+    overflow-y: auto;
+
+    .person-activity-title {
+      position: relative;
+      width: 100%;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.67);
+    }
+
+    .person-activity-btns {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      background-color: rgba(0, 0, 0, 0.12);
+
+      .btn-wrap {
+        position: relative;
+        width: 40px;
+        height: 48px;
+
+        button {
+          position: relative;
+          min-width: 40px;
+          width: 40px;
+          min-height: 32px;
+          height: 32px;
+          padding: 0;
+          margin: 0;
+
+          ng-md-icon {
+            width: 24px;
+            height: 24px;
+            fill: #3675a8;
+            padding: 0;
+          }
+        }
+
+        .value {
+          display: block;
+          position: relative;
+          width: 100%;
+          height: 16px;
+          line-height: 16px;
+          font-size: 14px;
+          font-style: italic;
+          text-align: center;
+          color: #3675a8;
+        }
+      }
+    }
+
+    .person-activity-content {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 100px);
+      overflow-y: auto;
+
+      .no-activity-text {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        font-size: 24px;
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.67);
+      }
+    }
+  }
+
+  .person-info {
+    position: relative;
+    width: 285px;
+    overflow-y: auto;
+
+    .person-info-title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 36px;
+      line-height: 36px;
+      background-color: rgba(0, 0, 0, 0.54);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .person-info-avatar {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .person-info-btns {
+      position: absolute;
+      width: calc(100% - 32px);
+      height: 36px;
+      top: 138px;
+      left: 16px;
+
+      .person-btn {
+        position: relative;
+        min-width: 36px;
+        width: 36px;
+        min-height: 36px;
+        height: 36px;
+        background-color: #ffffff;
+        padding: 0;
+        margin: 0 16px 0 0;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        float: left;
+
+        ng-md-icon {
+          width: 24px;
+          height: 24px;
+          fill: rgba(0, 0, 0, 0.54);
+        }
+      }
+
+      .person-dbl-btn {
+        position: relative;
+        min-width: 60px;
+        width: 60px;
+        min-height: 36px;
+        height: 36px;
+        background-color: #ffffff;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        float: right;
+
+        ng-md-icon {
+          position: relative;
+          width: 24px;
+          height: 24px;
+          fill: rgba(0, 0, 0, 0.54);
+
+          &:first-child {
+            left: 2px;
+          }
+
+          &:last-child {
+            right: 2px;
+          }
+        }
+      }
+    }
+
+    .person-info-content {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 190px);
+      overflow-y: auto;
+      padding: 0 16px;
+
+      .person-info-content-item {
+        position: relative;
+        width: 100%;
+        height: 64px;
+
+        .label {
+          position: relative;
+          height: 24px;
+          font-size: 14px;
+          font-weight: bold;
+          color: $color01;
+        }
+
+        .field {
+          position: relative;
+          box-sizing: border-box;
+          height: 34px;
+          padding-bottom: 4px;
+          margin-bottom: 6px;
+          font-size: 16px;
+          color: #3675a8;
+          border-bottom: 1px solid rgba(0,0,0,0.12);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+  }
+}

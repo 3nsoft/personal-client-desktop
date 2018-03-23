@@ -1,0 +1,59 @@
+{
+	"name": "3NWeb client",
+	
+	"appDomain": "3nweb.computer",
+
+	"capsRequested": {
+
+		"device": {
+			"fileDialog": "all"
+		},
+
+		"mail": {
+			"sendingTo": "all",
+			"receivingFrom": "all"
+		},
+
+		"openViewer": "all",
+
+		"openWithOSApp": "all",
+
+		"openChildWindow": "all",
+
+		"storage": {
+			"appFS" : [
+				{
+					"domain": "mail.3nweb.computer",
+					"storage": "synced-n-local"
+				}, {
+					"domain": "contacts.3nweb.computer",
+					"storage": "synced-n-local"
+				}, {
+					"domain": "tags.3nweb.computer",
+					"storage": "synced-n-local"
+				}, {
+					"domain": "chat.3nweb.computer",
+					"storage": "synced-n-local"
+				}, {
+					"domain": "storage.3nweb.computer",
+					"storage": "synced-n-local"
+				}, {
+					"domain": "test.3nweb.computer",
+					"storage": "synced-n-local"
+				}
+			],
+			"userFS": "all",
+			"sysFS": "all"
+		}
+
+	},
+
+	"windowOpts": {
+		"width": 1200,
+		"height": 700,
+		"minWidth": 1024,
+		"minHeight": 600,
+		"maxWidth": 1440
+	}
+
+}

@@ -1,1 +1,17 @@
-<img src="templates/common/images/chat-preview.png">
+<section class="chat-app">
+  <div class="chat-app__list">
+    <div class="chat-app__list--toolbar">
+      <md-button class="chat-app__list--toolbar-btn"
+        ng-click="$ctrl.newChat()">
+        NEW CHAT
+      </md-button>
+    </div>
+    <div class="chat-app__list--content">
+      <chat-list></chat-list>
+    </div>
+  </div>
+  <div ui-view 
+    class="chat-app__chat">
+    <img src="templates/mail/mail-folder/3n.png">
+  </div>
+</section>

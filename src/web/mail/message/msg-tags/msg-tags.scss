@@ -1,0 +1,219 @@
+@import '../../../config';
+
+.msg-tags {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 0 8px 0 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+
+	&__add {
+		position: relative;
+		height: 48px;
+		width: 48px;
+		margin: 0;
+		
+		ng-md-icon {
+			fill: $color06;
+		}
+	}
+
+	&__content {
+		position: relative;
+		width: calc(100% - 48px);
+		height: 48px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: $color06;
+	}
+
+}
+
+#msgTagModalWrap {
+	position: fixed;
+	display: none;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	pointer-events: auto;
+
+	#msgTagModal {
+		position: absolute;
+		width: 285px;
+		background-color: #ffffff;
+		border-radius: 4px;
+		box-shadow: 0 0 2px 2px $color03;
+		transition: height 0.2s ease-in-out;
+		transition: opacity 0.2s linear;
+		transition: top 0.2s ease-in-out;
+
+		&.open-modal {
+			height: 400px;
+			opacity: 1;
+			top: 132px;
+		}
+	
+		&.close-modal {
+			height: 0;
+			opacity: 0;
+			top: 200px;
+		}
+
+		.modal {
+			&__triangle {
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				top: -6px;
+				left: 40px;
+				box-shadow: 0 0 2px 2px $color03;
+				transform: rotate(45deg);
+				opacity: 0;
+
+				&::after {
+					content: '';
+					position: absolute;
+					width: 11px;
+					height: 11px;
+					background-color: #ffffff;
+					z-index: 1;
+					left: 0;
+					top: 0;
+				}
+			}
+
+
+			&__content {
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				background-color: #ffffff;
+
+				&--header {
+					position: relative;
+					width: 100%;
+					height: 48px;
+					padding: 8px 0;
+					border-bottom: 1px solid $color03;
+
+					input {
+						position: relative;
+						box-sizing: border-box;
+						width: calc(100% - 72px);
+						height: 32px;
+						border: none;
+						outline-width: 0;
+						padding: 0 8px 0 16px;
+						font-size: 14px;
+
+						// &:focus {
+						// 	border-bottom: 1px solid $color12;
+						// }
+					}
+
+					input::-webkit-input-placeholder {
+						font-style: italic;
+					}
+
+					button {
+						margin: 0 !important;
+						width: 30px;
+						min-height: 30px;
+						height: 30px;
+						padding: 3px;
+			
+						&.ok {
+							ng-md-icon {
+								fill: $color06;
+							}
+						}
+			
+						&.cancel {
+							ng-md-icon {
+								fill: $color04;
+							}
+						}
+					}
+				}
+
+				// &--footer {
+				// 	position: relative;
+				// 	width: 100%;
+				// 	height: 56px;
+				// 	padding: 10px 16px;
+				// 	border-top: 1px solid $color03;
+				// 	text-align: right;
+
+				// 	button {
+				// 		@include button3n($color06);
+				// 		margin: 0;
+				// 	}
+				// }
+
+				&--body {
+					position: relative;
+					width: 100%;
+					height: calc(100% - 50px);
+					margin: 8px 0;
+					padding: 0;
+					overflow-y: auto;
+
+					&-notadded, &-added {
+						position: relative;
+						width: 100%;
+						padding-bottom: 8px;
+					}
+
+					&-notadded {
+						border-bottom: 1px solid $color03;
+					}
+
+					&-title {
+						position: relative;
+						height: 32px;
+						line-height: 32px;
+						padding: 0 16px;
+						margin: 0;
+						font-size: 16px;
+						color: $color02;
+					}
+
+					&-item {
+						position: relative;
+						width: 100%;
+						height: 32px;
+						line-height: 32px;
+						padding: 0 16px;
+						font-size: 16px;
+						color: $color06;
+						cursor: pointer;
+
+						&:hover {
+							background-color: rgba(160, 209, 249, 0.54);
+						}
+
+						&:focus {
+							border: none;
+							outline-width: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

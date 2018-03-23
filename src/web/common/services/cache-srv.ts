@@ -7,50 +7,67 @@
 
  You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>. */
 
-
-export let ModulName = "3nweb.services.cache";
+export let ModuleName = "3nClient.services.cache";
 export let CacheSrvName = "cacheService";
 
 
 export function addService(angular: angular.IAngularStatic): void {
-  let mod = angular.module(ModulName, []);
+  let mod = angular.module(ModuleName, []);
   mod.service(CacheSrvName, Cache);
 }
 
 export class Cache {
   public username: string;
+  public general: {
+    appSelected: number;
+    progressBar: boolean;
+    blockUI: boolean;
+    observeSendings: string[];
+  };
   public folders: {
-    list?: { [id: string]: client3N.MailFolderMapping };
-    selectId?: string;
+    list?: { [id: string]: client3N.MailFolderMapping },
+    selectId?: string
   };
   public messages: {
     list?: { [id: string]: client3N.MessageMapping };
     selectId?: string;
     selectMode?: string;
+    contactsForCreateFrom: string[];
     refreshTS?: number;
     progeessCbId: number;
     sendStatus?: number;
-  };
-  public general: {
-    progressBar: boolean;
-    blockUI: boolean;
+    unreadMsgQuantity?: number;
   };
   public notifications: {
     list: client3N.Notification[]
   };
   public contacts: {
-    list: {
-      contact: { [id: string]: any },
-      group: {[id: string]: any}
-    },
-    section: string;
-    cMode: string;
-    select: {
-      contactId: string;
-      groupId: string;
-    }
-
+    list: { [id: string]: client3N.PersonMapping },
+    letters: string[],
+    total: number,
+    select: string,
+    marked: string[],
+    cMode: string
   };
+  public groups: {
+    list: { [id: string]: client3N.GroupMapping },
+    letters: string[],
+    total: number,
+    select: string,
+    grMode: string,
+  };
+  public tags: {
+    list: client3N.Tag[]
+  };
+  public chats: {
+    list: client3N.ChatRoom[];
+    selected: string;
+    selectedMembers?: string[];
+    logContent: client3N.ChatLog[];
+    refreshTS?: number;
+    unreadChatsQuantity?: number;
+  };
+
 
   static $inject = ["$rootScope"];
   constructor(
@@ -65,20 +82,48 @@ export class Cache {
       list: null,
       selectId: null,
       selectMode: "hide",
+      contactsForCreateFrom: [],
       refreshTS: 0,
       progeessCbId: null,
-      sendStatus: 0
+      sendStatus: 0,
+      unreadMsgQuantity: 0
     };
     this.general = {
       progressBar: false,
-      blockUI: false
+      blockUI: false,
+      appSelected: 1,
+      observeSendings: []
     };
     this.notifications = {
       list: []
     };
+    this.contacts = {
+      list: {},
+      letters: [],
+      total: 0,
+      select: null,
+      marked: [],
+      cMode: "hide"
+    };
+    this.groups = {
+      list: {},
+      letters: [],
+      total: 0,
+      select: null,
+      grMode: "hide"
+    };
+    this.tags = {
+      list: []
+    };
+    this.chats = {
+      list: [],
+      selected: null,
+      selectedMembers: [],
+      logContent: [],
+      refreshTS: 0,
+      unreadChatsQuantity: 0
+    };
 
   }
-
-
 
 }

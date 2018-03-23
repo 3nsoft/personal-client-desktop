@@ -1,0 +1,53 @@
+<section class="msg-attach">
+  <div class="attach-actions">
+    <span ng-if="!$ctrl.attached || ($ctrl.attached.length === 0)">
+      No attached files
+    </span>
+    <span ng-if="$ctrl.attached.length > 0">
+      {{$ctrl.attached.length}} attached file<span ng-if="$ctrl.attached.length > 1">s</span>
+    </span>
+    <div ng-if="!$ctrl.readOnly"
+      class="actions">
+      &nbsp;&nbsp;(&nbsp;
+        <a role="button"
+          ng-click="$ctrl.attachFiles()"
+          class="attach">
+          Attach files
+        </a>
+        <span ng-if="$ctrl.attached.length > 0">&nbsp;|&nbsp;</span>
+        <a ng-if="$ctrl.attached.length > 0"
+          role="button"
+          ng-click="$ctrl.deleteFiles()"
+          class="delete">
+          Delete all files
+        </a>
+      &nbsp;)
+    </div>
+    <md-button ng-if="$ctrl.attached.length > 0"
+      aria-label="open list"
+      ng-click="$ctrl.openList()"
+      class="md-icon-button open">
+      <ng-md-icon ng-if="!$ctrl.listIsOpen" icon="expand_more"></ng-md-icon>
+      <ng-md-icon ng-if="$ctrl.listIsOpen" icon="expand_less"></ng-md-icon>
+    </md-button>
+  </div>
+  <div ng-if="$ctrl.listIsOpen"
+    class="attach-list">
+    <div ng-repeat="attachItem in $ctrl.attached"
+      ng-if="attachItem.mode !== 'delete'"
+      class="attach-item">
+      <div ng-click="$ctrl.downloadFile($index)"
+        class="filename">
+        {{attachItem.name}}
+        <ng-md-icon ng-if="(attachItem.mode === 'saved') && ($ctrl._cacheSrv.messages.list[$ctrl.msgId].folderId !== $ctrl.MAIL_FOLDER_IDS.outbox)"
+          icon="file_download">
+        </ng-md-icon>
+      </div>
+      <ng-md-icon ng-if="!$ctrl.readOnly"
+        aria-label="delete one attachments"
+        ng-click="$ctrl.delFile($index)"
+        icon="close">
+      </ng-md-icon>
+    </div>
+  </div>
+</section>

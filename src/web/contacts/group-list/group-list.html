@@ -1,0 +1,32 @@
+<md-content class="gr-list">
+  <div class="gr-list-letter"
+    ng-repeat="symbol in $ctrl.cacheSrv.groups.letters">
+    <md-subheader class="gr-list-letter-title">
+      {{(symbol !== " ") ? symbol : "System groups"}}
+    </md-subheader>
+    <div class="gr-list-item" id="g{{group.groupId}}"
+      ng-repeat="group in ($ctrl.cacheSrv.groups.list | toArray) | filter: {letter: symbol} | orderBy:'name'"
+      layout="row"
+      layout-align="start center"
+      ng-class="{select: group.groupId === $ctrl.cacheSrv.groups.select}"
+      ng-click="$ctrl.selectGroup($event, group)">
+      <div ng-if="group.minAvatar !== ''"
+        class="avatar-field image hex2Mask"
+        ng-style="{'background-image': 'url(' + group.minAvatar + ')'}">
+      </div>
+      <div ng-if="group.minAvatar === ''"
+        class="avatar-field initials hex2Mask"
+        ng-style="{'background-color': group.color, color: $ctrl.invertColor(group.color)}"
+        layout="row"
+        layout-align="center center">
+        {{group.initials | uppercase}}
+      </div>
+      <div class="name-field"
+        layout="row"
+        layout-align="start center">
+        <span class="name">{{group.name}}</span>
+        <span>&nbsp;({{group.members.length}})</span>
+      </div>
+    </div>
+  </div>
+</md-content>

@@ -1,0 +1,214 @@
+@import "../../config";
+
+.edit-person-form-wrap {
+  max-height: 100%;
+}
+
+.edit-person-form {
+  position: relative;
+  width: 380px;
+
+  .person-avatar {
+    position: relative;
+    width: 100%;
+    height: 242px;
+    margin: 0 0 12px 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 48px;
+    width: 48px;
+    min-height: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+
+    ng-md-icon {
+      fill: #ffffff;
+
+      svg {
+        stroke: rgba(0, 0, 0, 0.3);
+        stroke-width: 1px;
+      }
+    }
+  }
+
+  .person-avatar-photo-action {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    left: calc(50% - 16px);
+    top: 200px;
+    z-index: 2;
+
+    .photo-btn {
+      position: relative;
+      min-width: 32px;
+      width: 32px;
+      min-height: 32px;
+      height: 32px;
+      padding: 0;
+      margin: 0;
+
+      ng-md-icon {
+        width: 32px;
+        height: 32px;
+        fill: #ffffff;
+
+        svg {
+          width: 32px;
+          height: 32px;
+          stroke: rgba(0, 0, 0, 0.3);
+          stroke-width: 1px;
+        }
+      }
+    }
+  }
+
+  .simply-input {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding: 0 16px 6px 16px;
+
+    label {
+      position: relative;
+      display: inline-block;
+      width: 104px;
+      padding-bottom: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      color: $color01;
+    }
+
+    input {
+      position: relative;
+      width: calc(100% - 104px);
+      padding-bottom: 6px;
+      border-left: none;
+      border-top: none;
+      border-right: none;
+      border-bottom: 1px solid $color10;
+      outline-width: 0;
+      font-size: 16px;
+      color: $color12;
+
+      &::-webkit-input-placeholder {
+        font-size: 16px;
+        font-weight: normal;
+        color: $color10;
+      }
+
+      &:focus {
+        border-bottom-color: $color12;
+        font-weight: bold;
+
+        &::-webkit-input-placeholder {
+          font-weight: normal;
+        }
+      }
+    }
+
+    md-select {
+      margin: 0;
+      width: calc(100% - 104px);
+      font-size: 16px;
+      color: $color12;
+
+      .md-select-value {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+      }
+    }
+
+  }
+
+  .simply-textarea {
+      position: relative;
+      width: 100%;
+      padding-left: 16px;
+      margin: 16px 0;
+
+      label {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding-bottom: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        color: $color01;
+      }
+
+      textarea {
+        position: relative;
+        width: calc(100% - 32px);
+        resize: none;
+        padding-left: 0;
+        padding-bottom: 6px;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid $color10;
+        outline-width: 0;
+        font-size: 16px;
+        color: $color12;
+
+        &::-webkit-input-placeholder {
+          font-size: 16px;
+          font-weight: normal;
+          color: $color10;
+        }
+
+        &:focus {
+          border-bottom-color: $color12;
+          font-weight: bold;
+
+          &::-webkit-input-placeholder {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+
+    .person-content-btns {
+      position: relative;
+      width: 100%;
+      height: 70px;
+      padding: 16px;
+
+      button {
+        position: relative;
+        min-height: 38px;
+        height: 38px;
+        padding: 0 16px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 38px;
+        color: #ffffff !important;
+      }
+
+      .btn-cancel {
+        background-color: lighten(#F44336, 10%) !important;
+
+        &:not([disabled]):hover {
+          background-color: #F44336 !important;
+        }
+      }
+
+      .btn-save {
+        background-color: lighten(#4CAF50, 10%);
+
+        &:not([disabled]):hover {
+          background-color: #4CAF50 !important;
+        }
+      }
+    }
+
+
+}

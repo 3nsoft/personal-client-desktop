@@ -1,0 +1,57 @@
+<section layout="row" 
+  layout-align="start stretch"
+  class="mail-folder">
+  <div class="msg-list">
+    <div layout="row" layout-align="space-between center" 
+      class="msg-list-filter">
+      <div class="filter-info">
+        {{$ctrl.filterItem | firstUppercase}}
+      </div>
+			<md-menu md-position-mode="target-right target"
+				md-offset="0 10">
+				<md-button aria-label="msg list filter"
+					class="btn-double"
+					ng-click="$ctrl.openFilter($mdMenu, $event)">
+					<span>Filter</span>
+					<ng-md-icon icon="arrow_drop_down"></ng-md-icon>
+				</md-button>
+				<md-menu-content>
+					<md-menu-item class="filter-select-item">
+						<md-button ng-click="$ctrl.selectFilterItem('Today')">
+							Today
+						</md-button>
+					</md-menu-item>
+					<md-menu-item class="filter-select-item">
+						<md-button ng-click="$ctrl.selectFilterItem('Week')">
+							Week
+						</md-button>
+					</md-menu-item>
+					<md-menu-item class="filter-select-item">
+						<md-button ng-click="$ctrl.selectFilterItem('All')">
+							All
+						</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+    </div>
+    <div class="msg-list-body">
+      <div ng-repeat="(id, msg) in $ctrl.msgList | toArray | filter:$ctrl.periodFilter($ctrl.filterItem) | orderBy:'-timeCr'"
+				ng-click="$ctrl.selectMsg(msg)"
+				ng-class="{'msg-list-select': msg.msgId === $ctrl._cacheSrv.messages.selectId}"
+				id="m{{msg.msgId}}"
+        class="msg-list-item">
+        <mail-folder-item item="msg"></mail-folder-item>
+      </div>
+    </div>
+  </div>
+  <div ui-view 
+		ng-if="!!$ctrl._cacheSrv.messages.selectId"
+		class="msg-content">
+    <img src="templates/mail/mail-folder/3n.png">
+  </div>
+	<div ng-if="!$ctrl._cacheSrv.messages.selectId" 
+		class="msg-content">
+    <img src="templates/mail/mail-folder/3n.png">
+  </div>
+
+</section>

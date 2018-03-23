@@ -1,0 +1,9 @@
+<section class="storage-create-folder">
+	<button ng-if="!$ctrl.isSectionOpen"
+		ng-click="$ctrl.toggle()">Create Folder</button>
+	<div ng-if="$ctrl.isSectionOpen">
+		<input ng-model="$ctrl.newFolderName" type="text">
+		<button ng-click="$ctrl.makeFolder()"
+			ng-disabled="!$ctrl.newFolderName">Create</button>
+	</div>
+</section>

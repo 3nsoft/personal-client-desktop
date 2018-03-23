@@ -21,6 +21,7 @@ declare namespace client3N {
 		orderNum: number;
 		folderName: string;
 		isSystem: boolean;
+		icon?: string;
 		messageIds: string[];
 	}
 
@@ -32,7 +33,7 @@ declare namespace client3N {
 	interface AttachFileInfo {
 		name: string;
 		size: number;
-		mode: string; // "not_saved", "saved", "delete"
+		mode: 'not_saved' | 'saved' | 'delete';
 	}
 
 	interface MessageJSON {
@@ -50,6 +51,17 @@ declare namespace client3N {
 		mailAddressErrors?: string[];
 		mailAddressErrorsInfo?: {[mail: string]: string};
 		sourceMsgId?: string;
+	}
+
+	interface MessageAddressesAliases {
+		mailAddress?: string;
+		mailAddressTO?: string[];
+		mailAddressCC?: string[];
+		mailAddressBC?: string[];
+	}
+
+	interface MessageEditContent extends MessageJSON {
+		alias: MessageAddressesAliases
 	}
 
 	interface MessageMapping {
@@ -73,6 +85,10 @@ declare namespace client3N {
 		color: string;
 	}
 
+	interface InboxMessageInfo extends web3n.asmail.MsgInfo {
+		msgKey: string;
+	}
+
 	interface Notification {
 		app: string;
 		type: string;
@@ -83,13 +99,124 @@ declare namespace client3N {
 		};
 	}
 
-	interface SendMailErrors {
+	interface SendMailResult {
 		recipientsQt: number;
-		status: string;
+		wrongRecipientsQt?: number;
+		status: 'success' | 'error';
 		errors: {
 			address: string;
 			error: string;
 		}[];
 	}
+
+	interface PersonJSON {
+		personId: string;
+		nickName: string;
+		fullName: string;
+		phone: string;
+		notice: string;
+		avatar: string;
+	}
+
+	interface PersonMapping {
+		personId: string;
+		nickName: string;
+		mails: string[];
+		groups: string[];
+		minAvatar: string;
+		letter: string;
+		isConfirm: boolean;
+		inBlackList: boolean;
+		initials: string;
+		color: string;
+		labels: string[];
+		mode: string;
+	}
+
+	interface PersonDataToEdit extends PersonJSON {
+		mails: string[];
+		groups: string[];
+	}
+
+	interface GroupJSON {
+		groupId: string;
+		name: string;
+		notice: string;
+		avatar: string;
+	}
+
+	interface GroupMapping {
+		groupId: string;
+		name: string;
+		members: string[];
+		minAvatar: string;
+		isSystem: boolean;
+		letter: string;
+		initials: string;
+		color: string;
+		labels: string[];
+		mode: string;
+	}
+
+	type Emoji = {
+		groupId: string;
+		symbol: string;
+		note: string;
+	}
+
+	type Tag = {
+		id: string;
+		name: string;
+		qt: number;
+	}
+
+	type ChatRoom = {
+		chatId: string;
+		name: string;
+		timestamp: number;
+		members: string[];
+		isGroup: boolean;
+		initials: string;
+		color: string;
+		lastMsg: string;
+		isRead?: boolean;
+		numberUnreadMsg?: number
+	}
+
+	type ChatLog = {
+		msgId: string;
+		direction: 'in' | 'out';
+		timestamp: number;
+		outMsg?: 'sending'|'sended'|'read'|undefined;
+		isAttached?: boolean;
+	}
+
+	type ChatDisplayedMessage = {
+		creator: string;
+		timestamp: number;
+		text?: string;
+		attached?: AttachFileInfo[];
+		msgId?: string;
+		outMsg?: 'sending'|'sended'|'read'|undefined;
+	}
+
+	type AppMsg = {
+		type: string;
+		data: AppMsgData;
+	}
+
+	type AppMsgData = {
+		chatId: string;
+		timestamp?: number;
+		isGroup?: boolean;
+		name?: string;
+	}
+
+	type IncomingMessage = web3n.asmail.IncomingMessage;
+	type OutgoingMessage = web3n.asmail.OutgoingMessage;
+	type AttachmentsContainer = web3n.asmail.AttachmentsContainer;
+	type MsgInfo = web3n.asmail.MsgInfo;
+	type FileException = web3n.files.FileException;
+	type WritableVersionedFS = web3n.files.WritableFS;
 
 }

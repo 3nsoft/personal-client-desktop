@@ -1,0 +1,249 @@
+@import '../../config';
+
+.chat-create-window {
+  max-height: 95%;
+  height: 95%;
+
+	.chat-create-form {
+    position: relative;
+    height: 100%;
+    width: 380px;
+
+    &__toolbar {
+      position: relative;
+      width: 100%;
+      height: 48px;
+      padding: 0 0 0 16px;
+      background-color: $color12;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      &-name {
+        font-size: 16px;
+        color: #ffffff;
+      }
+
+      .btn-close {
+        min-width: 48px;
+        width: 48px;
+        min-height: 48px;
+        height: 48px;
+        padding: 0;
+        margin: 0;
+        z-index: 2;
+  
+        ng-md-icon {
+          fill: #ffffff;
+  
+          svg {
+            stroke: rgba(0, 0, 0, 0.3);
+            stroke-width: 1px;
+          }
+        }
+      }
+    }
+
+    &__name {
+      position: relative;
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      input {
+				box-sizing: border-box;
+				width: 100%;
+				height: 36px;
+				padding: 6px 4px;
+				border: none;
+				border-bottom: 1px solid $color10;
+				outline-width: 0;
+				font-size: 16px;
+				color: $color12;
+				background-color: #ffffff;
+
+				&::-webkit-input-placeholder {
+					font-size: 14px;
+          font-weight: normal;
+          font-style: italic;
+					color: $color10;
+				}
+
+				&:focus {
+					border-bottom-color: $color12;
+					font-weight: bold;
+
+					&::-webkit-input-placeholder {
+						font-weight: normal;
+					}
+        }
+        
+        &.error {
+          border-bottom-color: $color05;
+        }
+			}
+    }
+
+    &__filter {
+      position: relative;
+      width: 100%;
+      height: 48px;
+      padding: 0 16px 0 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+
+      ng-md-icon {
+				margin-right: 12px;
+			}
+
+			input {
+				box-sizing: border-box;
+				width: calc(100% - 48px);
+				height: 36px;
+				padding: 6px 4px;
+				border: none;
+				border-bottom: 1px solid $color10;
+				outline-width: 0;
+				font-size: 16px;
+				color: $color12;
+				background-color: #ffffff;
+
+				&::-webkit-input-placeholder {
+					font-size: 16px;
+					font-weight: normal;
+					color: $color10;
+				}
+
+				&:focus {
+					border-bottom-color: $color12;
+					font-weight: bold;
+
+					&::-webkit-input-placeholder {
+						font-weight: normal;
+					}
+				}
+			}
+    }
+
+    &__content {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 208px);
+      padding: 12px 0;
+      background-color: rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+      overflow-y: auto;
+      
+      &--item {
+        position: relative;
+        width: 100%;
+        height: 56px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 12px 0 24px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color20;
+          outline-width: 0;
+        }
+
+        &:focus {
+          outline-width: 0;
+        }
+
+        .avatar-field {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          margin-right: 16px;
+          outline-width: 0;
+
+          &--marked {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            z-index: 5;
+            top: 8px;
+            left: 24px;
+            background-color: rgba(0, 0, 0, 0.54);
+            pointer-events: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            ng-md-icon {
+              fill: #ffffff;
+            }
+          }
+        }
+
+        .image {
+          background-size: cover;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+        }
+
+        .name-field {
+          position: relative;
+          width: calc(100% - 56px);
+          height: 22px;
+          font-size: 16px;
+          color: $color01;
+          -webkit-user-select: none;
+
+          .name {
+            display: block;
+            position: relative;
+            width: calc(100% - 36px);
+            height: 22px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .personInBlackList {
+            color: rgba(0, 0, 0, 0.38);
+          }
+
+          ng-md-icon {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            margin-left: 12px;
+            padding: 0;
+            fill: rgba(0, 0, 0, 0.54);
+          }
+        }
+      }
+    }
+    
+    &__action {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      align-items: center;
+
+      &--btn {
+        &-create {
+          @include button3n($color12);
+          margin: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,29 @@
-<img src="templates/common/images/storage-preview.png">
+<section class="storage-app">
+
+	<div layout="row">
+
+		<storage-folder-list class="storages-nav"></storage-folder-list>
+		
+		<storage-opened-folder ng-if="$ctrl.currentFolder"
+			class ="opened-storage-folder"
+			folder="$ctrl.currentFolder"></storage-opened-folder>
+		
+	</div>
+
+	<storage-saving-display></storage-saving-display>
+
+</section>
+
+<style>
+	.storage-app {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	.storages-nav {
+		width: 18%;
+	}
+	.opened-storage-folder {
+		width: 80%;
+	}
+</style>

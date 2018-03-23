@@ -1,5 +1,6 @@
 .idea
 .vscode
+.history
 public
 node_modules
 temp

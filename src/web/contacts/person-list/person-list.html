@@ -1,0 +1,54 @@
+<md-content class="person-list">
+  <div class="person-list-letter"
+    ng-repeat="symbol in $ctrl.cacheSrv.contacts.letters">
+    <md-subheader class="person-list-letter-title">
+      {{symbol}}
+    </md-subheader>
+    <div class="person-list-item" id="p{{person.personId}}"
+      ng-repeat="person in ($ctrl.cacheSrv.contacts.list | toArray) | filter: {letter: symbol} | orderBy:'nickName'"
+      layout="row"
+      layout-align="start center"
+      ng-class="{select: person.personId === $ctrl.cacheSrv.contacts.select}"
+      ng-click="$ctrl.selectPerson($event, person)">
+      <div ng-if="person.minAvatar !== ''"
+        class="avatar-field image hexMask"
+        ng-style="{'background-image': 'url(' + person.minAvatar + ')'}"
+        ng-click="$ctrl.markPersons($event, person.personId)">
+        <div class="person-marked"
+          layout="column"
+          layout-align="center center"
+          ng-if="$ctrl.cacheSrv.contacts.marked.indexOf(person.personId) > -1">
+          <ng-md-icon icon="check"></ng-md-icon>
+        </div>
+      </div>
+      <div ng-if="person.minAvatar === ''"
+        class="avatar-field initials hexMask"
+        ng-style="{'background-color': person.color, color: $ctrl.invertColor(person.color)}"
+        layout="row"
+        layout-align="center center"
+        ng-click="$ctrl.markPersons($event, person.personId)">
+        {{person.initials | uppercase}}
+        <div class="person-marked"
+          layout="column"
+          layout-align="center center"
+          ng-if="$ctrl.cacheSrv.contacts.marked.indexOf(person.personId) > -1">
+          <ng-md-icon icon="check"></ng-md-icon>
+        </div>
+      </div>
+      <div class="name-field"
+        layout="row"
+        layout-align="start center">
+        <span class="name"
+          ng-class="{personInBlackList: person.inBlackList}">
+          {{person.nickName}}
+        </span>
+        <ng-md-icon icon="warning"
+          ng-if="!person.isConfirm && !person.inBlackList">
+        </ng-md-icon>
+        <ng-md-icon icon="visibility_off"
+          ng-if="person.inBlackList">
+        </ng-md-icon>
+      </div>
+    </div>
+  </div>
+</md-content>

@@ -1,0 +1,32 @@
+<section class="groupsApp"
+  layout="row"
+	layout-align="start stretch">
+  <div class="groups-list">
+    <div class="groups-list-toolbar">
+			<div class="glist-toolbar-title"
+				ng-click="$ctrl.goPersons()">
+				Groups ({{$ctrl.cacheSrv.groups.total}})
+				<span>click to view contacts</span>
+			</div>
+			<div class="glist-toolbar-btns"
+				layout="row"
+				layout-align="center center">
+				<md-button class="md-raised"
+					ng-click="$ctrl.editGroup('new')">
+					CREATE NEW GROUP
+				</md-button>
+			</div>
+    </div>
+    <group-list></group-list>
+  </div>
+  <div ng-if="($ctrl.cacheSrv.groups.grMode !== 'hide') && ($ctrl.cacheSrv.groups.grMode !== 'create')"
+		class="groups-content"
+		ui-view>
+	</div>
+	<div ng-if="($ctrl.cacheSrv.groups.grMode === 'hide') || (($ctrl.cacheSrv.groups.grMode === 'create'))"
+		class="noGroups"
+		layout="column"
+		layout-align="center center">
+		<img src="templates/mail/mail-folder/3n.png">
+	</div>
+</section>

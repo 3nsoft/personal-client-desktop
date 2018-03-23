@@ -129,8 +129,10 @@ declare namespace angular.material {
         highlightClass(highlightClass: string): T;
         capsule(capsule: boolean): T;
         theme(theme: string): T;
+        toastClass(toastClass: string): T;
         hideDelay(delay: number): T;
         position(position: string): T;
+        toastClass(toastClass: string): T;
         parent(parent?: string|Element|JQuery): T; // default: root node
     }
 

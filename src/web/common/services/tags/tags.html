@@ -1,0 +1,67 @@
+<section class="tags">
+	<div class="tags__subtitle">
+		<input id="entryField"
+			type="text"
+			class="tags__subtitle--entry-field"
+			placeholder="Add or search tag"
+			ng-model="$ctrl.wantedTag"
+			ng-keyup="$ctrl.preSaveEditTag($event, 'create')"> 
+		<md-button class="md-icon-button ok" 
+			ng-if="$ctrl.wantedTag.length > 1"
+			ng-click="$ctrl.runSaveTag('create')"
+			aria-label="save tag">
+			<ng-md-icon icon="done" size="24"></ng-md-icon>
+		</md-button>
+		<md-button class="md-icon-button cancel" 
+			ng-if="$ctrl.wantedTag.length > 1"
+			ng-click="$ctrl.cancelEditTag('create')"
+			aria-label="cancel create tag">
+			<ng-md-icon icon="cancel" size="24"></ng-md-icon>
+		</md-button>
+	</div>
+		
+	<div class="tags__list">
+		<div ng-repeat="tag in $ctrl._cacheSrv.tags.list | filter: {name: $ctrl.wantedTag} | orderBy:'name' "
+			class="tags__list--item"
+			ng-class="{'tags__list--item-select': tag.name === $ctrl.selectedTag.name}">
+			<div class="tags__list--item-name">
+				<div ng-if="($ctrl.editableTagMode === 'show') || ($ctrl.editableTagMode === 'edit' && tag.id !== $ctrl.selectedTag.id)"
+					class="tags__list--item-name-content">
+					{{tag.name}} ({{tag.qt}})
+				</div>
+				<input ng-if="$ctrl.editableTagMode === 'edit' && tag.id === $ctrl.selectedTag.id"
+					id="editingField"
+					type="text"
+					class="tags__list--item-entry-field"
+					ng-model="$ctrl.editableTag"
+					ng-keyup="$ctrl.preSaveEditTag($event, 'edit')">
+			</div>
+			<!-- "show" mode -->	
+			<md-button ng-if="$ctrl.editableTagMode === 'show'" 
+				class="tags__list--item-btn tags__list--item-btn-edit"
+				ng-click="$ctrl.runEditTag(tag)"
+				aria-label="edit tag">
+				<ng-md-icon icon="edit" size="24"></ng-md-icon>
+			</md-button>
+			<md-button ng-if="$ctrl.editableTagMode === 'show'"
+				class="tags__list--item-btn tags__list--item-btn-delete"
+				ng-click="$ctrl.runDeleteTag($event, tag)"
+				aria-label="edit tag">
+				<ng-md-icon icon="delete" size="24"></ng-md-icon>
+			</md-button>
+			<!-- "edit" mode -->
+			<md-button class="md-icon-button tags__list--item-edbtn ok" 
+				ng-if="$ctrl.editableTagMode === 'edit' && tag.id === $ctrl.selectedTag.id && $ctrl.editableTag.length > 0"
+				ng-click="$ctrl.runSaveTag('edit')"
+				aria-label="save tag">
+				<ng-md-icon icon="done" size="24"></ng-md-icon>
+			</md-button>
+			<md-button class="md-icon-button tags__list--item-edbtn cancel" 
+				ng-if="$ctrl.editableTagMode === 'edit' && tag.id === $ctrl.selectedTag.id && $ctrl.editableTag.length > 0"
+				ng-click="$ctrl.cancelEditTag('edit')"
+				aria-label="cancel editing tag">
+				<ng-md-icon icon="cancel" size="24"></ng-md-icon>
+			</md-button>
+		</div>
+	</div>
+</section>

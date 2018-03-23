@@ -1,0 +1,16 @@
+<section class="storage-fs-file"
+	draggable="true">
+	{{ $ctrl.file.name }}
+	<button ng-click="$ctrl.open()">open</button>
+	<button ng-click="$ctrl.delete()">delete</button>
+</section>
+
+<style>
+	.storage-fs-file {
+		height: 2em;
+		width: 100%;
+		border: 1px solid grey;
+		margin: 3px;
+	}
+</style>
+	

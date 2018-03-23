@@ -1,0 +1,126 @@
+<md-dialog aria-label="edit person"
+  class="edit-person-form-wrap">
+  <form name="editPersonForm"
+    class="edit-person-form"
+    ng-cloak>
+    <md-dialog-content>
+      <md-button class="md-icon-button btn-close"
+        aria-label="close modal"
+        ng-click="closeModal()">
+        <md-tooltip md-direction="left">
+            Close form without save
+          </md-tooltip>
+        <ng-md-icon icon="close"></ng-md-icon>
+      </md-button>
+
+      <div class="person-avatar"
+        ng-if="person.dataMap.minAvatar === ''"
+        ng-style="{'background-color': person.dataMap.color}"
+        ng-cloak>
+      </div>
+      <div class="person-avatar"
+        ng-if="person.dataMap.minAvatar !== ''"
+        ng-style="{'background-image': 'url(' + person.data.avatar + ')'}"
+        ng-cloak>
+      </div>
+
+      <div class="person-avatar-photo-action">
+        <md-button ng-if="person.dataMap.minAvatar === ''"
+          aria-label="add_photo"
+          class="md-icon-button photo-btn"
+          ng-click="runAddAvatar()">
+          <md-tooltip md-direction="top">
+            Add Photo
+          </md-tooltip>
+          <ng-md-icon icon="add"></ng-md-icon>
+        </md-button>
+        <md-button ng-if="person.dataMap.minAvatar !== ''"
+          aria-label="del_photo"
+          class="md-icon-button photo-btn"
+          ng-click="runDelAvatar()">
+          <md-tooltip md-direction="top">
+            Delete Photo
+          </md-tooltip>
+          <ng-md-icon icon="delete_forever"></ng-md-icon>
+        </md-button>
+      </div>
+
+      <div class="simply-input"
+        layout="row"
+        layout-align="start end">
+        <label>Nick name*:</label>
+        <input type="text"
+          ng-model="person.data.nickName"
+          required
+          placeholder="Please enter Nick name">
+      </div>
+      <div class="simply-input"
+        layout="row"
+        layout-align="start end">
+        <label>Full Name:</label>
+        <input type="text"
+          ng-model="person.data.fullName"
+          placeholder="You can write only first name">
+      </div>
+      <div class="simply-input"
+        layout="row"
+        layout-align="start end">
+        <label>3NMail*:</label>
+        <input type="text"
+          mail-valid
+          name="email"
+          ng-model="person.data.mails[0]"
+          required
+          placeholder="for exaple: user@3nweb.com">
+      </div>
+      <div class="simply-input"
+        layout="row"
+        layout-align="start end">
+        <label>Groups:</label>
+        <md-select ng-model="person.data.groups"
+          multiple=""
+          placeholder="Please enter groups">
+          <md-option ng-value="group.groupId"
+            ng-repeat="group in (groups.list | toArray)"
+            class="group-for-person">
+            {{group.name}}
+          </md-option>
+        </md-select>
+      </div>
+      <div class="simply-input"
+        layout="row"
+        layout-align="start end">
+        <label>Phone:</label>
+        <input type="text"
+          ng-model="person.data.phone"
+          placeholder="for example: +1 111 1111 1111">
+      </div>
+      <div class="simply-textarea"
+        layout="column"
+        layout-align="start start">
+        <label>Notice:</label>
+        <textarea ng-model="person.data.notice"
+          placeholder="Some additional information"
+          rows="1">
+        </textarea>
+      </div>
+
+      <div class="person-content-btns"
+        layout="row" layout-align="end center">
+        <md-button class="md-raised btn-cancel"
+          aria-label="close modal"
+          ng-click="closeModal()">
+          CANCEL
+        </md-button>
+        <md-button class="md-raised btn-save"
+          aria-label="save person"
+          ng-disabled="(editPersonForm.$pristine) || (editPersonForm.$invalid)"
+          ng-click="runSavePerson()">
+          {{(person.dataMap.mode === "create") ? "CREATE" : "SAVE"}}
+        </md-button>
+
+      </div>
+      
+    </md-dialog-content>
+  </form>
+</md-dialog>

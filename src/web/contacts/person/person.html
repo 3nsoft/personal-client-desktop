@@ -1,0 +1,178 @@
+<section class="person"
+  layout="row"
+  layout-align="start stretch">
+
+  <div class="person-activity">
+    <div class="person-activity-title">
+      Activity with user (0)
+    </div>
+    <div class="person-activity-btns"
+      layout="row"
+      layout-align="space-around center">
+      <div class="btn-wrap">
+        <md-button aria-label="link">
+          <ng-md-icon icon="link"></ng-mb-icon>
+        </md-button>
+        <span class="value">0</span>
+      </div>
+      <div class="btn-wrap">
+        <md-button aria-label="media">
+          <ng-md-icon icon="insert_photo"></ng-mb-icon>
+        </md-button>
+        <span class="value">0</span>
+      </div>
+      <div class="btn-wrap">
+        <md-button aria-label="subject">
+          <ng-md-icon icon="subject"></ng-mb-icon>
+        </md-button>
+        <span class="value">0</span>
+      </div>
+    </div>
+    <div class="person-activity-content">
+      <span class="no-activity-text">No activity yet</span>
+    </div>
+  </div>
+
+  <div class="person-info">
+    <div class="person-info-title">User information</div>
+    <div class="person-info-avatar"
+      ng-if="$ctrl.dataForm.avatar === ''"
+      ng-style="{'background-color': $ctrl.cacheSrv.contacts.list[$ctrl.dataForm.personId].color}"
+      ng-cloak>
+    </div>
+    <div class="person-info-avatar"
+      ng-if="$ctrl.dataForm.avatar !== ''"
+      ng-style="{'background-image': 'url(' + $ctrl.dataForm.avatar + ')'}"
+      ng-cloak>
+    </div>
+    <div class="person-info-btns">
+      <md-button aria-label="begin chat"
+        class="person-btn">
+        <ng-md-icon icon="chat"></ng-md-icon>
+      </md-button>
+      <md-button aria-label="create message"
+        class="person-btn"
+        ng-click="$ctrl.createNewMsg()">
+        <ng-md-icon icon="mail_outline"></ng-md-icon>
+      </md-button>
+      <md-menu md-offset="0 44"
+        md-position-mode="target-right target">
+        <md-button aria-label="person menu"
+          class="person-dbl-btn"
+          ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+          <ng-md-icon icon="edit"></ng-md-icon>
+          <ng-md-icon icon="arrow_drop_down"></ng-md-icon>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item>
+            <md-button aria-label="edit"
+              ng-click="$ctrl.editPerson()">
+              Edit User
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="delete"
+              ng-click="$ctrl.deletePerson()">
+              Delete User
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="black list"
+              ng-disabled="$ctrl.cacheSrv.contacts.list[$ctrl.contact.personId].inBlackList"
+              ng-click="$ctrl.flagOn('b-list')">
+              Add User to Black List
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="confirm"
+              ng-disabled="$ctrl.cacheSrv.contacts.list[$ctrl.contact.personId].isConfirm"
+              ng-click="$ctrl.flagOn('confirm')">
+              Confirm User
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="mute"
+              ng-disabled="true">
+              Mute
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+    <div class="person-info-content">
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          Nick Name:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.dataForm.nickName}}
+        </span>
+      </div>
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          Full Name:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.dataForm.fullName}}
+        </span>
+      </div>
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          3NMail:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.dataForm.mails[0]}}
+        </span>
+      </div>
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          Groups:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.groupList}}
+        </span>
+      </div>
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          Phone:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.dataForm.phone}}
+        </span>
+      </div>
+      <div class="person-info-content-item">
+        <span class="label"
+          layout="row"
+          layout-align="start end">
+          Notice:
+        </span>
+        <span class="field"
+          layout="row"
+          layout-align="start end">
+          {{$ctrl.dataForm.notice}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+</section>

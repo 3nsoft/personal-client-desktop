@@ -1,0 +1,12 @@
+<section class="storage-folder-list"
+	layout="column">
+	<div ng-repeat="f in $ctrl.list">
+		<md-button ng-if="f !== $ctrl.opened" ng-click="$ctrl.open(f)">
+			{{ f.name }}
+		</md-button>
+		<span ng-if="f === $ctrl.opened">
+			{{ f.name }}
+		</span>
+	</div>
+</section>
+	
