@@ -50,7 +50,7 @@
 
 	"windowOpts": {
 		"width": 1200,
-		"height": 700,
+		"height": 600,
 		"minWidth": 1024,
 		"minHeight": 600,
 		"maxWidth": 1440

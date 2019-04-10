@@ -1,0 +1,146 @@
+@import "../../../../config";
+
+.mail-folder-manager__wrapper {
+  height: 96%;
+}
+
+.mail-folder-manager {
+  width: calc(4 * #{$size-column});
+  height: 100%;
+}
+
+.mail-folder-manager__toolbar {
+  width: 100%;
+  height: $size-6x;
+  padding: 0 $size-1x 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 $size-half 0 $grey-a12;
+}
+
+.mail-folder-manager__toolbar span {
+  font-size: $font-14;
+  font-weight: bold;
+  line-height: 1;
+  color: $azure;
+}
+
+.mail-folder-manager__toolbar .md-icon-button {
+  @include buttonIcon(28px);
+}
+
+.mail-folder-manager__toolbar .md-icon-button pcd-icon {
+  top: -$size-half;
+}
+
+.mail-folder-manager__input {
+  width: 100%;
+  height: $size-6x;
+  background-color: $grey-a06;
+  padding: 0 $size-2x $size-1x $size-2x;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.mail-folder-manager__input input {
+  position: relative;
+  height: $size-3x;
+  padding-bottom: $size-half;
+  padding-right: $size-6x;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid $grey-a54;
+  outline-width: 0;
+  font-size: $font-14;
+  line-height: 1;
+  color: $grey-a87;
+  background-color: transparent;
+}
+
+.mail-folder-manager__input input.is-invalid {
+  border-bottom-color: $red;
+}
+
+.mail-folder-manager__input input.is-invalid:focus {
+  border-bottom-color: $red;
+}
+
+.mail-folder-manager__input input::placeholder {
+  font-size: $font-14;
+  font-style: italic;
+  color: $grey-a32;
+}
+
+.mail-folder-manager__input input:focus {
+  border-bottom-color: $azure;
+}
+
+.mail-folder-manager__input .md-icon-button {
+  position: absolute;
+  bottom: $size-1x;
+  @include buttonIcon(24px);
+}
+
+.mail-folder-manager__input .btn-done {
+  right: $size-1x;
+}
+
+.mail-folder-manager__input .btn-cancel {
+  right: $size-4x;
+}
+
+.mail-folder-manager__content {
+  width: 100%;
+  height: calc(100% - #{$size-12x} - #{$size-2x});
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.mail-folder-manager__content-item {
+  width: 100%;
+  border: none;
+  outline-width: 0;
+  padding-right: $size-1x;
+}
+
+.mail-folder-manager__content-item.is-selected {
+  background-color: $azure-select;
+}
+
+.mail-folder-manager__content-folder {
+  width: calc(100% - #{$size-8x});
+}
+
+.mail-folder-manager__content-folder:focus {
+  border: none;
+  outline-width: 0;
+}
+
+.mail-folder-manager__content-item .md-icon-button {
+  opacity: 0;
+  position: absolute;
+  @include buttonIcon(32px);
+  top: 2px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.mail-folder-manager__content-item .btn-edit {
+  right: $size-5x;
+}
+
+.mail-folder-manager__content-item .btn-delete {
+  right: $size-1x;
+}
+
+.mail-folder-manager__content-item:hover {
+  background-color: $azure-select;
+}
+
+.mail-folder-manager__content-item:hover .md-icon-button {
+  opacity: 1;
+}

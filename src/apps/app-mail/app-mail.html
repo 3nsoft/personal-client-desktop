@@ -1,0 +1,26 @@
+<section class="app-mail">
+  <md-button
+    class="app-mail__btn-new"
+    ng-click="$ctrl.newMail()">
+    + New Mail
+  </md-button>
+
+  <div
+    ui-view="folders"
+    class="app-mail__folders"
+  >
+  </div>
+
+  <div
+    ui-view="messages"
+    class="app-mail__messages"
+  >
+  </div>
+
+  <div
+    ui-view="message"
+    class="app-mail__message"
+  >
+  </div>
+
+</section>

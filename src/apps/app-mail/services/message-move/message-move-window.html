@@ -1,0 +1,32 @@
+<md-dialog class="message-move-window__wrapper">
+  <div name="msgManager" class="message-move-window">
+    <div class="message-move-window__toolbar">
+      <span class="message-move-window__toolbar-title">
+        Move to Folder
+      </span>
+      <md-button
+        class="md-icon-button"
+        aria-label="close window"
+        ng-click="close()">
+        <pcd-icon
+          icon="close"
+          size="12"
+          color="#0090ec"
+        >
+        </pcd-icon>
+      </md-button>
+    </div>
+
+    <div class="message-move-window__body">
+      <mail-folder
+        ng-repeat="folder in folders"
+        class="message-move-window__folder"
+        ng-class="{'is-system': folder.isSystem}"
+        folder="folder"
+        select=""
+        ng-click="selectFolder(folder.id)"
+      >
+      </mail-folder>
+    </div>
+  </div>
+</md-dialog>

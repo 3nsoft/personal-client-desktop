@@ -1,0 +1,52 @@
+@import '../../../config';
+
+.contact-item {
+  width: 100%;
+  height: $size-7x;
+  padding: 0 $size-2x 0 $size-5x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.contact-item__icon {
+  margin-right: $size-1x;
+
+  & path {
+    cursor: pointer;
+  }
+}
+
+.contact-item__info {
+  width: calc(100% - #{$size-5x});
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  user-select: none;
+}
+
+.contact-item__name, .contact-item__mail {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 3px 0;
+  font-weight: bold;
+}
+
+.contact-item__name {
+  font-size: $font-14;
+  color: $grey-a87;
+}
+
+.contact-item__mail {
+  font-size: $font-12;
+  color: $grey-a54;
+}
+
+.contact-item__mail.mod-simple {
+  font-size: $font-14;
+  color: $grey-a87;
+}

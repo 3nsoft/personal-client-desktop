@@ -1,0 +1,43 @@
+@import '../../../../config.scss';
+
+.app-mail-message-fast-reply {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 $size-1x;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-mail-message-fast-reply md-input-container {
+  width: calc(100% - #{$size-6x});
+
+  textarea.md-input {
+    line-height: 1.3;
+    min-height: $size-20;
+    font-size: $font-14;
+  }
+
+  textarea::placeholder {
+    font-style: italic;
+    font-size: $font-14;
+    color: $grey-a54;
+  }
+
+  .md-errors-spacer {
+    display: none;
+  }
+}
+
+.app-mail-message-fast-reply button {
+  margin: 0 !important;
+  display: flex;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+

@@ -1,0 +1,135 @@
+<form name="msgManager" class="message-manager">
+  <div class="message-manager__toolbar">
+    <span class="message-manager__toolbar-title">
+      {{ getTitle() }}
+    </span>
+    <md-button
+      class="md-icon-button"
+      aria-label="close window"
+      ng-click="saveAndHide()">
+      <pcd-icon
+        icon="close"
+        size="12"
+        color="#0090ec"
+      >
+      </pcd-icon>
+    </md-button>
+  </div>
+
+  <div class="message-manager__body" ng-class="{'mod-editor': isShowQuillToolbar}">
+    <div
+      class="message-manager__field-wrap mod-padding"
+      ng-class="{'mod-short': !isFullMailList}"
+    >
+      <label class="message-manager__field-label">
+        To:
+      </label>
+      <md-chips
+        ng-model="message.alias"
+        md-add-on-blur="true"
+        md-autocomplete-snap=""
+        md-require-match="false"
+        md-separator-keys="keys"
+        md-transform-chip="transformAddress($chip)"
+        md-on-remove="removeAddress($chip, $index)"
+        md-on-add="onAdd()"
+        ng-required="true"
+      >
+        <md-autocomplete
+          md-selected-item="utility.selected"
+          md-search-text="utility.search"
+          md-items="item in queryContactsSearch(utility.search)"
+          md-item-text="item.name || item.mails[0]"
+          md-min-length="2"
+          md-delay="300"
+          placeholder="Enter a mail address"
+        >
+          <span>{{item.name}} <i>{{item.mails[0]}}</i></span>
+        </md-autocomplete>
+        <md-chip-template>
+          <span
+            class="message-manager__field-chip"
+            ng-class="{'is-send-error': isAddressSendError($chip)}">
+            {{ $chip }}
+          </span>
+        </md-chip-template>
+      </md-chips>
+      <md-button
+        ng-if="message.alias.length > 0"
+        class="md-icon-button"
+        ng-click="showFullMailList()"
+        aria-label="show full list"
+      >
+        <pcd-icon
+          icon="{{ isFullMailList ? 'expand_less' : 'expand_more' }}"
+          size="16"
+          color="rgba(0, 0, 0, 0.54)"
+        >
+        </pcd-icon>
+      </md-button>
+
+    </div>
+    <div class="message-manager__field-wrap">
+      <label
+        for="subject"
+        class="message-manager__field-label">
+        Subject:
+      </label>
+      <div class="message-manager__field-input">
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          ng-model="message.subject"
+          placeholder="Enter a message subject"
+        />
+      </div>
+    </div>
+    <div class="message-manager__attachments-block">
+      <attachments
+        key="message.msgKey"
+        files="message.attached"
+        mode="attachmentsMode"
+        complete="completeRemoval(attached)"
+      >
+      </attachments>
+    </div>
+    <squire
+      ng-model="message.bodyHTML"
+      height="250px"
+      open-menu="isShowQuillToolbar"
+      placeholder="Type in here!"
+    >
+    </squire>
+  </div>
+
+  <div class="message-manager__actions">
+    <md-button
+      aria-label="toogle editor toolbar"
+      ng-click="showEditorToolbar()"
+      class="md-icon-button more btn-editor">
+      <pcd-icon
+        icon="format_color_text"
+        size="16"
+        color="rgba(0, 0, 0, 0.54)"
+      >
+      </pcd-icon>
+    </md-button>
+    <md-button
+      class="btn-cancel"
+      aria-label="cancel edit message"
+      ng-click="hide()"
+    >
+      Discard
+    </md-button>
+    <md-button
+      class="btn-send"
+      aria-label="send message"
+      ng-disabled="message.mailAddresses.length === 0"
+      ng-click="send()"
+    >
+      Send
+    </md-button>
+  </div>
+
+</form>

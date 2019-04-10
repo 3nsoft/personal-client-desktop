@@ -1,0 +1,54 @@
+<section class="contact-list">
+  <div class="contact-list__header">
+    <md-button
+      class="contact-list__header-btn"
+      ng-click="$ctrl.newContact()">
+      + Add New Contact
+    </md-button>
+  </div>
+
+  <div class="contact-list__body">
+    <div class="contact-list__content-search">
+      <pcd-icon
+        class="contact-list__content-search-icon"
+        icon="search"
+        color="rgba(0, 0, 0, 0.54)"
+        size="14">
+      </pcd-icon>
+      <input
+        class="contact-list__content-search-input"
+        type="text"
+        ng-model="$ctrl.vars.search"
+        ng-keyup="$ctrl.searchChange($event)"
+        aria-label="search"
+      />
+      <md-button
+        ng-if="$ctrl.vars.search.length > 0"
+        class="md-icon-button contact-list__content-search-clear"
+        aria-label="clear"
+        ng-click="$ctrl.searchClear()">
+        <pcd-icon
+          icon="close"
+          color="rgba(0, 0, 0, 0.54)"
+          size="14">
+        </pcd-icon>
+      </md-button>
+    </div>
+    <div class="contact-list__content">
+      <div
+        ng-repeat="letter in $ctrl.allLetters track by letter"
+        class="contact-list__content-sub">
+        <div class="contact-list__content-sub-letter">{{ letter }}</div>
+        <contact-item
+            class="contact-list__content-item"
+            ng-class="{'is-selected': $ctrl.isSelected('style', item.id)}"
+            ng-repeat="item in ($ctrl.personList | toArray) | filter:  $ctrl.letterPersonFilter(letter) as results track by item.id"
+            person="item"
+            selected="$ctrl.isSelected('select', item.id)"
+            ng-click="$ctrl.select($event, item.id)"
+        >
+        </contact-item>
+      </div>
+    </div>
+  </div>
+</section>

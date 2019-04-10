@@ -1,0 +1,201 @@
+@import "../../../config";
+
+mail-messages-item {
+  border: none;
+  outline-width: 0;
+}
+
+.mail-messages-item {
+  width: 100%;
+  height: $size-10x;
+  border-bottom: 1px solid $grey-a12;
+  user-select: none;
+}
+
+.mail-messages-item.mod-selected {
+  background-color: $azure-bg;
+}
+
+.mail-messages-item:focus {
+  outline-width: 0;
+}
+
+.mail-messages-item.mod-attach {
+  height: 120px;
+}
+
+.mail-messages-item__body {
+  width: 100%;
+  height: $size-10x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.mail-messages-item__body-icon {
+  width: $size-8x;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.mail-messages-item__body-icon .pcd-icon-contact {
+  cursor: pointer;
+}
+
+.mail-messages-item__body-content {
+  width: calc(100% - #{$size-8x});
+  padding-right: $size-2x;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.mail-messages-item__body-content-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.mail-messages-item__body-content-row span {
+  position: relative;
+  display: block;
+}
+
+.mail-messages-item__body-content-row span.is-noread {
+  font-weight: bold;
+}
+
+.mail-messages-item__body-content-row.item-content-row1 {
+  justify-content: space-between;
+}
+
+.mail-messages-item__body-content-row .item-content-name {
+  height: $size-3x;
+  font-size: $font-16;
+  line-height: $size-3x;
+  color: $grey-a87;
+}
+
+.mail-messages-item__body-content-row .item-content-date {
+  display: flex;
+  font-size: $font-12;
+  font-weight: bold;
+  line-height: 1.25;
+  color: $grey-a54;
+}
+
+.mail-messages-item__body-content-row .item-content-subject {
+  height: $size-20;
+  font-size: $font-14;
+  line-height: $size-20;
+  color: $grey-a87;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mail-messages-item__body-content-row.item-content-row3 {
+  justify-content: space-between;
+}
+
+.mail-messages-item__body-content-row .item-content-text {
+  width: calc(100% - #{$size-3x + $size-half});
+  height: $size-20;
+  font-size: $font-14;
+  line-height: $size-20;
+  color: $grey-a87;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mail-messages-item__body-content-row .item-content-text.mod-sending {
+  font-weight: bold;
+  color: $azure;
+}
+
+.mail-messages-item__attach {
+  height: $size-5x;
+  padding: 0 $size-2x 0 $size-8x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.mail-messages-item__attach-item {
+  height: $size-4x;
+  border-radius: $size-half;
+  background-color: $azure-a24;
+  border: 1px solid $azure-select;
+  user-select: none;
+  padding: 0 $size-1x 0 $size-half;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mail-messages-item__attach-icon {
+  margin-right: $size-half;
+}
+
+.mail-messages-item__attach-name {
+  height: $size-3x;
+  width: calc(100% - #{$size-20});
+  font-size: $font-14;
+  color: $grey-a87;
+  line-height: $size-3x;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mail-messages-item__attach-more {
+  height: $size-4x;
+  font-size: $font-12;
+  font-weight: bold;
+  color: $grey-a87;
+  line-height: $size-4x;
+  margin-left: $size-1x;
+}
+
+.mail-messages-item__attach.mod-1 {
+  .mail-messages-item__attach-item {
+    max-width: 100%;
+  }
+}
+
+.mail-messages-item__attach.mod-2 {
+  .mail-messages-item__attach-item {
+    max-width: calc(100% - #{$size-6x});
+  }
+  .mail-messages-item__attach-more {
+    width: $size-5x + 2;
+  }
+}
+
+.mail-messages-item__attach.mod-3 {
+  .mail-messages-item__attach-item {
+    max-width: calc(100% - #{$size-7x});
+  }
+  .mail-messages-item__attach-more {
+    width: $size-6x;
+  }
+}
+
+.mail-messages-item__attach.mod-4 {
+  .mail-messages-item__attach-item {
+    max-width: calc(100% - #{$size-8x});
+  }
+  .mail-messages-item__attach-more {
+    width: $size-7x;
+  }
+}

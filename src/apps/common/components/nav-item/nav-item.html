@@ -1,0 +1,25 @@
+<a 
+  class="nav-item"
+  ng-class="{'is-disable': $ctrl.disable}"
+  ui-sref="{{ $ctrl.sref }}"
+  ui-sref-active="mod-active">
+  <span
+    ng-if="!$ctrl.icon"
+    class="nav-item__name">
+    {{ item.name }}
+  </span>
+  <div class="nav-item__icon-wrap">
+      <pcd-icon
+      ng-if="$ctrl.icon"
+      class="nav-item__icon"
+      icon="{{ $ctrl.icon }}"
+      color="{{ $ctrl.color || 'rgba(0, 0, 0, 0.54)' }}"
+    >
+    </pcd-icon>
+    <div
+      ng-if="$ctrl.amt && $ctrl.amt > 0"
+      class="nav-item__amt">
+      {{ $ctrl.amt < 999 ? $ctrl.amt : '999+' }}
+    </div>
+  </div>
+</a>

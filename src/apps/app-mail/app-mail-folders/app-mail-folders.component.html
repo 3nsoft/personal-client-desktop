@@ -1,0 +1,28 @@
+<section class="app-mail-folders">
+  <div class="app-mail-folders__title">
+    <span>Folders</span>
+    <md-button
+      class="md-icon-button"
+      ng-click="$ctrl.manageMailFolder()"
+      aria-label="create_folder"
+    >
+      <pcd-icon
+        icon="folder_open"
+        color="rgba(0, 0, 0, 0.54)"
+        size="16">
+      </pcd-icon>
+    </md-button>
+  </div>
+
+  <div class="app-mail-folders__list">
+    <mail-folder
+      ng-repeat="(id, folder) in $ctrl.list"
+      class="app-mail-folders__list-item"
+      ng-class="{'is-system': folder.isSystem}"
+      folder="folder"
+      select="id === $ctrl.selectFolderId"
+      ng-click="$ctrl.selectFolder(id)"
+    >
+    </mail-folder>
+  </div>
+</section>

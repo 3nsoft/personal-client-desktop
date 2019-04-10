@@ -1,0 +1,32 @@
+<section class="contact-item">
+  <pcd-contact-icon
+    class="contact-item__icon"
+    size="32"
+    label="{{ $ctrl.person.name || $ctrl.person.mails[0] }}"
+    is-select="$ctrl.selected"
+  >
+  </pcd-contact-icon>
+  <!--
+  <pcd-contact-avatar
+    ng-if="$ctrl.person.avatar"
+    class="contact-item__avatar"
+    size="32"
+    avatar="$ctrl.person.avatar"
+    is-select="$ctrl.selected"
+  >
+  </pcd-contact-avatar>
+  -->
+  <div class="contact-item__info">
+    <div
+      ng-if="$ctrl.person.name"
+      class="contact-item__name">
+      {{ ::$ctrl.person.name }}
+    </div>
+    <div
+      ng-if="$ctrl.person.mails[0]"
+      class="contact-item__mail"
+      ng-class="{'mod-simple': !$ctrl.person.name}">
+      {{ ::$ctrl.person.mails[0] }}
+    </div>
+  </div>
+</section>

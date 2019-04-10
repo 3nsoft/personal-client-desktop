@@ -1,0 +1,98 @@
+<div class="attachments">
+  <div
+    ng-if="$ctrl.getFileList().length > 0"
+    class="attachments__content"
+  >
+    <div
+      class="attachments__content-item"
+      ng-class="{'mod-short': !$ctrl.isFullFileList}"
+      ng-repeat="file in $ctrl.getFileList() | limitTo : $ctrl.limit as results track by file.name"
+    >
+      <pcd-icon
+        class="attachments__content-item-icon"
+        icon="attach_file"
+        size="16"
+        color="#f44336"
+      >
+      </pcd-icon>
+      <div class="attachments__content-item-name">
+        {{ file.name }}
+      </div>
+      <pcd-icon
+        ng-if="$ctrl.key !== 'out=new'"
+        class="attachments__content-item-download"
+        icon="file_download"
+        size="16"
+        color="rgba(0, 144, 236, 0.87)"
+        ng-click="$ctrl.download(file.name)"
+      >
+      </pcd-icon>
+      <pcd-icon
+        class="attachments__content-item-icon"
+        icon="close"
+        size="16"
+        color="rgba(0, 0, 0, 0.54)"
+        ng-click="$ctrl.deleteFile(file.name)"
+      >
+      </pcd-icon>
+    </div>
+
+    <div
+      ng-if="$ctrl.getFileList().length > 2 && !$ctrl.isFullFileList"
+      class="attachments__content-info"
+    >
+      +{{ $ctrl.getFileList().length - 2 }}
+    </div>
+
+    <md-button
+      class="md-icon-button"
+      ng-click="$ctrl.showFullFileList()"
+      aria-label="show full list"
+      ng-if="$ctrl.getFileList().length > 1"
+    >
+      <pcd-icon
+        icon="{{ $ctrl.isFullFileList ? 'expand_less' : 'expand_more' }}"
+        size="16"
+        color="rgba(0, 0, 0, 0.54)"
+      >
+      </pcd-icon>
+    </md-button>
+
+  </div>
+  <div
+    class="attachments__actions"
+  >
+    <div class="attachments__actions-info">
+      {{ $ctrl.getAttachmentsInfo() }}
+    </div>
+    <div class="attachments__actions-btns">
+      (
+      <md-button
+        ng-if="$ctrl.mode !== 'ban_of_addition'"
+        class="attachments__actions-btn-add"
+        ng-click="$ctrl.runAttachProcess()"
+      >
+        Add File(s)
+      </md-button>
+      <span ng-if="$ctrl.mode !== 'ban_of_addition' && $ctrl.getFileList().length > 0">
+        |
+      </span>
+      <md-button
+        ng-if="$ctrl.getFileList().length > 0 && $ctrl.mode !== 'ban_of_addition'"
+        class="attachments__actions-btn-del"
+        ng-click="$ctrl.deleteAllFiles()"
+        aria-label="delete all files"
+      >
+        Delete all files
+      </md-button>
+      <md-button
+        ng-if="$ctrl.mode === 'ban_of_addition'"
+        class="attachments__actions-btn-save"
+        ng-click="$ctrl.downloadAll()"
+      >
+        Save all
+      </md-button>
+      )
+    </div>
+  </div>
+</div>

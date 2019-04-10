@@ -9,10 +9,18 @@ const ts = require("gulp-typescript");
 const browserify = require("browserify");
 const buffer = require("vinyl-buffer");
 const source = require("vinyl-source-stream");
-const browser = require("browser-sync");
 const path = require("path");
 const fs = require("fs");
 const rename = require("gulp-rename");
+const shell = require("gulp-shell");
+const gulpif = require("gulp-if");
+const uglifyes = require("uglify-es");
+const composer = require("gulp-uglify/composer");
+const minify = composer(uglifyes, console);
+const uglifycss = require("gulp-uglifycss");
+const stripDebug = require("gulp-strip-debug");
+const LIBS = require("./libs.json");
+let env = 'dev';
 
 function folderExists(path) {
 	try {
@@ -53,51 +61,81 @@ const BUILD = "./public";
 const ELECTRON = "../core-platform-electron";
 const APP_FOLDER = `${ELECTRON}/build/all/apps/${APP_FOLDER_NAME}`;
 const MOCK_CONFS = `${ELECTRON}/build/all/mock-confs`;
+const JASMINE_FOR_APPS = 'build/all/tests/apps-jasmine.js';	// in ELECTRON dir
+const THIS_FOLDER_NAME = path.basename(__dirname);
+// const TESTS_RELATIVE_PATH = `../${THIS_FOLDER_NAME}/tests`;
 
-gulp.task("copy-lib", copy("./src/lib-ext/**/*.*", "./public/lib-ext"));
+gulp.task(
+	"pre-prod",
+	function (cb) {
+		env = 'production';
+		cb();
+	}
+);
 
-gulp.task("del-lib", del(["./public/lib-ext"]));
+gulp.task(
+  "create-lib",
+  gulp.series(
+    copy("./src/libs/**/*.*", "./public/libs"),
+    copy("./src/assets/**/*.*", "./public/assets"),
+    (cb) => {
+      for (let item of LIBS) {
+        gulp.src(item.from).pipe(gulp.dest(item.to));
+      }
+      cb();
+    }
+  )
+);
 
-gulp.task("copy-html", gulp.parallel(
-	copy([
-		"./src/web/**/*.html", "!./src/web/index.html", "./src/web/**/*.png", "./src/web/**/*.jpg", "./src/web/**/*.gif", "./src/web/**/*.svg" ],
-		"./public/templates"),
-	copy("./src/web/index.html", "./public"),
-	copy("./src/web/storage/saving-applet/index.html", "./public/saving-applet")
-));
-
-gulp.task("del-html", del([
-	"./public/templates", "./public/index.html", "./public/saving-applet/index.html" ])
+gulp.task(
+  "create-html",
+  copy("./src/**/*.html", "./public")
 );
 
 gulp.task("styles", function() {
-	return gulp.src("./src/web/**/*.scss")
-		.pipe(sourcemaps.init())
+	return gulp.src("./src/**/*.scss")
+		.pipe(gulpif(env === 'dev', sourcemaps.init()))
 		.pipe(sass())
-		.pipe(sourcemaps.write())
+		.pipe(gulpif(env === 'dev', sourcemaps.write()))
 		.pipe(gulp.dest("./temp"));
 });
 
 gulp.task("concat-css", function () {
 	return gulp.src('./temp/**/*.css')
 		.pipe(concatCss("index.css"))
+		.pipe(gulpif(env === 'production', uglifycss()))
 		.pipe(gulp.dest('./public/'));
 });
 
+
+gulp.task(
+	"del-html",
+	del(
+		[
+			"./public/*",
+			!"./public/index.js",
+      !"./public/index.css",
+      !"./public/libs",
+      !"./public/assets"
+		]
+	)
+);
+
 gulp.task("del-css", del(["./public/index.css"]));
+gulp.task("del-js", del(["./public/index.js"]));
 
 gulp.task("del-temp", del(["./temp/"]));
 
-gulp.task("del-all", del(["./public"]));
+gulp.task("del-public", del(["./public"]));
 
 
 gulp.task("tsc", function() {
 	var tsProject = ts.createProject("tsconfig.json");
 	var tsResult = tsProject.src()
-		.pipe(sourcemaps.init())
+		.pipe(gulpif(env === 'dev', sourcemaps.init()))
 		.pipe(tsProject());
 	return tsResult.js
-		.pipe(sourcemaps.write())
+		.pipe(gulpif(env === 'dev', sourcemaps.write()))
 		.pipe(gulp.dest("./temp"));
 });
 
@@ -111,34 +149,25 @@ function browserifySubTask(browserifyEntry, destFolder) {
 			}).bundle()
 			.pipe(source(entryFileName))
 			.pipe(buffer())
-			.pipe(sourcemaps.init({loadMaps: true}))
-			.pipe(sourcemaps.write(''))
+			.pipe(gulpif(env === 'dev', sourcemaps.init({loadMaps: true})))
+			.pipe(gulpif(env === 'dev', sourcemaps.write('')))
+			.pipe(gulpif(env === 'production', stripDebug()))
+			.pipe(gulpif(env === 'production', minify({}).on('error', function (err) {
+				console.log(err);
+			})))
 			.pipe(gulp.dest(destFolder))
 	);
 }
 
-gulp.task("browserify-app", browserifySubTask("./temp/index.js", "./public"));
-gulp.task("browserify-storage-applet", browserifySubTask(
-	"./temp/storage/saving-applet/index.js", "./public/saving-applet"));
+gulp.task(
+	"browserify",
+	browserifySubTask(
+		"./temp/index.js",
+		"./public",
+	),
+);
 
-gulp.task("browserify", gulp.parallel(
-	"browserify-app", "browserify-storage-applet"));
-
-gulp.task("browser", function() {
- browser({
-	 server: {
-		 baseDir: "./public"
-	 },
-	 port: 9000,
-	 open: true,
-	 notify: false
- });
-});
-
-
-gulp.task("create-lib", gulp.series("del-lib", "copy-lib"));
-gulp.task("create-html", gulp.series("del-html", "copy-html"));
-gulp.task("create-css", gulp.series("del-css", "styles", "concat-css"));
+gulp.task("create-css", gulp.series("styles", "concat-css"));
 gulp.task("create-js", gulp.series("tsc", "browserify"));
 
 function moveToElectronTasks() {
@@ -167,33 +196,15 @@ Still, you may copy content of folder ${BUILD} manually.
 }
 gulp.task("to-electron", moveToElectronTasks());
 
-gulp.task("watcher", function() {
-	gulp.watch("./src/web/**/*.scss", gulp.series("create-css"));
-	gulp.watch(["./src/**/*.ts", "!./src/typings/*.ts"], gulp.series("create-js"));
-	gulp.watch(["./src/web/**/*.html", "./src/web/**/*.png", "./src/web/**/*.jpg", "./src/web/**/*.gif", "./src/web/**/*.svg"], gulp.series("create-html"));
-});
-
-gulp.task("watcher-electron", function() {
-	gulp.watch("./src/web/**/*.scss", gulp.series("create-css", "to-electron"));
-	gulp.watch(["./src/**/*.ts", "!./src/typings/*.ts"], gulp.series("create-js", "to-electron"));
-	gulp.watch(["./src/web/**/*.html", "./src/web/**/*.png", "./src/web/**/*.jpg", "./src/web/**/*.gif", "./src/web/**/*.svg"], gulp.series("create-html", "to-electron"));
-});
-
 gulp.task("help", function(callback) {
 	var h = '\nПомощь:\n'+
 		'1) "build"  - компилирует необходимые файлы из папки SRC в папку PUBLIC и затем переносит все в папку BUILD/APPS/CLIENT в ELECTRON.\n'+
-		'2) "browser" - "поднимает" локальный сервер (LOCALHOST:9000)) и открывает web-страницу приложения в браузере.\n'+
-		'3) "run-app" - компилирует необходимые файлы из папки SRC, переносит все в папку PUBLIC, "поднимает" локальный сервер (LOCALHOST:9000) и открывает web-страницу приложения в браузере.\n'+
-		'4) "run-dev" - запускает задачу RUN-APP и затем отслеживает изменения, вносимые в рабочие файлы.\n'+
-		'5) "build-watch" - BUILD + WATCHER.\n'+
-		'6) "default" ("help") - выводит это сообщение\n';
+		'2) "build:prod" - компилирует необходимые файлы из папки SRC в папку PUBLIC, минимизирует код и затем переносит все в папку BUILD/APPS/CLIENT в ELECTRON.\n'+
+		'3) "default" ("help") - выводит это сообщение\n';
 	console.log(h);
 	callback();
 });
 
-gulp.task("build", gulp.series("del-all", gulp.parallel("create-lib", "create-html", "create-css", "create-js"), "del-temp", "to-electron"));
-gulp.task("run-app", gulp.series("build", "browser"));
-gulp.task("run-dev", gulp.series("build", gulp.parallel("browser", "watcher")));
-gulp.task("build-watch", gulp.series("build", "watcher-electron"));
+gulp.task("build", gulp.series("del-public", "create-lib", gulp.parallel("create-html", "create-css", "create-js"), "del-temp", "to-electron"));
+gulp.task("build:prod", gulp.series("pre-prod", "build"));
 gulp.task("default", gulp.series("help"));
-

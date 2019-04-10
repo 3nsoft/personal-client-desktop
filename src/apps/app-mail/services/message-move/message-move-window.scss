@@ -1,0 +1,53 @@
+@import "../../../../config";
+
+.message-move-window__wrapper {
+  height: 95%;
+}
+
+.message-move-window {
+  width: 400px;
+  height: 100%;
+  background-color: $white;
+}
+
+.message-move-window__toolbar {
+  width: 100%;
+  height: $size-6x;
+  padding: 0 $size-1x 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey-a12;
+}
+
+.message-move-window__body {
+  width: 100%;
+  height: calc(100% - #{$size-6x});
+  overflow-y: auto;
+}
+
+.message-move-window__toolbar-title {
+  font-size: $font-14;
+  font-weight: bold;
+  line-height: 1;
+  color: $azure;
+}
+
+.message-move-window__toolbar .md-icon-button {
+  @include buttonIcon(24px);
+}
+
+.message-move-window__folder {
+  width: 100%;
+  cursor: pointer;
+}
+
+.message-move-window__folder:focus {
+  border: none;
+  outline-width: 0;
+}
+
+.message-move-window__folder:hover .mail-folder {
+  background-color: $azure-bg;
+}

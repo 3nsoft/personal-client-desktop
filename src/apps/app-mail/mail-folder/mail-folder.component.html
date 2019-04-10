@@ -1,0 +1,23 @@
+<div class="mail-folder" ng-class="{'is-selected': $ctrl.select}">
+  <pcd-icon
+    icon="{{ $ctrl.iconName }}"
+    color="{{ $ctrl.iconColor }}"
+    size="14"
+    class="mail-folder__icon"
+  >
+  </pcd-icon>
+  <div class="mail-folder__name">
+    <md-tooltip md-direction="top">{{ $ctrl.folder.name }}</md-tooltip>
+    {{ $ctrl.folder.name }}&nbsp;
+  </div>
+  <div
+    ng-if="$ctrl.folder.messageKeys.length > 0"
+    class="mail-folder__size">
+    ({{ $ctrl.folder.messageKeys.length }})
+  </div>
+  <div
+    ng-if="$ctrl.folder.qtNoRead > 0"
+    class="mail-folder__no-read">
+    {{ $ctrl.folder.qtNoRead }}
+  </div>
+</div>

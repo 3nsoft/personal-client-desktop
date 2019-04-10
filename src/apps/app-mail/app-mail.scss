@@ -1,0 +1,37 @@
+@import '../../config';
+
+.app-mail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.app-mail__btn-new {
+  @include buttonRound($azure, $white, none);
+  box-shadow: 0px 2px 8px 0 $grey-a12;
+  position: absolute;
+  z-index: 1000;
+  top: $size-1x;
+  left: $size-1x;
+}
+
+.app-mail__folders {
+  width: calc(#{$size-column} * 2);
+  height: 100%;
+}
+
+.app-mail__messages {
+  width: calc(#{$size-column} * 4);
+  height: 100%;
+}
+
+.app-mail__message {
+  width: calc(100% - #{$size-column} * 6);
+  height: 100%;
+  background-color: $azure-a24;
+  padding: 8px;
+}

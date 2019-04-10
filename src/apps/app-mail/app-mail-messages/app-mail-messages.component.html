@@ -1,0 +1,90 @@
+<section class="app-mail-messages">
+  <div class="app-mail-messages__toolbar">
+    <md-select
+      ng-model="$ctrl.timeFilterType"
+      md-on-close="$ctrl.filterChange()"
+      placeholder="By time"
+      class="md-no-underline"
+    >
+      <md-option value="today">Today</md-option>
+      <md-option value="week">Last 7 days</md-option>
+      <md-option value="all">All</md-option>
+    </md-select>
+
+    <md-button
+      ng-if="$ctrl.isToolbarBtnShow && $ctrl.filteredMessageList.length > 0"
+      class="app-mail-messages__toolbar-btn"
+      ng-click="$ctrl.onAction('clear_trash')"
+    >
+      Clear trash
+    </md-button>
+  </div>
+  <div
+    ng-if="$ctrl.selectMessagesIds.length > 1"
+    class="app-mail-messages__actions">
+    <md-button
+        class="md-icon-button app-mail-messages__actions-icon-btn"
+        ng-click="$ctrl.onAction('cancel')"
+        aria-label="cancel"
+    >
+      <pcd-icon
+          icon="close"
+          color="rgba(0, 0, 0, 0.54)"
+          size="20">
+      </pcd-icon>
+    </md-button>
+    <div class="app-mail-messages__actions-info">
+      {{ $ctrl.selectMessagesIds.length }} mails
+    </div>
+    <md-button
+        class="md-icon-button app-mail-messages__actions-icon-btn-middle"
+        ng-click="$ctrl.onAction('select_all')"
+        aria-label="select_all"
+    >
+      <pcd-icon
+          icon="select_all"
+          color="rgba(0, 0, 0, 0.54)"
+          size="20">
+      </pcd-icon>
+    </md-button>
+    <md-button
+        class="md-icon-button app-mail-messages__actions-icon-btn-middle"
+        ng-click="$ctrl.onAction('move')"
+        aria-label="move_to_folder"
+    >
+      <pcd-icon
+          icon="move_to_inbox"
+          color="rgba(0, 0, 0, 0.54"
+          size="20">
+      </pcd-icon>
+    </md-button>
+    <md-button
+        class="md-icon-button app-mail-messages__actions-icon-btn-middle"
+        ng-click="$ctrl.onAction('delete')"
+        aria-label="delete"
+    >
+      <pcd-icon
+          icon="delete"
+          color="#f44336"
+          size="20">
+      </pcd-icon>
+    </md-button>
+  </div>
+  <div
+    class="app-mail-messages__body"
+    ng-class="{'mod-actions': $ctrl.selectMessagesIds.length > 1}">
+    <div
+      ng-repeat="item in $ctrl.filteredMessageList track by item.msgKey"
+      class="app-mail-messages__item">
+      <mail-messages-item
+        content="item"
+        selected="$ctrl.isMsgSelect(item)"
+        multi="$ctrl.selectMessagesIds.length > 1"
+        ng-click="$ctrl.selectMsg($event, item)"
+      >
+      </mail-messages-item>
+    </div>
+  </div>
+
+  
+</section>

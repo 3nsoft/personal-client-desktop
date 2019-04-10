@@ -1,0 +1,126 @@
+<section
+  class="app-mail-message"
+  ng-class="{'mod-disable': $ctrl.isDisable}"
+>
+  <div
+    ng-if="!$ctrl.message && !$ctrl.sendStatus.msgId"
+    class="app-mail-message__empty"
+  ></div>
+
+  <div
+    ng-if="$ctrl.message || $ctrl.sendStatus.msgId"
+    class="app-mail-message__content"
+  >
+    <app-mail-message-toolbar
+      message-map="$ctrl.messageMap"
+      action="$ctrl.onAction(mode)"
+    >
+    </app-mail-message-toolbar>
+    
+
+    <div
+      class="app-mail-message__content-body"
+      ng-class="{'mod-fast': $ctrl.toolbarOptions.replyBtn}"
+    >
+      <div class="app-mail-message__content-item-1">
+        <div class="app-mail-message__content-subject">
+          {{ $ctrl.message.subject }}
+        </div>
+        <div class="app-mail-message__content-date">
+          {{ $ctrl.getDate() }}
+        </div>
+      </div>
+
+      <div class="app-mail-message__content-item-2">
+        <span class="app-mail-message__content-title">
+          From:
+        </span>
+        <div
+          class="app-mail-message__content-addr"
+          ng-style="{'background-color': $ctrl.getColor($ctrl.message.senderAlias)}"
+        >
+          {{ $ctrl.message.senderAlias }}
+        </div>
+      </div>
+
+      <div class="app-mail-message__content-item-2">
+        <span class="app-mail-message__content-title">
+          To:
+        </span>
+        <div class="app-mail-message__content-addr-wrap">
+          <div
+              ng-repeat="addr in $ctrl.recipients"
+              class="app-mail-message__content-addr"
+              ng-style="{'background-color': $ctrl.getColor(addr)}"
+          >
+            {{ addr }}
+          </div>
+
+          <div
+              ng-if="$ctrl.recipientsQt"
+              class="app-mail-message__content-addr-info"
+          >
+            +{{ $ctrl.recipientsQt }}
+          </div>
+          <md-button
+              ng-if="$ctrl.message.alias.length > 1"
+              class="md-icon-button app-mail-message__content-addr-btn"
+              ng-click="$ctrl.showRecipients()"
+              aria-label="show"
+          >
+            <pcd-icon
+                ng-if="!$ctrl.recipientsQt "
+                icon="keyboard_arrow_up"
+                color="rgba(0, 144, 236, 0.87)"
+                size="24">
+            </pcd-icon>
+            <pcd-icon
+                ng-if="$ctrl.recipientsQt "
+                icon="keyboard_arrow_down"
+                color="rgba(0, 144, 236, 0.87)"
+                size="24">
+            </pcd-icon>
+          </md-button>
+
+        </div>
+      </div>
+
+      <div ng-if="$ctrl.message.attached && $ctrl.message.attached.length > 0">
+        <attachments
+            key="$ctrl.message.msgKey"
+            files="$ctrl.message.attached"
+            complete="$ctrl.completeRemoval(attached)"
+            mode="'ban_of_addition'"
+            disable="$ctrl.selectedFolderId === '2'"
+        >
+        </attachments>
+      </div>
+
+      <div
+          class="app-mail-message__content-text"
+          ng-bind-html="$ctrl.message.bodyHTML"
+      >
+      </div>
+
+    </div>
+
+    <div
+      ng-if="$ctrl.selectedFolderId === '2' && ($ctrl.sendStatus.msgId || $ctrl.sendStatus.progress)"
+      class="app-mail-message__content-body"
+    >
+      {{ $ctrl.sendStatus.msgId }} : {{ $ctrl.sendStatus.progress ? $ctrl.sendStatus.progress : '' }}
+    </div>
+
+
+    <div
+      ng-if="$ctrl.toolbarOptions.replyBtn"
+      class="app-mail-message__content-fast"
+    >
+      <app-mail-message-fast-reply
+        message="$ctrl.message"
+      ></app-mail-message-fast-reply>
+    </div>
+
+  </div>
+
+</section>

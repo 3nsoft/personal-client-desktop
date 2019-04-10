@@ -1,0 +1,107 @@
+@import "../../../config";
+
+.person {
+  width: 100%;
+  height: 100%;
+}
+
+.person__avatar {
+  width: 285px;
+  height: 285px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.person__icon-btn {
+  margin: 0 !important;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.person__avatar-btn {
+  position: absolute;
+  bottom: $size-1x;
+  left: calc(50% - 20px);
+  background-color: $grey-a06;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.person__avatar-wrapper:hover {
+  cursor: pointer;
+  .person__avatar-btn {
+    opacity: 1;
+    &:hover {
+      background-color: $grey-a06;
+      border-radius: 50%;
+    }
+  }
+}
+
+.person__actions {
+  width: 100%;
+  height: $size-7x;
+  background-color: $grey-a06;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 $size-1x;
+  margin-bottom: $size-half;
+}
+
+.person__actions-btn-menu {
+  font-size: $font-14;
+  font-weight: bold;
+  color: $grey-a54;
+  text-transform: initial !important;
+  margin: 0 !important;
+  position: absolute;
+  top: 10px;
+  right: 2px;
+}
+
+.person__actions-btn-menu-item {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  pcd-icon {
+    margin-right: $size-1x;
+  }
+}
+
+.person__info {
+  height: calc(100% - 346px);
+  overflow-y: auto;
+}
+
+.person__info.person__info-new {
+  height: calc(100% - 289px);
+}
+
+.person__info-btns {
+  width: 100%;
+  padding: 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: $size-3x 0;
+}
+
+.person__info-btn-save {
+  @include buttonFlat($azure);
+}

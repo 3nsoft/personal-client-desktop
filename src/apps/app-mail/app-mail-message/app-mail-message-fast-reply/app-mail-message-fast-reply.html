@@ -1,0 +1,24 @@
+<div class="app-mail-message-fast-reply">
+   <md-input-container md-no-float="true">
+      <textarea
+        ng-model="$ctrl.text"
+        max-rows="2"
+        md-select-on-focus
+        md-no-resize="true"
+        placeholder="Fast reply"
+      ></textarea>
+    </md-input-container>
+    
+    <md-button
+      class="md-icon-button"
+      ng-click="$ctrl.fastReply()"
+      ng-disabled="!$ctrl.text"
+      aria-label="send"
+    >
+      <pcd-icon
+          icon="send"
+          color="#4caf50"
+          size="24">
+      </pcd-icon>
+    </md-button>
+</div>

@@ -1,0 +1,52 @@
+@import "../../../config";
+
+.mail-folder {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 $size-2x;
+  background-color: transparent;
+  overflow: hidden;
+  user-select: none;
+  font-size: $font-14;
+  color: $grey-a87;
+  cursor: pointer;
+  outline-width: 0;
+}
+
+.mail-folder.is-selected {
+  background-color: $white;
+  border-left: $size-half solid $azure;
+  padding-left: 12px;
+}
+
+.mail-folder__icon {
+  margin-right: $size-1x;
+}
+
+.mail-folder__name {
+  max-width: calc(100% - #{$size-11x});
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mail-folder__no-read {
+  position: absolute;
+  height: 18px;
+  top: 10px;
+  right: 12px;
+  border-radius: 18px;
+  background-color: $azure;
+  color: $white-01;
+  padding: 0 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-12;
+  font-weight: bold;
+}

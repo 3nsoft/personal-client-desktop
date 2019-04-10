@@ -1,0 +1,30 @@
+<section
+  class="pcd-icon-contact"
+  ng-style="$ctrl.getMainStyles()">
+  <pcd-icon
+    class="pcd-icon-contact__main"
+    icon="{{ $ctrl.icon }}"
+    color="{{ $ctrl.currentIconColor }}"
+    size="{{ $ctrl.size }}">
+  </pcd-icon>
+  <div 
+    ng-if="!$ctrl.isSelect"
+    class="pcd-icon-contact__letter"
+    ng-style="$ctrl.getLabelStyles()">
+    {{ $ctrl.getLetter() }}
+  </div>
+<!--  <pcd-icon
+    ng-if="$ctrl.isSelect"
+    class="pcd-icon-contact__check"
+    icon="check_box_outline"
+    color="#0090ec"
+    size="{{ $ctrl.checkIconSize }}">
+  </pcd-icon> -->
+  <pcd-icon
+    ng-if="$ctrl.isSelect"
+    class="pcd-icon-contact__check"
+    icon="check_box"
+    color="#0090ec"
+    size="{{ $ctrl.checkIconSize }}">
+  </pcd-icon>
+</section>

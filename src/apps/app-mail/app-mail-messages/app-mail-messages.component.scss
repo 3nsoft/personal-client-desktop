@@ -1,0 +1,89 @@
+@import "../../../config";
+
+.app-mail-messages {
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+}
+
+.app-mail-messages__toolbar {
+  width: 100%;
+  height: $size-8x;
+  background-color: $white;
+  border-bottom: 1px solid $grey-a12;
+  padding: 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-mail-messages__toolbar md-select {
+  margin: 0;
+  width: 112px;
+  font-size: $font-14;
+  color: $grey-a54;
+}
+
+.app-mail-messages__toolbar md-select span {
+  color: $grey-a54;
+}
+
+.app-mail-messages__toolbar-btn {
+  color: $red;
+}
+
+.app-mail-messages__actions {
+  width: 100%;
+  height: $size-6x;
+  background-color: $grey-a12;
+  padding: 0 0 0 $size-1x 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.app-mail-messages__actions-icon-btn {
+  @include buttonIcon(40px);
+}
+
+.app-mail-messages__actions-icon-btn-middle {
+  @include buttonIcon(48px);
+}
+
+.app-mail-messages__actions-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  font-size: $font-14;
+  font-weight: bold;
+  color: $grey-a87;
+}
+
+.app-mail-messages__body {
+  width: 100%;
+  height: calc(100% - #{$size-8x});
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app-mail-messages__body.mod-actions {
+  height: calc(100% - #{$size-8x + $size-6x});
+}
+
+.app-mail-messages__item {
+  width: 100%;
+  cursor: pointer;
+}
+
+.app-mail-messages__item:focus {
+  border: none;
+  outline-width: 0;
+}
+
+.app-mail-messages__item:hover {
+  background-color: $azure-bg;
+}

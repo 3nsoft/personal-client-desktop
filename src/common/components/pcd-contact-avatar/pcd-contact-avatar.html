@@ -1,0 +1,12 @@
+<section
+  class="pcd-icon-avatar"
+  ng-class="{'hex': !$ctrl.isGroup, 'hex2Mask': $ctrl.isGroup}"
+  ng-style="$ctrl.getMainStyles()">
+  <pcd-icon
+    ng-if="$ctrl.isSelect"
+    class="pcd-icon-avatar__check"
+    icon="check_box"
+    color="#0090ec"
+    size="{{ $ctrl.checkIconSize }}">
+  </pcd-icon>
+</section>

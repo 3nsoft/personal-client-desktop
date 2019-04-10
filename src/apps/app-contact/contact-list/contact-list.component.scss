@@ -1,0 +1,148 @@
+@import '../../../config';
+
+.contact-list {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.contact-list__header {
+  width: 100%;
+  height: $size-8x;
+  padding: 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $white;
+}
+
+.contact-list__header-btn {
+  @include buttonRound($azure, $white, none);
+  box-shadow: 0px 2px 8px 0 $grey-a12;
+}
+
+.contact-list__body {
+  width: 100%;
+  height: calc(100% - #{$size-8x});
+  background-color: $white;
+}
+
+.contact-list__content-search {
+  width: 100%;
+  height: $size-6x;
+  background-color: $white-01;
+  padding: $size-1x $size-2x;
+}
+
+.contact-list__content-search-icon {
+  position: absolute;
+  left: $size-2x;
+  top: $size-2x;
+  z-index: 1;
+}
+
+.contact-list__content-search-input {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  padding-left: $size-2x;
+  padding-right: $size-2x;
+  font-size: $font-14;
+  outline-width: 0;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid $grey-a12;
+  background-color: $white-01;
+
+  &:focus, &:active {
+    border-color: $azure;
+    outline-width: 0;
+  }
+}
+
+.contact-list__content-search-clear {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: $size-half;
+  min-width: $size-3x !important;
+  min-height: $size-3x !important;;
+  width: $size-3x !important;;
+  height: $size-3x !important;;
+  padding: 0 !important;;
+  margin: 0 !important;;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  & pcd-icon {
+    top: -2px;
+  }
+}
+
+.contact-list__content {
+  width: 100%;
+  height: calc(100% - #{$size-8x});
+  margin: $size-1x 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.contact-list__content-sub {
+  width: 100%;
+  border-bottom: 1px solid $grey-a06;
+}
+
+.contact-list__content-sub:last-child {
+  border-bottom: none;
+}
+
+.contact-list__content-sub-letter {
+  position: absolute;
+  width: $size-5x;
+  height: $size-7x;
+  left: 0;
+  top: 0;
+  font-size: $font-16;
+  font-weight: bold;
+  color: $azure;
+  background-color: transparent;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-list__content-item {
+  cursor: pointer;
+  &:focus, &:active {
+    outline-width: 0;
+  }
+}
+
+.contact-list__content-item.is-selected {
+  .contact-item {
+    background-color: $azure-select;
+  }
+  &:focus, &:active {
+    outline-width: 0;
+  }
+}
+
+.contact-list__content-item:hover {
+  .contact-item {
+    background-color: $grey-a06;
+  }
+}
+
+.contact-list__content-item.is-selected {
+  .contact-item {
+    background-color: $azure-select;
+  }
+}

@@ -1,0 +1,204 @@
+@import "../../../config";
+
+.app-mail-message {
+  width: 100%;
+  height: 100%;
+}
+
+.app-mail-message.mod-disable {
+  pointer-events: none;
+  border-radius: $size-half;
+  transform: rotate(-0.5deg);
+}
+
+.app-mail-message.mod-disable:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: $size-half;
+  box-shadow: 0 2px 5px $grey-a32;
+  transform: rotate(1deg);
+  background-color: $white;
+  z-index: -1;
+}
+
+.app-mail-message.mod-disable:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-color: $grey-a32;
+}
+
+.app-mail-message__empty {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/3n.png') no-repeat 50% 50%;
+  opacity: 0.3;
+}
+
+.app-mail-message__content {
+  width: 100%;
+  height: 100%;
+  border-radius: $size-half;
+  box-shadow: 0 1px 5px 0 $grey-a32;
+}
+
+.app-mail-message__content-body {
+  width: 100%;
+  height: calc(100% - #{$size-7x});
+  padding: $size-2x 0;
+  background-color: $white;
+  border-bottom-left-radius: $size-half;
+  border-bottom-right-radius: $size-half;
+  overflow-y: auto;
+}
+
+.app-mail-message__content-body.mod-fast {
+  height: calc(100% - #{$size-7x} - #{$size-7x});
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.app-mail-message__content-fast {
+  width: 100%;
+  height: $size-7x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $white;
+  border-bottom-left-radius: $size-half;
+  border-bottom-right-radius: $size-half;
+  border-top: 1px solid $grey-a12;
+}
+
+app-mail-message-fast-reply {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.app-mail-message__content-item-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $size-2x;
+  font-size: $font-14;
+  font-weight: 600;
+  margin-bottom: $size-1x;
+}
+
+.app-mail-message__content-subject {
+  color: $grey-a87;
+  line-height: 1.7;
+  flex-grow: 1;
+}
+
+.app-mail-message__content-date {
+  padding-left: $size-half;
+  color: $grey-a54;
+}
+
+.app-mail-message__content-item-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 $size-2x;
+  margin-bottom: $size-half;
+  font-size: $font-14;
+}
+
+.app-mail-message__content-title {
+  position: relative;
+  font-weight: 600;
+  color: $grey-a54;
+  padding-right: $size-2x;
+}
+
+.app-mail-message__content-addr {
+  padding: $size-1x $size-2x;
+  border-radius: $size-2x;
+  margin-right: $size-1x;
+  margin-bottom: $size-half;
+  color: $white;
+}
+
+.app-mail-message__content-addr-wrap {
+  padding-right: $size-5x;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.app-mail-message__content-addr-info {
+  height: $size-5x;
+  line-height: $size-5x;
+  font-size: $font-14;
+  font-weight: bold;
+  color: $azure-a87;
+}
+
+.app-mail-message__content-addr-btn {
+  @include buttonIcon($size-5x);
+  position: absolute;
+  right: 0;
+}
+
+.app-mail-message__content-text {
+  padding: $size-2x;
+
+  & * {
+    margin: 0;
+  }
+
+  & p {
+    font-size: $font-14;
+  }
+
+  & h1 {
+    font-size: $font-32;
+  }
+
+  & h2 {
+    font-size: $font-24;
+  }
+
+  & h3 {
+    font-size: $font-18;
+  }
+
+  & h4 {
+    font-size: $font-16;
+  }
+
+  & h5 {
+    font-size: $font-14;
+  }
+
+  & pre, & code {
+    background-color: $grey-a87;
+    overflow: visible;
+    padding: $size-half $size-1x;
+    white-space: pre-wrap;
+    border-radius: 3px;
+    color: $white;
+  }
+
+  & blockquote {
+    border-left: 2px solid $grey-a54;
+    padding-left: $size-1x;
+    margin-left: $size-3x;
+  }
+}

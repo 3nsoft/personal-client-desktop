@@ -1,0 +1,305 @@
+@import "config";
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/opensans-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/opensans-italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/opensans-semibold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/opensans-semibolditalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+body {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+	font-family: OpenSans, sans-serif;
+
+  .general {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .start-info {
+      position: absolute;
+      width: 80%;
+      height: 100px;
+      top: calc(50% - 50px);
+      left: 10%;
+
+      h3 {
+        text-align: center;
+        margin: 0;
+      }
+    }
+  }
+
+}
+
+div, button, section, p, form, input {
+  position: relative;
+  box-sizing: border-box;
+}
+
+button[disabled] {
+  cursor: not-allowed !important;
+}
+
+.md-scroll-mask {
+  position: initial;
+}
+
+.hexMask {
+	clip-path: polygon(20px 40px, 2.68px 30px, 2.68px 10px, 20px 0px, 37.32px 10px, 37.32px 30px);
+}
+
+.hex {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hex2Mask {
+	clip-path: polygon(20px 40px, 15.36px 37.32px, 10px 37.32px, 7.32px 32.68px, 2.68px 30px, 2.68px 24.64px, 0px 20px, 2.68px 15.36px, 2.68px 10px, 7.32px 7.32px, 10px 2.68px, 15.36px 2.68px, 20px 0px, 24.64px 2.68px, 30px 2.68px, 32.68px 7.32px, 37.32px 10px, 37.32px 15.36px, 40px 20px, 37.32px 24.64px, 37.32px 30px, 32.68px 32.68px, 30px 37.32px, 24.64px 37.32px);
+}
+
+//.quote {
+//  margin-left: 10px !important;
+//  padding-left: 15px !important;
+//  border-left: 1px solid $azure-a87;
+//  color: $grey-a32;
+//}
+
+blockquote {
+  display: block !important;
+}
+
+/*
+button[disabled="disabled"] {
+  cursor: not-allowed !important;
+}
+*/
+
+
+/* стилизация полосы прокрутки */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: $grey-a12;
+}
+
+/* внешний вид системных сообщений */
+.success-toast {
+  .md-toast-content {
+    background-color: #c8e6c9 !important;
+    color: #1b5e20 !important;
+  }
+}
+
+.error-toast {
+  .md-toast-content {
+    background-color: #ffcdd2 !important;
+    color: #b71c1c !important;
+  }
+}
+
+.info-toast {
+  .md-toast-content {
+    background-color: #bbdefb !important;
+    color: #0d47a1 !important;
+  }
+}
+
+md-dialog {
+  max-height: 96% !important;
+}
+
+/* внешний вид диалогового окна подтверждения удаления */
+md-dialog[aria-label="delete dialog"] {
+  text-align: center;
+
+  md-dialog-content {
+    .md-title {
+      font-weight: bold;
+    }
+  }
+
+   md-dialog-actions {
+     justify-content: space-around !important;
+   }
+
+  .md-cancel-button {
+    @include buttonFlat($red);
+  }
+
+  .md-confirm-button {
+    @include buttonFlat($green);
+  }
+}
+
+/* двойная кнопка */
+.btn-double {
+  position: relative;
+  height: $size-5x;
+  min-width: $size-8x;
+  // box-shadow: 0 0 2px 2px $grey-a12;
+  margin: 0 0 0 $size-1x;
+  padding: 0 $size-1x;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  span {
+    position: relative;
+    display: block;
+    font-size: $font-16;
+    font-weight: bold;
+    color: $grey-a54;
+  }
+
+  ng-md-icon {
+    fill: $grey-a87;
+    margin: 0;
+  }
+
+  &:hover {
+    background-color: $white !important;
+    box-shadow: 0 0 2px 2px $grey-a12;
+  }
+}
+
+/* кнопка удаления в chip */
+md-chip {
+  .md-chip-remove {
+    md-icon {
+      min-width: $size-18;
+      min-height: $size-18;
+
+      svg {
+        width: $size-18;
+        height: $size-18;
+        fill: $grey-a87;
+      }
+    }
+  }
+}
+
+md-chip.md-focused {
+  color: $red-a87 !important;
+}
+
+md-chips {
+  md-chips-wrap {
+    &.md-focused {
+      box-shadow: none !important;
+    }
+  }
+}
+
+/* переопределение css для quill */
+.ql-container {
+  .ql-editor {
+    blockquote {
+      margin-top: 0;
+      margin-bottom: 0;
+      border-left-width: 2px;
+    }
+  }
+}
+
+.ql-toolbar {
+  .ql-formats {
+    .ql-font {
+      .ql-picker-options {
+        top: -88px;
+      }
+    }
+
+    .ql-align {
+      .ql-picker-options {
+        top: -106px;
+      }
+    }
+
+    .ql-color, .ql-background {
+      .ql-picker-options {
+        top: -108px;
+      }
+    }
+
+  }
+}
+
+/* стилизация полосы прокрутки */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.success-toast {
+  .md-toast-content {
+    background-color: #c8e6c9 !important;
+    color: #1b5e20 !important;
+  }
+}
+
+.error-toast {
+  .md-toast-content {
+    background-color: #ffcdd2 !important;
+    color: #b71c1c !important;
+  }
+}
+
+.info-toast {
+  .md-toast-content {
+    background-color: #bbdefb !important;
+    color: #0D47A1 !important;
+  }
+}
+
+.ui-notification {
+  border-radius: 4px;
+}
+.ui-notification.success {
+  background-color: #c8e6c9 !important;
+  color: #1b5e20 !important;
+}
+.ui-notification.error {
+  background-color: #ffcdd2 !important;
+  color: #b71c1c !important;
+}
+.ui-notification.info {
+  background-color: #bbdefb !important;
+  color: #0D47A1 !important;
+}

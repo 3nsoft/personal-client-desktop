@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+    <title>3NWeb Client</title>
+    <link rel="shorcut icon" type="image/png" href="./assets/images/3NLogo100.png">
+    <link href="./libs/angular/angular-csp.css" rel="stylesheet">
+    <link href="./libs/angular-material/angular-material.min.css" rel="stylesheet">
+    <link href="./libs/angular-ui-notification/angular-ui-notification.min.css" rel="stylesheet">
+    <link href="./libs/ng-embed/ng-embed.min.css" rel="stylesheet">
+    <link href="./index.css" rel="stylesheet">
+
+    <script src="./index.js"></script>
+    <script src="./libs/squire/squire.js"></script>
+    <script src="./libs/squire/angular-squire.js"></script>
+
+  </head>
+  <body ng-app="3nClient">
+
+    <section class="general" ui-view>
+      <div class="start-info">
+        <h3><b>Starting initialization ...</b></h3>
+        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+      </div>
+    </section>
+
+  </body>
+</html>

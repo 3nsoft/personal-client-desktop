@@ -1,0 +1,216 @@
+/*
+ Copyright (C) 2018 3NSoft Inc.
+
+ This program is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later
+ version.
+
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ See the GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along with
+ this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import { SingleProc } from '../../../common/services/processes';
+import { logError } from '../../../common/services/libs/logging';
+import { APPS, SYS_MAIL_FOLDERS } from '../../../common/const';
+import { whatIsIt } from '../../common/helpers';
+import { appMailState } from '../common/app-mail-store';
+
+export class MailLocalFS {
+  private initializing: Promise<void>|undefined;
+  private changeProc: SingleProc|undefined = new SingleProc();
+  private fs: web3n.files.WritableFS = null;
+  private valueToSave: any|undefined;
+
+  constructor() {
+    const fsName = APPS.find(app => app.name === 'Mail').fsName;
+    this.initializing = w3n.storage.getAppLocalFS(fsName)
+      .then(fs => {
+        this.fs = fs;
+        this.initializing = undefined;
+      });
+  }
+
+  /**
+   * функция записи файла как линк в 3N local storage
+   * @param folderId {string}
+   * @param msgKey {string}
+   * @param fileName {string}
+   * @param file {web3n.files.File}
+   * @return {Promise<void>}
+   */
+  public async saveFileTo3NStorage(
+    folderId: string,
+    msgKey: string,
+    fileName: string,
+    file: web3n.files.File,
+  ): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+    if (!this.changeProc) {
+      throw new Error(`Save file ${fileName} is already finished.`);
+    }
+
+    this.valueToSave = file;
+    return this.changeProc.startOrChain(async () => {
+      if (this.valueToSave !== file) { return; }
+      const path = `${folderId}/${msgKey}/attachments/${fileName}`;
+      await this.fs.link(path, file);
+    })
+      .catch(err => logError(`Error occured when saving link to file ${fileName}`, err));
+  }
+
+  /**
+   * удаление файла из 3N local storage
+   * @param folderId {string}
+   * @param msgKey {string}
+   * @param fileName {string}
+   * @return {Promise<boolean>}
+   */
+  public async deleteFileFrom3NStorage(folderId: string, msgKey: string, fileName: string): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+    const folderPath = `${folderId}/${msgKey}/attachments`;
+    const essenceType = await whatIsIt(this.fs, folderPath, fileName);
+    try {
+      switch (essenceType) {
+        case 'folder':
+          await this.fs.deleteFolder(`${folderPath}/${fileName}`, true);
+          break;
+        case 'file':
+          await this.fs.deleteFile(`${folderPath}/${fileName}`);
+          break;
+        case 'link':
+          return await this.fs.deleteLink(`${folderPath}/${fileName}`);
+      }
+    } catch (err) {
+      logError(`Error occured when deleting file ${fileName}`, err);
+    }
+  }
+
+  /**
+   * удаление папки собщения
+   * @param parentFolderName {string}
+   * @param deletedFolderName {string}
+   * @return {Promise<void>}
+   */
+  public async deleteFolderFrom3NStorage(
+    parentFolderName: string,
+    deletedFolderName: string,
+  ): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+    const folderFullPath = `${parentFolderName}/${deletedFolderName}`;
+    console.log(folderFullPath);
+    const essenceType = await whatIsIt(this.fs, parentFolderName, deletedFolderName);
+    if (essenceType === 'folder') {
+      console.log('This is folder');
+      await this.fs.deleteFolder(folderFullPath, true)
+        .catch(err => logError(`Error occured when deleting folder ${parentFolderName}/${deletedFolderName}`, err));
+    }
+  }
+
+  /**
+   * переимнование/перемещение папки сообщения
+   * @param folderFullPathFrom {string}
+   * @param folderFullPathTo {string}
+   * @return {Promise<void>}
+   */
+  public async renameFolder(folderFullPathFrom: string, folderFullPathTo: string): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+    const pathFrom = folderFullPathFrom.split('/');
+    const essenceType = await whatIsIt(
+      this.fs,
+      pathFrom.slice(0, -1).join('/'),
+      pathFrom.slice(-1)[0],
+    );
+    if (essenceType === 'folder') {
+      await this.fs.move(folderFullPathFrom, folderFullPathTo)
+        .catch(err => logError(`Error occured when rename folder ${folderFullPathFrom} to ${folderFullPathTo}`, err));
+    }
+  }
+
+  /**
+   * функция сохранения приатаченного файла в файловую систему устройства
+   * @param msgKey {string}
+   * @param fileName {string}
+   * @return {Promise<void>}
+   */
+  async downloadFileFromAttach(msgKey: string, fileName: string): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+
+    const folderId = appMailState.values.messageList[msgKey].folderId;
+    let srcFile: web3n.files.File;
+
+    if (folderId !== SYS_MAIL_FOLDERS.inbox) {
+      const essenceType = await whatIsIt(this.fs, `${folderId}/${msgKey}/attachments`, fileName);
+      switch (essenceType) {
+        case 'file':
+          srcFile = await this.fs.readonlyFile(`${folderId}/${msgKey}/attachments/${fileName}`)
+            .catch(async (exc: web3n.files.FileException) => {
+              if (exc.notFound) {
+                logError(`File ${folderId}/${msgKey}/attachments/${fileName} not found`);
+              } else {
+                logError(exc);
+              }
+              throw exc;
+            });
+          break;
+        case 'link':
+          const symLink = await this.fs.readLink(`${folderId}/${msgKey}/attachments/${fileName}`);
+          srcFile = (await symLink.target()) as web3n.files.File;
+          break;
+      }
+    } else {
+      const msgId = appMailState.values.messageList[msgKey].msgId;
+      const inboxMsg = await w3n.mail.inbox.getMsg(msgId);
+      srcFile = await inboxMsg.attachments.readonlyFile(fileName)
+        .catch(async (exc: web3n.files.FileException) => {
+          logError(exc);
+          throw exc;
+        });
+    }
+
+    const title = 'Save file';
+    const outFile = await w3n.device.saveFileDialog(title, null, fileName);
+    if (outFile) {
+      await outFile.copy(srcFile)
+        .catch(err => {
+          logError(err);
+        });
+    }
+  }
+
+  /**
+   * запись данных сообщения в localFS
+   */
+  public async saveJsonDataToFS<T>(folderId: string, msgKey: string, fileName: string, data: T): Promise<void> {
+    if (this.initializing) { await this.initializing; }
+    const fullPath = `${folderId}/${msgKey}/${fileName}`;
+    if (!this.changeProc) {
+      throw new Error(`Save file ${fullPath} is already finished.`);
+    }
+    this.valueToSave = data;
+    return this.changeProc.startOrChain(async () => {
+      if (this.valueToSave !== data) { return; }
+      await this.fs.writeJSONFile(fullPath, data);
+    })
+      .catch(err => logError(`Error occured when saving link to file ${fullPath}`, err));
+  }
+
+  /**
+   *
+   */
+  public async readJsonDataFromFS<T>(folderId: string, msgKey: string, fileName: string = 'data.json'): Promise<T> {
+    if (this.initializing) { await this.initializing; }
+    const fullPath = `${folderId}/${msgKey}/${fileName}`;
+    return await this.fs.readJSONFile<T>(fullPath)
+      .catch((exc: client3N.FileException) => {
+        logError(`Error occured when reading file ${fullPath} from localFS`, exc);
+        return null;
+      });
+  }
+
+}

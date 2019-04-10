@@ -1,0 +1,101 @@
+<div
+  class="mail-messages-item"
+  ng-class="{'mod-attach': $ctrl.content.attachedFilesNames && $ctrl.content.attachedFilesNames.length > 0, 'mod-selected': $ctrl.selected}"
+>
+  <div class="mail-messages-item__body">
+    <div class="mail-messages-item__body-icon">
+      <pcd-contact-icon
+        size="32"
+        label="{{ $ctrl.content.senderAlias}}"
+        is-select="$ctrl.selected && $ctrl.multi"
+      >
+      </pcd-contact-icon>
+    </div>
+    <div class="mail-messages-item__body-content">
+      <div
+        class="mail-messages-item__body-content-row item-content-row1">
+        <span
+          class="item-content-name"
+          ng-class="{'is-noread': !$ctrl.content.isRead}"
+        >
+          {{ $ctrl.content.senderAlias }}
+        </span>
+        <span class="item-content-date">{{ $ctrl.getTimeString() }}</span>
+      </div>
+      <div
+        class="mail-messages-item__body-content-row item-content-row2"
+      >
+        <span
+          class="item-content-subject"
+          ng-class="{'is-noread': !$ctrl.content.isRead}"
+        >
+          {{ $ctrl.content.subject }}
+        </span>
+      </div>
+      <div
+          class="mail-messages-item__body-content-row item-content-row3"
+      >
+        <span
+            class="item-content-text"
+            ng-if="$ctrl.content.folderId !== '2'"
+        >
+          {{ $ctrl.content.body }}
+        </span>
+        <span
+            class="item-content-text mod-sending"
+            ng-if="$ctrl.content.folderId === '2'"
+        >
+          Sending in progress ...
+        </span>
+
+        <pcd-icon
+          ng-if="$ctrl.isMessageIn()"
+          class="item-content-direction"
+          icon="call_received"
+          size="16"
+          color="#2fd365"
+        >
+        </pcd-icon>
+        <pcd-icon
+          ng-if="!$ctrl.isMessageIn()"
+          class="item-content-direction"
+          icon="call_made"
+          size="16"
+          color="#f44336"
+        >
+        </pcd-icon>
+      </div>
+    </div>
+  </div>
+  <div
+    ng-if="$ctrl.content.attachedFilesNames && $ctrl.content.attachedFilesNames.length > 0"
+    class="mail-messages-item__attach"
+    ng-class="{
+      'mod-1': $ctrl.content.attachedFilesNames.length === 1,
+      'mod-2': $ctrl.content.attachedFilesNames.length > 1,
+      'mod-3': $ctrl.content.attachedFilesNames.length > 10,
+      'mod-4': $ctrl.content.attachedFilesNames.length > 100
+    }"
+  >
+    <div
+      class="mail-messages-item__attach-item"
+    >
+      <pcd-icon
+        class="mail-messages-item__attach-icon"
+        icon="attach_file"
+        size="16"
+        color="#f44336"
+      >
+      </pcd-icon>
+      <div class="mail-messages-item__attach-name">
+        {{ $ctrl.content.attachedFilesNames[0] }}
+      </div>
+    </div>
+    <div
+        ng-if="$ctrl.content.attachedFilesNames.length > 1"
+        class="mail-messages-item__attach-more"
+    >
+      +{{ $ctrl.content.attachedFilesNames.length - 1 }}{{ $ctrl.content.attachedFilesNames.length === 2 ? ' file' : ' files' }}
+    </div>
+  </div>
+</div>

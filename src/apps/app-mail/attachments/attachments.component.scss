@@ -1,0 +1,126 @@
+@import "../../../config";
+
+.attachments {
+  background-color: $grey-a06;
+  width: 100%;
+  min-height: $size-5x;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.attachments__content {
+  min-height: $size-6x;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 $size-5x 0 $size-2x;
+  transition: height 0.2s ease-in-out;
+}
+
+.attachments__content-item {
+  max-width: 100%;
+  width: auto;
+  height: $size-4x;
+  border-radius: $size-half;
+  background-color: $azure-a24;
+  padding: 0 $size-half;
+  margin: $size-1x $size-1x $size-1x 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.attachments__content-item:hover {
+  .attachments__content-item-download {
+    opacity: 1;
+  }
+}
+
+.attachments__content-item.mod-short {
+  max-width: 180px;
+  width: 180px;
+}
+
+.attachments__content-item-name {
+  height: $size-3x;
+  width: calc(100% - #{$size-4x});
+  padding: 0 $size-half;
+  font-size: $font-14;
+  color: $grey-a87;
+  line-height: $size-3x;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.attachments__content-item-download {
+  position: absolute;
+  top: $size-1x;
+  left: calc(50% - #{$size-1x});
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1;
+  border: none;
+  outline-width: 0;
+}
+
+.attachments__content-info {
+  height: $size-6x;
+  font-size: $font-14;
+  font-weight: bold;
+  line-height: $size-6x;
+  color: $azure-a87;
+}
+
+.attachments__content .md-icon-button {
+  @include buttonIcon(24px);
+  position: absolute;
+  top: $size-12;
+  right: $size-1x;
+}
+
+.attachments__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 $size-2x;
+}
+
+.attachments__actions-info {
+  height: $size-3x;
+  font-size: $font-12;
+  line-height: $size-3x;
+  font-weight: bold;
+  color: $grey-a87;
+  margin-right: $size-1x;
+}
+
+.attachments__actions-btns {
+  height: $size-3x;
+  font-size: $font-12;
+  line-height: $size-3x;
+  font-weight: bold;
+  color: $grey-a87;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.attachments__actions-btn-add,
+.attachments__actions-btn-save {
+  @include buttonLikeLink($font-12, $azure-a87);
+}
+
+.attachments__actions-btn-del {
+  @include buttonLikeLink($font-12, $red-a87);
+}

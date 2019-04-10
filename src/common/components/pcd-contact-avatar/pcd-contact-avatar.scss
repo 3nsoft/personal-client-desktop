@@ -1,0 +1,25 @@
+@import '../../../config';
+
+.pcd-icon-avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline-width: 0;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.pcd-icon-avatar:focus, .pcd-icon-avatar:active {
+  border: none;
+  outline-width: 0;
+}
+
+.pcd-icon-avatar__check {
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}

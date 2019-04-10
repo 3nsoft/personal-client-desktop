@@ -1,0 +1,119 @@
+/* colors */
+$white: #ffffff;
+$white-01: #f1f1f1;
+$black: #000000;
+$azure: #0090ec;
+$azure-a24: #cce4f9;
+$azure-a87: rgba(0, 144, 236, 0.87);
+$azure-bg: #cce4f9;
+$azure-select: #b4d7f6;
+$blue-light: #c2d9ef;
+$green: #2fd365;
+$red: #f44336;
+$red-a87: rgba(244, 67, 54, 0.87);
+$grey-a06: rgba(0, 0, 0, 0.06);
+$grey-a12: rgba(0, 0, 0, 0.12);
+$grey-a24: rgba(0, 0, 0, 0.24);
+$grey-a32: rgba(0, 0, 0, 0.32);
+$grey-a54: rgba(0, 0, 0, 0.54);
+$grey-a87: rgba(0, 0, 0, 0.87);
+
+$black-01-shadow: rgba(0, 0, 0, 0.15);
+$black-02-shadow: rgba(0, 0, 0, 0.24);
+$azure-shadow: rgba(0, 144, 236, 0.48);
+
+/* size: 1x = 8px */
+$size-half: 4px;
+$size-1x: 8px;
+$size-2x: 16px;
+$size-3x: 24px;
+$size-4x: 32px;
+$size-5x: 40px;
+$size-6x: 48px;
+$size-7x: 56px;
+$size-8x: 64px;
+$size-9x: 72px;
+$size-10x: 80px;
+$size-11x: 88px;
+$size-12x: 96px;
+
+$size-12: 12px;
+$size-15: 15px;
+$size-18: 18px;
+$size-20: 20px;
+$size-column: 95px;
+
+/* font-size */
+$font-10: 10px;
+$font-12: 12px;
+$font-14: 14px;
+$font-16: 16px;
+$font-18: 18px;
+$font-24: 24px;
+$font-32: 32px;
+$font-64: 64px;
+
+/* mixins */
+@mixin buttonFlat($color) {
+  font-weight: bold;
+  background-color: $color;
+  border-radius: 4px;
+	color: $white !important;
+	padding: 0 $size-2x;
+  margin: 0;
+	cursor: pointer;
+
+	&:hover, &:focus {
+		background-color: darken($color, 5%) !important;
+	}
+
+  &[disabled] {
+    background-color: lighten($color, 20%) !important;
+  }
+}
+
+@mixin buttonRound($color, $bgColor, $bColor) {
+  font-weight: bold;
+  color: $color;
+  background-color: $bgColor;
+  border: 1px solid $bColor;
+  border-radius: 20px;
+  padding: 0 $size-2x;
+  margin: 0;
+  text-transform: none;
+}
+
+@mixin buttonIcon($size) {
+  min-width: $size !important;
+  width: $size !important;
+  min-height: $size !important;
+  height: $size !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin buttonLikeLink($fontSize, $color) {
+  min-width: $size-3x;
+  min-height: calc(#{$fontSize + $size-1x});
+  height: calc(#{$fontSize + $size-1x});
+  padding: $size-half;
+  background-color: transparent;
+  font-size: $fontSize;
+  font-weight: bold;
+  color: $color;
+  margin: 0;
+  line-height: 1;
+  text-transform: initial;
+
+  &:hover, &:focus {
+    color: darken($color, 5%) !important;
+  }
+
+  &[disabled] {
+    color: lighten($color, 20%) !important;
+  }
+}

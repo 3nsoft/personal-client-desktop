@@ -1,0 +1,73 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "align": [
+      true,
+      "parameters",
+      "statements"
+    ],
+    "array-type": [true, "array"],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "ban-types": [true],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "interface-name": [true, "never-prefix"],
+    "max-line-length": [true, 140],
+    "member-access": [
+      true,
+      "no-public",
+      "check-accessor",
+      "check-parameter-property"
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "constructor",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "no-bitwise": false,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowTernary": true
+      }
+    ],
+    "no-unused-variable": false,
+    "object-literal-key-quotes": ["consistent"],
+    "object-literal-sort-keys": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "case-insensitive",
+        "grouped-imports": true
+      }
+    ],
+    "unified-signatures": false
+  }
+}

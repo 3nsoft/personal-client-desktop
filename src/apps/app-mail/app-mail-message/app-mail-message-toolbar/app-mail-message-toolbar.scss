@@ -1,0 +1,74 @@
+@import "../../../../config";
+
+.app-mail-message-toolbar {
+  width: 100%;
+  height: $size-7x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 $size-1x;
+  border-top-left-radius: $size-half;
+  border-top-right-radius: $size-half;
+  border-bottom: 1px solid $grey-a12;
+  background-color: $white;
+}
+
+.app-mail-message-toolbar button {
+  text-transform: initial !important;
+}
+
+.app-mail-message-toolbar .app-mail-message-toolbar__icon-btn {
+  @include buttonIcon(40px);
+}
+
+.app-mail-message-toolbar__btn-delete {
+  position: absolute;
+  top: $size-1x;
+  right: $size-1x;
+}
+
+.app-mail-message-toolbar .app-mail-message-toolbar__menu-btn {
+  margin: 0;
+}
+
+.app-mail-message-toolbar__menu-item-btn {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: $font-14 !important;
+  font-weight: 600 !important;
+}
+
+.app-mail-message-toolbar__menu-item-btn pcd-icon {
+  margin-right: 8px;
+}
+
+.app-mail-message-toolbar__menu-item-btn.mod-div {
+  border-top: 1px solid $grey-a12;
+}
+
+.app-mail-message-toolbar__sending-status {
+  width: calc(100% - #{$size-5x});
+  font-size: $font-14;
+  color: $grey-a87;
+}
+
+.app-mail-message-toolbar__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 5;
+  height: 2px;
+
+  .md-container {
+    height: 2px;
+    background-color: $white !important;
+
+    .md-bar {
+      background-color: $azure;
+    }
+  }
+}

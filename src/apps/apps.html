@@ -1,0 +1,61 @@
+<section class="apps">
+  <md-progress-linear
+    ng-if="$ctrl.isProgress"
+    md-mode="indeterminate"
+    class="apps__progress"
+  >
+  </md-progress-linear>
+
+  <div class="apps__toolbar">
+    <pcd-contact-icon
+      color="'#2fd365'"
+      size="32"
+      label="{{ $ctrl.user }}">
+    </pcd-contact-icon>
+    
+    <div class="apps__toolbar-info">
+      <div class="apps__toolbar-name">
+        {{ $ctrl.user }}
+      </div>
+      <div class="apps__toolbar-status">
+        Status: <span>{{ $ctrl.userStatus }}</span>
+      </div>
+    </div>
+
+    <div class="apps__toolbar-nav">
+      <div
+        ng-repeat="item in $ctrl.menu"
+        class="apps__toolbar-nav--item">
+        <nav-item
+          sref="item.stateName"
+          icon="item.icon"
+          amt=""
+        >
+        </nav-item>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="apps__toolbar-open-btn"
+      ng-click="$ctrl.toogleRightSidenav()">
+      <pcd-icon
+        icon="people_outline"
+        color="#ffffff">
+      </pcd-icon>
+    </button>
+  </div>
+
+  <div ui-view class="apps__content">
+    ...
+  </div>
+
+  <md-sidenav
+    class="md-sidenav-right apps__sidenav-right"
+    md-component-id="right"
+    md-whiteframe="2"
+  >
+    <app-contact></app-contact>
+  </md-sidenav>
+
+</section>

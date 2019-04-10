@@ -1,0 +1,189 @@
+<div 
+  ng-if="$ctrl.folderId !== '2'"
+  class="app-mail-message-toolbar"
+>
+  <md-button
+      class="md-icon-button app-mail-message-toolbar__icon-btn"
+      ng-if="$ctrl.options.sendBtn"
+      ng-click="$ctrl.onAction('sendMsg')"
+      aria-label="send"
+  >
+    <pcd-icon
+        icon="send"
+        color="rgba(0, 0, 0, 0.54)"
+        size="24">
+    </pcd-icon>
+  </md-button>
+
+  <md-button
+    class="md-icon-button app-mail-message-toolbar__icon-btn"
+    ng-if="$ctrl.options.replyBtn"
+    ng-click="$ctrl.onAction('replyMsg')"
+    aria-label="replay"
+  >
+    <pcd-icon
+      icon="reply"
+      color="rgba(0, 0, 0, 0.54)"
+      size="24">
+    </pcd-icon>
+  </md-button>
+
+  <md-button
+    class="md-icon-button app-mail-message-toolbar__icon-btn"
+    ng-if="$ctrl.options.replyAllBtn"
+    ng-click="$ctrl.onAction('replyAllMsg')"
+    aria-label="replay all"
+  >
+    <pcd-icon
+      icon="reply_all"
+      color="rgba(0, 0, 0, 0.54)"
+      size="24">
+    </pcd-icon>
+  </md-button>
+
+  <md-button
+    class="md-icon-button app-mail-message-toolbar__icon-btn"
+    ng-if="$ctrl.options.forwardBtn"
+    ng-click="$ctrl.onAction('forwardMsg')"
+    aria-label="forward"
+  >
+    <pcd-icon
+      icon="forward"
+      color="rgba(0, 0, 0, 0.54)"
+      size="24">
+    </pcd-icon>
+  </md-button>
+
+  <md-menu md-offset="0 36" ng-if="$ctrl.options.actions.all">
+    <md-button
+        aria-label="Open demo menu"
+        class="app-mail-message-toolbar__menu-btn"
+        ng-click="$mdMenu.open($event)"
+    >
+      Actions
+    </md-button>
+    <md-menu-content width="4">
+      <md-menu-item ng-if="$ctrl.options.actions.editBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn"
+          ng-click="$ctrl.onAction('editMsg')"
+        >
+          <pcd-icon
+            icon="edit"
+            color="rgba(0, 0, 0, 0.54)"
+            size="16">
+          </pcd-icon>
+          Edit Mail
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$ctrl.options.actions.saveMsgBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn"
+          ng-click="$ctrl.onAction('saveMsg')"
+        >
+          <pcd-icon
+            icon="save_alt"
+            color="rgba(0, 0, 0, 0.54)"
+            size="16">
+          </pcd-icon>
+          Save Mail
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$ctrl.attach && $ctrl.attach > 0 && $ctrl.options.actions.saveAttachBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn"
+          ng-click="$ctrl.onAction('saveAttach')"
+          >
+          <pcd-icon
+            icon="attachment"
+            color="rgba(0, 0, 0, 0.54)"
+            size="16">
+          </pcd-icon>
+          Save All Attachments
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$ctrl.options.actions.moveMsgBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn"
+          ng-click="$ctrl.onAction('moveMsg')"
+        >
+          <pcd-icon
+            icon="move_to_inbox"
+            color="rgba(0, 0, 0, 0.54)"
+            size="16">
+          </pcd-icon>
+          Move to Folder
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$ctrl.options.actions.unreadBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn"
+          ng-click="$ctrl.onAction('unreadMsg')"
+        >
+          <pcd-icon
+            icon="lens"
+            color="rgba(0, 0, 0, 0.54)"
+            size="16">
+          </pcd-icon>
+          Mark Unread
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$ctrl.options.actions.delMsgBtn">
+        <md-button
+          class="app-mail-message-toolbar__menu-item-btn mod-div"
+          ng-click="$ctrl.onAction('delMsg')"
+        >
+          <pcd-icon
+            icon="delete"
+            color="#f44336"
+            size="16">
+          </pcd-icon>
+          Delete Mail
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <md-button
+    ng-if="$ctrl.options.actions.delMsgBtn"
+    class="md-icon-button app-mail-message-toolbar__icon-btn app-mail-message-toolbar__btn-delete"
+    ng-click="$ctrl.onAction('delMsg')"
+    aria-label="delete"
+  >
+    <pcd-icon
+      icon="delete"
+      color="#f44336"
+      size="24">
+    </pcd-icon>
+  </md-button>
+</div>
+
+<div 
+  ng-if="$ctrl.folderId === '2'"
+  class="app-mail-message-toolbar"
+>
+  <md-button
+    class="app-mail-message-toolbar__icon-btn"
+    ng-click="$ctrl.onAction('stopSend')"
+    aria-label="stop"
+  >
+    <pcd-icon
+      icon="stop"
+      color="#f44336"
+      size="24">
+    </pcd-icon>
+  </md-button>
+
+  <div class="app-mail-message-toolbar__sending-status">
+    Complete
+    <span ng-if="!$ctrl.sendingProgress"> 0%</span>
+    <span ng-if="$ctrl.sendingProgress"> {{ $ctrl.sendingStatusText }}</span>
+  </div>
+
+  <md-progress-linear
+    md-mode="determinate"
+    value="{{ $ctrl.sendingProgress }}"
+    class="app-mail-message-toolbar__progress">
+  </md-progress-linear>
+
+</div>

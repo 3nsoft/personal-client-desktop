@@ -1,0 +1,108 @@
+@import '../config';
+
+.apps {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.apps__progress {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  .md-container {
+    background-color: lighten($color: $azure, $amount: 40%) !important;
+  }
+
+  .md-bar {
+    background-color: $azure !important;
+  }
+}
+
+.apps__toolbar {
+  width: 100%;
+  height: $size-9x;
+  box-shadow: 0 0 $size-1x 0 $grey-a32;
+  padding: 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 60;
+}
+
+.apps__toolbar-info {
+  margin: 0 $size-1x;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  user-select: none;
+}
+
+.apps__toolbar-name, .apps__toolbar-status {
+  height: $size-2x;
+  font-size: $font-14;
+  font-weight: bold;
+  line-height: $size-2x;
+  color: $grey-a87;
+}
+
+.apps__toolbar-name {
+  font-size: $font-14;
+  font-weight: bold;
+}
+
+.apps__toolbar-status {
+  font-size: $font-10;
+}
+
+.apps__toolbar-nav {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.apps__toolbar-nav--item {
+  width: $size-12x;
+}
+
+.apps__toolbar-open-btn {
+  position: absolute;
+  width: $size-9x;
+  height: $size-9x;
+  top: 0;
+  right: 0;
+  border: none;
+  outline-width: 0;
+  background-color: $azure;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.apps__content {
+  width: 100%;
+  height: calc(100% - #{$size-9x});
+  background-color: $grey-a54;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.apps__sidenav-right {
+  height: calc(100% - #{$size-9x});
+  top: $size-9x;
+  max-width: 665px !important;
+  width: 665px;
+}
+
+.apps md-backdrop.md-sidenav-backdrop.md-opaque {
+  background-color: transparent;
+}

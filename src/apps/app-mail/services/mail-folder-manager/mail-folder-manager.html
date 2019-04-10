@@ -1,0 +1,88 @@
+<md-dialog class="mail-folder-manager__wrapper">
+  <section class="mail-folder-manager">
+  <div class="mail-folder-manager__toolbar">
+    <span>Manage Folders</span>
+    <md-button
+      class="md-icon-button"
+      aria-label="close window"
+      ng-click="hide()">
+      <pcd-icon
+        icon="close"
+        size="12"
+        color="#0090ec"
+      >
+      </pcd-icon>
+    </md-button>
+  </div>
+  <div class="mail-folder-manager__input">
+    <input
+      id="inputName"
+      type="text"
+      placeholder="Create New Folder"
+      ng-model="editFolder.name"
+      ng-class="{'is-invalid': isNameInvalid}"
+      ng-keydown="onKey($event)"
+      ng-disabled="isBlocked"
+    />
+    <md-button
+      ng-if="editFolder.name.length > 0"
+      class="md-icon-button btn-cancel"
+      aria-label="cancel"
+      ng-click="editCancel()">
+      <pcd-icon
+        icon="close"
+        size="16"
+        color="#f44336"
+      >
+      </pcd-icon>
+    </md-button>
+    <md-button
+      ng-if="editFolder.name.length > 0"
+      class="md-icon-button btn-done"
+      aria-label="done"
+      ng-click="editDone()">
+      <pcd-icon
+        icon="done"
+        size="16"
+        color="#4caf50"
+      >
+      </pcd-icon>
+    </md-button>
+  </div>
+  <div class="mail-folder-manager__content">
+    <div
+      ng-repeat="folder in (folderList | toArray) | filter: {isSystem: false} | orderBy: folder.orderNum as results track by folder.id"
+      class="mail-folder-manager__content-item"
+      ng-class="{'is-selected': folder.id === editFolder.id}"
+    >
+      <mail-folder
+        class="mail-folder-manager__content-folder"
+        folder="folder"
+      >
+      </mail-folder>
+      <md-button
+        class="md-icon-button btn-edit"
+        aria-label="edit folder"
+        ng-click="startEditFolder(folder.id)">
+        <pcd-icon
+          icon="edit"
+          size="24"
+          color="rgba(0, 0, 0, 0.32)"
+        >
+        </pcd-icon>
+      </md-button>
+      <md-button
+        class="md-icon-button btn-delete"
+        aria-label="delete folder"
+        ng-click="startDeleteFolder(folder.id)">
+        <pcd-icon
+          icon="delete"
+          size="24"
+          color="rgba(0, 0, 0, 0.32)"
+        >
+        </pcd-icon>
+      </md-button>
+    </div>
+  </div>
+</section>
+</md-dialog>

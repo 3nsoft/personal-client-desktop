@@ -1,0 +1,202 @@
+@import "../../../../config";
+
+.message-manager {
+  width: 600px;
+  height: 600px;
+  background-color: $white;
+}
+
+.message-manager__toolbar {
+  width: 100%;
+  height: $size-6x;
+  padding: 0 $size-1x 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey-a12;
+}
+
+.message-manager__body {
+  width: 100%;
+  height: calc(100% - #{$size-6x + $size-8x});
+  overflow-y: auto;
+  // margin-bottom: $size-8x;
+}
+
+.message-manager__body.mod-editor {
+  height: calc(100% - #{$size-6x + $size-8x + $size-6x});
+}
+
+.message-manager__actions {
+  position: absolute;
+  width: 100%;
+  height: $size-8x;
+  bottom: 0;
+  box-shadow: 0 0 10px 2px $grey-a12;
+  padding: 0 $size-2x 0 $size-1x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: $white;
+}
+
+.message-manager__actions button.btn-cancel {
+  @include buttonFlat($white);
+  box-shadow: 0px 1px 4px 0 $grey-a24;
+  color: $red !important;
+}
+
+.message-manager__actions button.btn-send {
+  @include buttonFlat($azure);
+  box-shadow: 0px 1px 4px 0 $azure-shadow;
+  margin-left: $size-2x;
+}
+
+.message-manager__toolbar-title {
+  font-size: $font-14;
+  font-weight: bold;
+  line-height: 1;
+  color: $azure;
+}
+
+.message-manager__toolbar .md-icon-button {
+  @include buttonIcon(24px);
+  pcd-icon {
+    top: -4px;
+  }
+}
+
+.message-manager__actions .btn-editor {
+  @include buttonIcon(24px);
+  position: absolute;
+  left: $size-1x;
+  top: $size-15;
+}
+
+.message-manager__field-wrap {
+  width: 100%;
+  min-height: $size-6x;
+  padding: 0 $size-2x;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid $grey-a12;
+}
+
+.message-manager__field-wrap.mod-padding {
+  padding-right: $size-6x;
+}
+
+.message-manager__field-wrap.no-padding {
+  padding: 0;
+}
+
+.message-manager__field-wrap.mod-short {
+  max-height: $size-6x;
+  overflow: hidden;
+}
+
+.message-manager__field-wrap.mod-short:after {
+  content: '...';
+  font-size: $font-18;
+  font-weight: bold;
+  position: absolute;
+  top: $size-2x;
+  right: $size-4x;
+}
+
+.message-manager__field-wrap .md-icon-button {
+  position: absolute;
+  right: $size-1x;
+  top: $size-12;
+  @include buttonIcon(24px);
+}
+
+.message-manager__field-wrap .md-chips {
+  box-shadow: none !important;
+}
+
+.message-manager__field-wrap .md-input::placeholder {
+  font-size: $font-14;
+  color: $grey-a54;
+}
+
+.message-manager__field-label {
+  height: $size-6x;
+  padding: 0 $size-1x 0 0;
+  font-size: $font-14;
+  font-weight: bold;
+  color: $grey-a54;
+  line-height: $size-6x;
+}
+
+.message-manager__field-input {
+  flex: 1;
+  height: $size-6x;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-manager__field-input input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline-width: 0;
+  font-size: $font-14;
+  color: $grey-a87;
+}
+
+.message-manager__field-chip {
+  font-size: $font-14;
+  color: #ffffff;
+}
+
+.message-manager__attachments-block {
+  border-bottom: 1px solid $grey-a12;
+}
+
+ng-quill-editor {
+  > div {
+    min-height: $size-8x;
+    position: relative;
+  }
+
+  .ql-toolbar {
+    display: none;
+    position: fixed;
+    width: 100%;
+    bottom: $size-8x;
+    background-color: $grey-a06;
+    padding: $size-half $size-1x;
+    z-index: 5;
+    background-color: $white;
+  }
+
+  .ql-container {
+    border: none !important;
+  }
+}
+
+#editor {
+  box-sizing: border-box;
+  min-height: 200px;
+  border: 1px solid #888;
+  padding: 1em;
+  background: transparent;
+  color: #2b2b2b;
+  font: 13px/1.35;
+  cursor: text;
+}
+
+.angular-squire.ng-empty {
+  div.placeholder {
+    font-size: $font-14;
+    line-height: 1.4;
+    padding: 10px;
+  }
+}

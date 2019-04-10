@@ -1,0 +1,167 @@
+<section ng-if="$ctrl.person" class="person">
+  <div class="person__avatar-wrapper" ng-cloak>
+    <div
+      class="person__avatar"
+      ng-if="!$ctrl.person.avatar"
+      ng-style="$ctrl.getAvatarStyle()"
+    >
+      {{ $ctrl.getInitials() }}
+    </div>
+    <div
+      class="person__avatar"
+      ng-if="$ctrl.person.avatar"
+      ng-style="$ctrl.getAvatarStyle()"
+    >
+    </div>
+    <md-button
+      ng-if="$ctrl.person.avatar"
+      ng-click="$ctrl.setAvatar('remove')"
+      aria-label="remove avatar"
+      class="md-icon-button person__icon-btn person__avatar-btn">
+      <pcd-icon
+        icon="delete"
+        color="#ffffff"
+        size="24">
+      </pcd-icon>
+    </md-button>
+    <md-button
+      ng-if="!$ctrl.person.avatar"
+      ng-click="$ctrl.setAvatar('add')"
+      aria-label="add avatar"
+      class="md-icon-button person__icon-btn person__avatar-btn">
+      <pcd-icon
+        icon="add"
+        color="#ffffff"
+        size="24">
+      </pcd-icon>
+    </md-button>
+  </div>
+
+  <div
+    class="person__actions"
+    ng-if="$ctrl.person.id">
+    <md-button
+      class="md-icon-button person__icon-btn person__actions-btn"
+      ng-click="$ctrl.personAction('chat')"
+      ng-disabled="$ctrl.person.id === 'new'"
+      aria-label="chat">
+      <pcd-icon
+        icon="chat"
+        color="rgba(0, 0, 0, 0.54)"
+        size="16">
+      </pcd-icon>
+    </md-button>
+    <md-button
+      class="md-icon-button person__icon-btn person__actions-btn"
+      ng-click="$ctrl.personAction('mail')"
+      ng-disabled="$ctrl.person.id === 'new'"
+      aria-label="mail">
+      <pcd-icon
+        icon="mail_outline"
+        color="rgba(0, 0, 0, 0.54)"
+        size="16">
+      </pcd-icon>
+    </md-button>
+
+    <md-menu md-position-mode="target-right target" >
+      <md-button
+        aria-label="Open demo menu"
+        class="person__actions-btn-menu"
+        ng-click="$mdMenu.open($event)"
+        ng-disabled="$ctrl.disabledAction()">
+        Action
+        <pcd-icon
+          icon="arrow_drop_down"
+          color="rgba(0, 0, 0, 0.54)"
+          size="16">
+        </pcd-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button
+            class="person__actions-btn-menu-item"
+            aria-label="delete"
+            ng-click="$ctrl.personAction('delete')">
+            <pcd-icon
+              icon="delete"
+              color="#f44336"
+              size="16">
+            </pcd-icon>
+            Delete user
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+  </div>
+
+  <form
+    name="$ctrl.personForm"
+    class="person__info"
+    ng-class="{'person__info-new': !$ctrl.person.id}">
+    <div class="app-contact__field-wrapper">
+      <label
+        ng-class="{'is-disabled': $ctrl.person.mails[0] === $ctrl.me || $ctrl.disabled}">
+        3NMail:
+      </label>
+      <input
+        type="text"
+        name="mail"
+        placeholder="Please enter 3NMail"
+        ng-disabled="$ctrl.person.mails[0] === $ctrl.me || $ctrl.disabled"
+        ng-model="$ctrl.person.mails[0]"
+        required
+      />
+    </div>
+    <div class="app-contact__field-wrapper">
+      <label
+        ng-class="{'is-disabled': $ctrl.disabled}">
+        Name:
+      </label>
+      <input
+        type="text"
+        name="name"
+        placeholder="Please enter name"
+        ng-disabled="$ctrl.disabled"
+        ng-model="$ctrl.person.name"
+      />
+    </div>
+    <div class="app-contact__field-wrapper">
+      <label
+        ng-class="{'is-disabled': $ctrl.disabled}">
+        Phone:
+      </label>
+      <input
+        type="text"
+        name="name"
+        placeholder="Please enter phone"
+        ng-disabled="$ctrl.disabled"
+        ng-model="$ctrl.person.phone"
+      />
+    </div>
+    <div class="app-contact__field-wrapper">
+      <label
+        ng-class="{'is-disabled': $ctrl.disabled}">
+        Notice:
+      </label>
+      <input
+        type="text"
+        name="notice"
+        placeholder="Please enter additional information"
+        ng-disabled="$ctrl.disabled"
+        ng-model="$ctrl.person.notice"
+      />
+    </div>
+    <div
+      ng-if="$ctrl.personForm.$dirty" 
+      class="person__info-btns">
+      <md-button
+        class="person__info-btn-save"
+        ng-click="$ctrl.saveContact()"
+        ng-disabled="$ctrl.personForm.$invalid">
+        Save
+      </md-button>
+    </div>          
+  </form>
+
+</section>

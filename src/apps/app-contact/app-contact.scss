@@ -1,0 +1,70 @@
+@import '../../config';
+
+.app-contact {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.app-contact__section-left {
+  width: 380px;
+}
+
+.app-contact__section-right {
+  width: calc(100% - 380px);
+}
+
+.app-contact__field-wrapper {
+  position: relative;
+  width: 100%;
+  height: $size-8x;
+  padding: 0 $size-2x $size-half $size-2x;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  background-color: $white;
+}
+
+.app-contact__field-wrapper input {
+  display: block;
+  width: 100%;
+  height: 32px;
+  font-size: $font-14;
+  outline-width: 0;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid $grey-a12;
+  background-color: transparent;
+  &:focus, &:active {
+    border-color: $azure;
+    outline-width: 0;
+  }
+  &[disabled] {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+}
+
+.app-contact__field-wrapper input::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+.app-contact__field-wrapper input.ng-invalid {
+  border-bottom-color: $red;
+}
+
+.app-contact__field-wrapper label {
+  font-size: $font-12;
+  font-weight: bold;
+  color: $grey-a87;
+  user-select: none;
+}
+
+.app-contact__field-wrapper label.is-disabled {
+  opacity: 0.35;
+}
