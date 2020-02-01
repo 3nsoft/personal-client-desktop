@@ -13,13 +13,15 @@
 <http://www.gnu.org/licenses/>.
 */
 
-import { ITimeoutService } from 'angular';
-import { StateProvider, UrlRouterProvider } from '@uirouter/angularjs';
+import { IQService, ITimeoutService } from 'angular';
+import { StateParams, StateProvider, UrlRouterProvider } from '@uirouter/angularjs';
 import { logError } from './services/libs/logging';
 import { appState } from '../apps/common/services/app-store';
+import { appChatState, chat } from '../apps/app-chat/common/app-chat-store';
 import * as AppContactService from '../apps/app-contact/services/app-contact.service';
 import * as AppMailService from '../apps/app-mail/services/app-mail.service';
 import * as MessageSendService from '../apps/app-mail/services/message-send.service';
+import { Chat } from '../apps/app-chat/common/chat';
 
 export function router($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider): void {
   $urlRouterProvider.otherwise('/');
@@ -47,6 +49,18 @@ export function router($stateProvider: StateProvider, $urlRouterProvider: UrlRou
               await mailSrv.getMailFolderList();
               await msgSrv.checkSendingList();
               await mailSrv.getMessageList();
+              appChatState.values.list = await chat.readChatList();
+              appChatState.values.lastTS = appChatState.values.list
+                .reduce((ts, item) => {
+                  ts = item.timestamp > ts
+                    ? item.timestamp
+                    : ts;
+                  return ts;
+                }, 0);
+              appChatState.values.unreadChatsQt = appChatState.values.list
+                .reduce((sum, ch) => {
+                  return sum + (ch.isRead ? 0 : 1);
+                }, 0);
               return true;
             } catch (err) {
               logError(err);

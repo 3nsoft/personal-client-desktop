@@ -28,6 +28,7 @@ interface IAppMailState {
   selectedMessageKeys: string[];
   sendingStatus: client3N.SendingStatus;
   inboxRefreshTimestamp: number;
+  unreadMessages: number;
 }
 
 export const mailSyncedFS = new MailSyncedFS();
@@ -40,3 +41,4 @@ appMailState.values.messageList = {};
 appMailState.values.selectedMessageKeys = [];
 appMailState.values.sendingStatus = null;
 appMailState.values.inboxRefreshTimestamp = 0;
+appMailState.values.unreadMessages = 0;

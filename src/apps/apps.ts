@@ -24,6 +24,11 @@ import * as CommonServiceModule from './common/services/common.service';
 import { appState } from './common/services/app-store';
 import { AppId, APPS } from '../common/const';
 import * as MsgReceivingServiceModule from '../apps/app-mail/services/message-receiving.service';
+import * as ChatNetServiceModule from '../apps/app-chat/common/chat-net.service';
+import { logError } from '../common/lib/logging';
+import { concat, from } from 'rxjs';
+import { appChatState } from './app-chat/common/app-chat-store';
+import { appMailState } from './app-mail/common/app-mail-store';
 
 export let ModuleName = '3nClient.apps';
 export function addComponent(ng: angular.IAngularStatic): void {
@@ -41,20 +46,24 @@ class AppsComponent {
 
   static $inject = [
     '$state',
+    '$timeout',
     '$transitions',
     '$mdSidenav',
     CommonServiceModule.CommonServiceName,
     MsgReceivingServiceModule.MessageReceivingServiceName,
+    ChatNetServiceModule.ChatNetSrvName,
   ];
   constructor(
     private $state: StateService,
+    private $timeout: angular.ITimeoutService,
     private $transitions: Transition,
     private $mdSidenav: angular.material.ISidenavService,
     private commonSrv: CommonServiceModule.CommonService,
     private msgReciveSrv: MsgReceivingServiceModule.MessageReceivingService,
+    private chatNetSrv: ChatNetServiceModule.Srv,
   ) {}
 
-  $onInit(): void {
+  async $onInit(): Promise<void> {
     this.user = appState.values.user.split('@')[0];
     this.userStatus = appState.values.userStatus.description;
     this.menu = APPS.filter(item => !item.isDisabled && item.stateName);
@@ -107,29 +116,68 @@ class AppsComponent {
       }
     });
 
+    const lostChatInMsgs = await w3n.mail.inbox.listMsgs(appChatState.values.lastTS)
+      .then(async msgsInfo => {
+        const data = msgsInfo.filter(m => m.msgType === 'chat');
+        data.sort((a, b) => a.deliveryTS - b.deliveryTS);
+        // appChatState.values.lastTS = data[data.length - 1].deliveryTS;
+        const res: web3n.asmail.IncomingMessage[] = [];
+        for (const m of data) {
+          const inMsg = await w3n.mail.inbox.getMsg(m.msgId);
+          res.push(inMsg);
+        }
+        return res;
+      });
+
     const msgIn$: Observable<client3N.IncomingMessage> = Observable
       .create(obs => w3n.mail.inbox.subscribe('message', obs))
-      .pipe(
-        share(),
-      );
+      .pipe(share());
 
     msgIn$
       .pipe(
-        takeUntil(this.ngUnsubscribe),
         filter(msg => msg.msgType === 'mail'),
         tap(msg => this.msgReciveSrv.refreshInbox()),
-        share(),
-      )
-      .subscribe();
-
-    msgIn$
-      .pipe(
         takeUntil(this.ngUnsubscribe),
-        filter(msg => msg.msgType === 'chat'),
         share(),
       )
       .subscribe();
 
+    concat(
+      from(lostChatInMsgs),
+      msgIn$
+        .pipe(filter(msg => msg.msgType === 'chat')),
+    )
+      .pipe(
+        tap(msg => console.log('Chat msg: ', msg)),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe(msg => {
+        const serviceMessageType = (msg.jsonBody as client3N.AppMsg).type;
+        appChatState.values.lastTS = msg.deliveryTS > appChatState.values.lastTS
+          ? msg.deliveryTS
+          : appChatState.values.lastTS;
+        switch (serviceMessageType) {
+          case '001':
+            this.chatNetSrv.openChatFromOutsideEvent(msg);
+            break;
+          case '002':
+            this.chatNetSrv.markChatMsgAsRead(msg.msgId, msg.jsonBody.data.chatId);
+            break;
+          case '010':
+            this.chatNetSrv.markChatUnread(msg, msg.jsonBody.data.chatId);
+            break;
+        }
+      },
+        err => logError(err),
+      );
+
+    appChatState.change$.unreadChatsQt
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(qt => this.setUnreadAmount(AppId.Chat, qt));
+
+    appMailState.change$.unreadMessages
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(qt => this.setUnreadAmount(AppId.Mail, qt));
   }
 
   $onDestroy(): void {
@@ -141,6 +189,14 @@ class AppsComponent {
     const isRightSidenavOpen = appState.values.isRightSidenavOpen;
     appState.values.isRightSidenavOpen = !isRightSidenavOpen;
     this.$mdSidenav('right').toggle();
+  }
+
+  public setUnreadAmount(appId: number, count: number): void {
+    this.$timeout(() => {
+      const appItem = this.menu.find(item => item.id === appId);
+      appItem.unreadAmount = count;
+      console.log(this.menu);
+    });
   }
 
 }

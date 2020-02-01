@@ -1,0 +1,108 @@
+<md-dialog aria-label="new chat"
+  class="app-chat-create-window"
+>
+  <form name="newChatForm"
+    class="app-chat-create-form"
+    ng-cloak>
+    <div class="app-chat-create-form__toolbar">
+      <span class="app-chat-create-form__toolbar-name">New Chat</span>
+      <md-button
+        class="md-icon-button btn-close"
+        aria-label="close modal"
+        ng-click="closeModal()"
+      >
+        <md-tooltip md-direction="left">
+          Cancel
+        </md-tooltip>
+        <pcd-icon
+            icon="close"
+            color="#3675a8"
+        ></pcd-icon>
+      </md-button>
+    </div>
+
+    <div class="app-chat-create-form__name">
+      <input type="text"
+        name="chatName"
+        placeholder="Please Enter Name of Chat"
+        ng-model="chatName"
+        ng-disabled="selectedPersons.length < 2"
+        ng-required="true"
+        class="app-chat-create-form__name-input"
+        ng-class="{'error': newChatForm.chatName.$dirty && newChatForm.chatName.$invalid}"
+      />
+    </div>
+
+    <div class="app-chat-create-form__filter">
+      <pcd-icon icon="search"></pcd-icon>
+      <input
+        type="text"
+        ng-model="filterName"
+        class="app-chat-create-form__filter-input"
+      />
+    </div>
+
+    <div class="app-chat-create-form__content">
+      <div class="app-chat-create-form__content--item"
+        ng-repeat="person in (contacts.list | toArray) | filter: searchName(filterName) | filter: {letter: symbol} | orderBy:'name'"
+        ng-click="selectContact(person.id)">
+        <div ng-if="person.avatar !== ''"
+          class="avatar-field image hexMask"
+          style="background-image:url({{person.avatar}})"
+          ng-style="$ctrl.getAvatarStyle(person)"
+        ></div>
+        <div ng-if="person.avatar === ''"
+          class="avatar-field initials hexMask"
+          ng-style="getAvatarStyle(person)"
+          layout="row"
+          layout-align="center center"
+        >
+          {{getInitials(person)}}
+        </div>
+        <div ng-if="isPersonInList(person.id)"
+          class="avatar-field--marked hexMask">
+          <pcd-icon icon="done" size="24" color="#ffffff"></pcd-icon>
+        </div>
+
+        <div class="name-field"
+          layout="row"
+          layout-align="start center">
+          <span class="name"
+            ng-class="{personInBlackList: person.isBlocked}">
+            {{person.name || person.mails[0]}}
+          </span>
+          <pcd-icon
+            ng-if="!person.isConfirmed && !person.isBlocked"
+            icon="warning"
+            size="24"
+            color="rgba(0, 0, 0, 0.54)"
+          ></pcd-icon>
+          <pcd-icon
+            ng-if="person.isBlocked"
+            icon="visibility_off"
+            size="24"
+            color="rgba(0, 0, 0, 0.54)"
+          ></pcd-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-chat-create-form__action">
+      <md-button
+        class="app-chat-create-form__action--btn-create"
+        ng-click="createNewChat()"
+        ng-disabled="(selectedPersons.length === 0) || newChatForm.$invalid"
+      >
+        Create
+      </md-button>
+
+      <md-button
+        class="app-chat-create-form__action--btn-cancel"
+        ng-click="closeModal()"
+      >
+        Cancel
+      </md-button>
+    </div>
+
+  </form>
+</md-dialog>

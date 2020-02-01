@@ -325,10 +325,10 @@ export class MessageManagerService {
     if (alias && alias.length > 0) {
       this.$timeout(() => {
         const chipElements = document.querySelectorAll('md-chip');
-        for (let i = 0; i < chipElements.length; i++) {
-          (chipElements[i] as HTMLElement).style.backgroundColor = getElementColor(alias[i]);
-          (chipElements[i] as HTMLElement).querySelector('svg').style.fill = '#ffffff';
-        }
+        Array.from(chipElements).forEach((chip: HTMLElement, index: number) => {
+          chip.style.backgroundColor = getElementColor(alias[index]);
+          chip.querySelector('svg').style.fill = '#ffffff';
+        });
       });
     }
   }

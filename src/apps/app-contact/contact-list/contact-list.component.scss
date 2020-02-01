@@ -87,8 +87,8 @@
 
 .contact-list__content {
   width: 100%;
-  height: calc(100% - #{$size-8x});
-  margin: $size-1x 0;
+  height: calc(100% - #{$size-7x});
+  margin: $size-half 0;
   overflow-x: hidden;
   overflow-y: auto;
 }

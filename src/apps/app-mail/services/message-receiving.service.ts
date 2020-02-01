@@ -17,7 +17,7 @@
 
 import { copy, IAngularStatic, ITimeoutService } from 'angular';
 import { logError } from '../../../common/services/libs/logging';
-import {getAlias, html2text, waitAll} from '../../common/helpers';
+import { getAlias, html2text, waitAll } from '../../common/helpers';
 import { appState } from '../../common/services/app-store';
 import { appMailState } from '../common/app-mail-store';
 import * as AppMailServiceModule from './app-mail.service';

@@ -43,39 +43,39 @@ export function* iterFoldersIn(c: AttachmentsContainer|undefined):
   }
 }
 
-export function addFileTo(c: AttachmentsContainer, file: File,
-                          name?: string): void {
+export function addFileTo(c: AttachmentsContainer, file: File, name?: string): void {
   if (!file) { throw new Error(`File is not given`); }
   if (!c.files) { c.files = {}; }
   if (!name) { name = file.name; }
-  if (c.files[name] || (c.folders && c.folders[name])) { throw new Error(
-    `File name ${name}, as it is already used`); }
+  if (c.files[name] || (c.folders && c.folders[name])) {
+    throw new Error(`File name ${name}, as it is already used`);
+  }
   c.files[name] = file;
 }
 
-export function addFolderTo(c: AttachmentsContainer, folder: FS,
-                            name?: string): void {
+export function addFolderTo(c: AttachmentsContainer, folder: FS, name?: string): void {
   if (!folder) { throw new Error(`Folder is not given`); }
   if (!c.folders) { c.folders = {}; }
   if (!name) { name = folder.name; }
-  if (c.folders[name] || (c.files && c.files[name])) { throw new Error(
-    `Folder name ${name}, as it is already used by other `); }
+  if (c.folders[name] || (c.files && c.files[name])) {
+    throw new Error(`Folder name ${name}, as it is already used by other `);
+  }
   c.folders[name] = folder;
 }
 
-export function renameFileIn(c: AttachmentsContainer,
-                             initName: string, newName: string): void {
-  if (!c.files || !c.files[initName]) { throw new Error(
-    `File ${initName} is not found`); }
+export function renameFileIn(c: AttachmentsContainer, initName: string, newName: string): void {
+  if (!c.files || !c.files[initName]) {
+    throw new Error(`File ${initName} is not found`);
+  }
   const file = c.files[initName];
   addFileTo(c, file, newName);
   delete c.files[initName];
 }
 
-export function renameFolderIn(c: AttachmentsContainer,
-                               initName: string, newName: string): void {
-  if (!c.folders || !c.folders[initName]) { throw new Error(
-    `Folder ${initName} is not found`); }
+export function renameFolderIn(c: AttachmentsContainer, initName: string, newName: string): void {
+  if (!c.folders || !c.folders[initName]) {
+    throw new Error(`Folder ${initName} is not found`);
+  }
   const folder = c.folders[initName];
   addFolderTo(c, folder, newName);
   delete c.folders[initName];

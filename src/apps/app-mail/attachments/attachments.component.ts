@@ -15,7 +15,7 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { copy, IAngularEvent, IAngularStatic, IComponentOptions, IScope, ITimeoutService } from 'angular';
+import { IAngularEvent, IAngularStatic, IComponentOptions, IScope, ITimeoutService } from 'angular';
 import * as AttachServiceModule from '../services/attach.service';
 
 export let ModuleName = '3nClient.attachments';
@@ -92,7 +92,7 @@ class AttachmentsComponent {
   public deleteAllFiles(): void {
     const tmpFiles = this.files.slice();
     tmpFiles.forEach(item => {
-      item.mode = 'toDelete'
+      item.mode = 'toDelete';
     });
     this.howDisplay(tmpFiles);
   }

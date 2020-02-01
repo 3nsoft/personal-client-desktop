@@ -1,1 +1,26 @@
-<h1>This is CHAT APP</h1>
+<section class="app-chat">
+  <div class="app-chat__sidenav">
+    <div class="app-chat__sidenav-toolbar">
+      <md-button
+        type="button"
+        class="app-chat__sidenav-btn"
+        ng-click="$ctrl.openNewChat()"
+      >
+        + New Chat
+      </md-button>
+    </div>
+    <div class="app-chat__sidenav-content">
+      <app-chat-list></app-chat-list>
+    </div>
+  </div>
+
+  <div class="app-chat__content">
+    <div
+        ng-if="!$ctrl.chatIdSelected"
+        class="app-chat__content-empty"
+    ></div>
+
+    <app-chat-content ng-if="$ctrl.chatIdSelected"
+    ></app-chat-content>
+  </div>
+</section>

@@ -16,10 +16,10 @@ export function sizeObject(obj: any): number {
 
 /**
  * функция получения массива используемых букв для списков контактов и групп контактов
- * @param data {[id: string]: T}
+ * @param data {[id: string]: client3N.Person
  * @return {string[]} - массив используемых символов, отсортированный по алфавиту
  */
-export function getAllLetters<T>(data: { [id: string]: client3N.Person }): string[] {
+export function getAllLetters(data: { [id: string]: client3N.Person }): string[] {
   const result: string[] = [];
   Object.keys(data).forEach(id => {
     const currentLetter = data[id].name ?

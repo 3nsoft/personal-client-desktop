@@ -1,0 +1,39 @@
+<section class="app-chat-msg-create" ng-cloak>
+  <div class="app-chat-msg-create__wrapper">
+    <md-button class="md-icon-button"
+      ng-disabled="true"
+      aria-label="Additional"
+    >
+      <pcd-icon icon="add" size="20" color="rgba(0, 0, 0, 0.54)"></pcd-icon>
+    </md-button>
+    <md-button class="md-icon-button"
+      aria-label="Emoticon"
+      ng-click="$ctrl.openEmojiList()"
+    >
+      <pcd-icon icon="insert_emoticon" size="20" color="rgba(0, 0, 0, 0.54)"></pcd-icon>
+    </md-button>
+    <md-button class="md-icon-button"
+      aria-label="Files"
+      ng-click="$ctrl.attachFiles()"
+    >
+      <pcd-icon icon="attach_file" size="20" color="rgba(0, 0, 0, 0.54"></pcd-icon>
+    </md-button>
+    <md-input-container class="app-chat-msg-create__input-field"
+      md-no-float>
+      <textarea id="inputField"
+        rows="2"
+        max-rows="3"
+        md-no-resize="true"
+        placeholder="Please enter text here"
+        ng-model="$ctrl.inputField">
+      </textarea>
+    </md-input-container>
+    <md-button class="md-icon-button send-btn"
+      aria-label="Send"
+      ng-disabled="!$ctrl.inputField"
+      ng-click="$ctrl.createMsg()"
+    >
+      <pcd-icon icon="send" size="20" color="#3675a8"></pcd-icon>
+    </md-button>
+  </div>
+</section>

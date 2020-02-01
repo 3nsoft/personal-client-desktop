@@ -47,7 +47,7 @@ export function checkMailFoldersForMessages(
       mailFolderListUpdated[currentMsgFolderId].messageKeys.push(key);
     }
   }
-  return calcUnreadMsg(mailFolderListUpdated, msgList);
+  return copy(calcUnreadMsg(mailFolderListUpdated, msgList));
 }
 
 /**

@@ -44,7 +44,8 @@ declare namespace client3N {
     icon: string;
     stateName?: string;
     fsName: string;
-    isDisabled: boolean;
+	isDisabled: boolean;
+	unreadAmount?: number;
   }
 
   interface UserStatus {
@@ -125,7 +126,7 @@ declare namespace client3N {
   interface AttachFileInfo {
     name: string;
     size: number;
-    mode: 'toSave' | 'saved' | 'toDelete';
+    mode: 'toSave' | 'saved' | 'not_saved' | 'toDelete';
   }
 
   interface ErrorWhenSend {
@@ -139,6 +140,54 @@ declare namespace client3N {
     sentDataSize: number;
     isComplete: boolean;
   }
+
+  interface ChatRoom {
+    chatId: string;
+    name: string;
+    timestamp: number;
+    members: string[];
+    isGroup: boolean;
+    initials: string;
+    color: string;
+    lastMsg: string;
+    isRead?: boolean;
+    numberUnreadMsg?: number;
+  }
+
+  interface ChatLog {
+    msgId: string;
+    direction: 'in' | 'out';
+    timestamp: number;
+    outMsg?: 'sending'|'sended'|'read'|undefined;
+    isAttached?: boolean;
+  }
+
+  interface ChatDisplayedMessage {
+    creator: string;
+    timestamp: number;
+    text?: string;
+    attached?: AttachFileInfo[];
+    msgId?: string;
+    outMsg?: 'sending'|'sended'|'read'|undefined;
+  }
+
+  interface AppMsg {
+    type: string;
+    data: AppMsgData;
+  }
+
+  interface AppMsgData {
+    chatId: string;
+    timestamp?: number;
+    isGroup?: boolean;
+    name?: string;
+  }
+
+  type Emoji = {
+		groupId: string;
+		symbol: string;
+		note: string;
+	}
 
   /*
 	interface MessageJSON {

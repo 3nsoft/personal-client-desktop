@@ -30,6 +30,7 @@ export const APPS: client3N.Apps[] = [
     stateName: 'root.app-chat',
     fsName: 'computer.3nweb.chat',
     isDisabled: false,
+    unreadAmount: 0,
   },
   {
     id: AppId.Mail,
@@ -38,6 +39,7 @@ export const APPS: client3N.Apps[] = [
     stateName: 'root.app-mail',
     fsName: 'computer.3nweb.mail',
     isDisabled: false,
+    unreadAmount: 0,
   },
   {
     id: AppId.Storage,
@@ -66,6 +68,8 @@ export const APP_FILE_NAMES: {[name: string]: string} = {
   contacts: 'contacts.json',
   mailFolders: 'mail-folders.json',
   messages: 'message-list.json',
+  chatList: 'chat-list.json',
+  chatLog: 'chat-log.json',
 };
 
 /**

@@ -15,16 +15,51 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { IAngularStatic, IComponentOptions } from 'angular';
+import { appChatState } from './common/app-chat-store';
+import * as AppChatCreateWindowSrvModule from './app-chat-create-window/app-chat-create-window';
+
 export let ModuleName = '3nClient.app.chat';
 
-export function addComponent(ng: angular.IAngularStatic): void {
+export function addComponent(ng: IAngularStatic): void {
   const mod = ng.module(ModuleName, []);
   mod.component('appChat', componentConfig);
 }
 
-class AppChatComponent {}
+class AppChatComponent {
+  public chatIdSelected: string = null;
 
-const componentConfig: angular.IComponentOptions = {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  static $inject = [AppChatCreateWindowSrvModule.AppChatCreateWindowName];
+  constructor(
+    private chatCreateSrv: AppChatCreateWindowSrvModule.Srv,
+  ) {}
+
+  $onInit(): void {
+    this.chatIdSelected = appChatState.values.selected;
+    appChatState
+      .change$
+      .selected
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(chatId => this.chatIdSelected = chatId);
+
+  }
+
+  $onDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public openNewChat(): void {
+    console.log(`Create new chat ...`);
+    this.chatCreateSrv.openChatCreateWindow();
+  }
+}
+
+const componentConfig: IComponentOptions = {
   bindings: {},
   templateUrl: './apps/app-chat/app-chat.html',
   controller: AppChatComponent,

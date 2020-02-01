@@ -3,11 +3,15 @@ $white: #ffffff;
 $white-01: #f1f1f1;
 $black: #000000;
 $azure: #0090ec;
+$azure-a12: rgba(0, 144, 236, 0.12);
 $azure-a24: #cce4f9;
 $azure-a87: rgba(0, 144, 236, 0.87);
 $azure-bg: #cce4f9;
 $azure-select: #b4d7f6;
+$blue: #3675a8;
+$blue-dark: #195f97;
 $blue-light: #c2d9ef;
+$yellow: #ffc765;
 $green: #2fd365;
 $red: #f44336;
 $red-a87: rgba(244, 67, 54, 0.87);
@@ -36,6 +40,7 @@ $size-9x: 72px;
 $size-10x: 80px;
 $size-11x: 88px;
 $size-12x: 96px;
+$size-16x: 128px;
 
 $size-12: 12px;
 $size-15: 15px;
@@ -71,6 +76,31 @@ $font-64: 64px;
     background-color: lighten($color, 20%) !important;
   }
 }
+
+@mixin buttonFlat2($color, $bgColor, $bColor) {
+  font-weight: bold;
+  color: $color;
+  background-color: $bgColor;
+  @if $bgColor == $white {
+    box-shadow: 0 1px 4px 0 $grey-a24;
+  } @else {
+    border: 1px solid $bColor;
+  }
+  border-radius: 4px;
+  padding: 0 $size-2x;
+  margin: 0;
+  text-transform: none;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    background-color: darken($bgColor, 5%) !important;
+  }
+
+  &[disabled] {
+    background-color: lighten($bgColor, 20%) !important;
+  }
+}
+
 
 @mixin buttonRound($color, $bgColor, $bColor) {
   font-weight: bold;

@@ -92,7 +92,7 @@ class AppMailMessagesComponent {
           ids[0].indexOf('in=') > -1 &&
           !appMailState.values.messageList[ids[0]].isRead
         ) {
-          this.$timeout(() => {}, 200)
+          this.$timeout(() => {}, 200) // tslint:disable-line:no-empty
             .then(() => {
               setReadFlag(ids[0], true);
             });

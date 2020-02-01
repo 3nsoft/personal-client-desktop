@@ -36,6 +36,7 @@ import * as AppContactComponentModule from '../apps/app-contact/app-contact';
 import * as AppChatComponentModule from '../apps/app-chat/app-chat';
 import * as AppMailComponentModule from '../apps/app-mail/app-mail';
 import * as CommonServiceModule from '../apps/common/services/common.service';
+import * as EmojiServiceModule from '../common/services/emoji/emoji-srv';
 
 import * as AppContactsServiceModule from '../apps/app-contact/services/app-contact.service';
 import * as AppContactItemComponent from '../apps/app-contact/contact-item/contact-item.component';
@@ -61,6 +62,13 @@ import * as MessageMoveServiceModule from '../apps/app-mail/services/message-mov
 import * as MessageManagerHelpersServiceModule from '../apps/app-mail/services/message-manager/message-manager.helpers.service';
 import * as MsgSendProgressServiceModule from '../apps/app-mail/services/message-send-progress.service';
 
+import * as ChatNetServiceModule from '../apps/app-chat/common/chat-net.service';
+import * as AppChatCreateWindowSrvModule from '../apps/app-chat/app-chat-create-window/app-chat-create-window';
+import * as AppChatListComponentModule from '../apps/app-chat/app-chat-list/app-chat-list';
+import * as AppChatContentComponentModule from '../apps/app-chat/app-chat-content/app-chat-content';
+import * as AppChatMsgCreateComponentModule from '../apps/app-chat/app-chat-msg-create/app-chat-msg-create';
+import * as AppChatContentMsgComponentModule from '../apps/app-chat/app-chat-content/app-chat-content-msg/app-chat-content-msg';
+
 export const dependencies = [
   'ui.router',
   'ngAnimate',
@@ -82,6 +90,7 @@ export const dependencies = [
   AppMailMessageToolbarComponentModule.ModuleName,
   AppMailMessageFastReplyComponentModule.ModuleName,
   CommonServiceModule.ModuleName,
+  EmojiServiceModule.ModuleName,
   AppContactsServiceModule.ModuleName,
   AppContactItemComponent.ModuleName,
   AppContactListComponentModule.ModuleName,
@@ -102,45 +111,66 @@ export const dependencies = [
   MessageMoveServiceModule.ModuleName,
   MessageManagerHelpersServiceModule.ModuleName,
   MsgSendProgressServiceModule.ModuleName,
+  ChatNetServiceModule.ModuleName,
+  AppChatCreateWindowSrvModule.ModuleName,
+  AppChatListComponentModule.ModuleName,
+  AppChatContentComponentModule.ModuleName,
+  AppChatMsgCreateComponentModule.ModuleName,
+  AppChatContentMsgComponentModule.ModuleName,
 ];
+
+export enum AppModuleType {
+  Filter = 'filter',
+  Component = 'component',
+  Directive = 'directive',
+  Service = 'service',
+  Provider = 'provider',
+}
 
 export interface AppsModule {
   module: any;
-  type: 'filter'|'component'|'directive'|'service'|'provider';
+  type: AppModuleType;
 }
 
 export const appsModules: AppsModule[] = [
-  { module: ArrayFilterModule, type: 'filter' },
-  { module: AsyncFilterModule, type: 'filter' },
-  { module: ConfirmDialogServiceModule, type: 'service' },
-  { module: PcdIconDirectiveModule, type: 'directive' },
-  { module: PcdIconContactComponentModule, type: 'component' },
-  { module: NavItemComponentModule, type: 'component' },
-  { module: AppsComponentModule, type: 'component' },
-  { module: AppContactComponentModule, type: 'component' },
-  { module: AppChatComponentModule, type: 'component' },
-  { module: AppMailComponentModule, type: 'component' },
-  { module: CommonServiceModule, type: 'service' },
-  { module: AppContactsServiceModule, type: 'service' },
-  { module: AppContactItemComponent, type: 'component' },
-  { module: AppContactListComponentModule, type: 'component' },
-  { module: AppContactItemComponentModule, type: 'component' },
-  { module: PersonComponentModule, type: 'component' },
-  { module: AppMailServiceModule, type: 'service' },
-  { module: MessageSendServiceModule, type: 'service' },
-  { module: MessageReceivingServiceModule, type: 'service' },
-  { module: AppMailFoldersComponentModule, type: 'component' },
-  { module: AppMailMessagesComponentModule, type: 'component' },
-  { module: AppMailMessageComponentModule, type: 'component' },
-  { module: AppMailMessageToolbarComponentModule, type: 'component' },
-  { module: AppMailMessageFastReplyComponentModule, type: 'component' },
-  { module: MailFolderManagerServiceModule, type: 'service' },
-  { module: MailFolderComponentModule, type: 'component' },
-  { module: MailMessagesItemComponentModule, type: 'component' },
-  { module: AttachServiceModule, type: 'service' },
-  { module: AttachmentsComponentModule, type: 'component' },
-  { module: MessageManagerServiceModule, type: 'service' },
-  { module: MessageMoveServiceModule, type: 'service' },
-  { module: MessageManagerHelpersServiceModule, type: 'service' },
-  { module: MsgSendProgressServiceModule, type: 'service' },
+  { module: ArrayFilterModule, type: AppModuleType.Filter },
+  { module: AsyncFilterModule, type: AppModuleType.Filter },
+  { module: ConfirmDialogServiceModule, type: AppModuleType.Service },
+  { module: PcdIconDirectiveModule, type: AppModuleType.Directive },
+  { module: PcdIconContactComponentModule, type: AppModuleType.Component },
+  { module: NavItemComponentModule, type: AppModuleType.Component },
+  { module: AppsComponentModule, type: AppModuleType.Component },
+  { module: AppContactComponentModule, type: AppModuleType.Component },
+  { module: AppChatComponentModule, type: AppModuleType.Component },
+  { module: AppMailComponentModule, type: AppModuleType.Component },
+  { module: CommonServiceModule, type: AppModuleType.Service },
+  { module: EmojiServiceModule, type: AppModuleType.Service },
+  { module: AppContactsServiceModule, type: AppModuleType.Service },
+  { module: AppContactItemComponent, type: AppModuleType.Component },
+  { module: AppContactListComponentModule, type: AppModuleType.Component },
+  { module: AppContactItemComponentModule, type: AppModuleType.Component },
+  { module: PersonComponentModule, type: AppModuleType.Component },
+  { module: AppMailServiceModule, type: AppModuleType.Service },
+  { module: MessageSendServiceModule, type: AppModuleType.Service },
+  { module: MessageReceivingServiceModule, type: AppModuleType.Service },
+  { module: AppMailFoldersComponentModule, type: AppModuleType.Component },
+  { module: AppMailMessagesComponentModule, type: AppModuleType.Component },
+  { module: AppMailMessageComponentModule, type: AppModuleType.Component },
+  { module: AppMailMessageToolbarComponentModule, type: AppModuleType.Component },
+  { module: AppMailMessageFastReplyComponentModule, type: AppModuleType.Component },
+  { module: MailFolderManagerServiceModule, type: AppModuleType.Service },
+  { module: MailFolderComponentModule, type: AppModuleType.Component },
+  { module: MailMessagesItemComponentModule, type: AppModuleType.Component },
+  { module: AttachServiceModule, type: AppModuleType.Service },
+  { module: AttachmentsComponentModule, type: AppModuleType.Component },
+  { module: MessageManagerServiceModule, type: AppModuleType.Service },
+  { module: MessageMoveServiceModule, type: AppModuleType.Service },
+  { module: MessageManagerHelpersServiceModule, type: AppModuleType.Service },
+  { module: MsgSendProgressServiceModule, type: AppModuleType.Service },
+  { module: ChatNetServiceModule, type: AppModuleType.Service },
+  { module: AppChatCreateWindowSrvModule, type: AppModuleType.Service },
+  { module: AppChatListComponentModule, type: AppModuleType.Component },
+  { module: AppChatContentComponentModule, type: AppModuleType.Component },
+  { module: AppChatMsgCreateComponentModule, type: AppModuleType.Component },
+  { module: AppChatContentMsgComponentModule, type: AppModuleType.Component },
 ];

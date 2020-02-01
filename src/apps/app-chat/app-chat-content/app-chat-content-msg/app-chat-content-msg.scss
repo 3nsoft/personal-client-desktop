@@ -1,0 +1,269 @@
+@import '../../../../config';
+
+.app-chat-content-msg {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  max-width: 558px;
+  margin: $size-1x auto;
+
+  &__date {
+    position: relative;
+    text-align: center;
+    font-size: $font-16;
+    color: $grey-a54;
+    padding: $size-half 0;
+  }
+
+  &__title {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &-offset {
+      padding-left: 44px;
+    }
+
+    &--name {
+      position: relative;
+      height: $size-20;
+      padding-right: $size-2x;
+      font-size: $font-14;
+      font-weight: bold;
+      color: $blue;
+    }
+
+    &--timestamp {
+      position: relative;
+      font-style: italic;
+      font-size: $font-12;
+      line-height: $font-14;
+      color: $grey-a54;
+    }
+  }
+
+  &__body {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    &--content {
+      position: relative;
+      padding: 12px $size-2x;
+      border-radius: 5px;
+      min-width: $size-5x;
+      font-size: $font-14;
+      color: $grey-a87;
+      line-height: $font-18;
+    }
+
+    &--attach {
+      position: relative;
+      padding: 12px $size-2x;
+      border-radius: 5px;
+      // min-width: 40px;
+      width: 100%;
+      font-style: italic;
+      font-size: $font-14;
+      color: $white;
+      background-color:  $blue-dark;
+
+      &-item {
+        position: relative;
+        width: 100%;
+        height: $size-3x;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+
+        &:hover {
+          pcd-icon {
+            opacity: 0.5;
+          }
+        }
+
+        &:focus {
+          border: none;
+          outline-width: 0;
+        }
+
+        &-open {
+          display: block;
+        }
+
+        &-close {
+          display: none;
+        }
+
+        pcd-icon {
+          position: absolute;
+          top: 0;
+          left: calc(50% - 12px);
+          width: $size-3x;
+          height: $size-3x;
+          margin: 0;
+          padding: 0;
+          opacity: 0;
+          transition: 0.2s opacity;
+        }
+      }
+
+      &-group {
+        position: relative;
+
+        &-title {
+          position: relative;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          height: $size-3x;
+
+          span {
+            display: block;
+          }
+
+          button {
+            min-width: $size-3x !important;
+            min-height: $size-3x !important;
+            width: $size-3x !important;
+            height: $size-3x !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        &-item {
+          position: relative;
+          width: 100%;
+          height: $size-3x;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          cursor: pointer;
+
+          &:hover {
+            pcd-icon {
+              opacity: 0.5;
+            }
+          }
+
+          &:focus {
+            border: none;
+            outline-width: 0;
+          }
+
+          &-open {
+            display: block;
+          }
+
+          &-close {
+            display: none;
+          }
+
+          pcd-icon {
+            position: absolute;
+            top: 0;
+            left: calc(50% - 12px);
+            width: $size-3x;
+            height: $size-3x;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transition: 0.2s opacity;
+          }
+        }
+      }
+    }
+  }
+
+
+  &_in {
+    .app-chat-content-msg {
+      &__title {
+        justify-content: flex-start;
+      }
+
+      &__body {
+        justify-content: flex-start;
+        padding-right: $size-6x;
+
+        &--avatar {
+          position: relative;
+          width: 44px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+
+          &-content {
+            position: relative;
+            width: $size-5x;
+            height: $size-5x;
+            transform: scale(0.7);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: $font-16;
+            font-weight: bold;
+          }
+        }
+
+        &--content {
+          background-color: $white;
+        }
+
+      }
+    }
+  }
+
+  &_out {
+    .app-chat-content-msg {
+      &__title {
+        justify-content: flex-end;
+      }
+
+      &__body {
+        justify-content: flex-end;
+
+        &--content {
+          max-width: calc(100% - #{$size-8x});
+          background-color: rgba($azure, 0.36);
+        }
+
+        &--flags {
+          position: relative;
+          width: $size-8x;
+          padding: $size-1x;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: flex-end;
+
+          pcd-icon {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

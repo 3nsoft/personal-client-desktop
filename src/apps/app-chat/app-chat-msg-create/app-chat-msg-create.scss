@@ -1,0 +1,56 @@
+@import "../../../config";
+
+.app-chat-msg-create {
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    position: relative;
+    width: 654px;
+    padding-top: $size-1x;
+    padding-bottom: $size-1x;
+    margin-right: calc(50% - 279px);
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: $size-6x !important;
+      height: $size-6x !important;
+      padding-top: 0;
+      margin: 0 !important;
+    }
+  }
+
+  &__input-field {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 462px;
+    min-height: $size-5x;
+    max-height: $size-10x;
+    margin: 0;
+
+    .md-errors-spacer {
+      display: none;
+    }
+
+    textarea {
+      font-size: $font-14;
+      line-height: $size-20;
+      color: $grey-a87;
+      padding-top: 0;
+      border: none !important;
+
+      &::-webkit-input-placeholder {
+        font-style: italic;
+      }
+    }
+  }
+}

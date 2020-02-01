@@ -55,7 +55,13 @@ export class CommonService {
         );
         if (!equals(appMailState.values.list, mailFolderListUpdated)) {
           appMailState.values.list = copy(mailFolderListUpdated);
+          appMailState.values.unreadMessages = Object.keys(mailFolderListUpdated)
+            .reduce((count: number, key: string) => {
+              count = count + mailFolderListUpdated[key].qtNoRead;
+              return count;
+            }, 0);
         }
+        console.log('COUNT: ', appMailState.values.unreadMessages);
         await this.appMailSrv.saveMessageList(msgList);
       });
   }

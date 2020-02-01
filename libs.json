@@ -17,7 +17,7 @@
   },
   {
     "from": "./node_modules/ng-embed/images/*.*",
-    "to": "./public/libs/ng-embed/images"
+    "to": "./public/libs/images"
   },
   {
     "from": "./node_modules/angular-ui-notification/dist/angular-ui-notification.min.css",

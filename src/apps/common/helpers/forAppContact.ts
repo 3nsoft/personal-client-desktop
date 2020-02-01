@@ -1,4 +1,4 @@
-import {appState} from "../services/app-store";
+import { appState } from "../services/app-store";
 
 export function createNewPersonList(): {[id: string]: client3N.Person} {
   const personList: {[id: string]: client3N.Person} = {};
@@ -43,4 +43,16 @@ export function createNewPerson(): client3N.Person {
     isBlocked: false,
     labels: [],
   }
+}
+
+/**
+ * выделение инициалов из названия контакта/группы
+ * @param name {string}
+ * @return {string}
+ */
+export function getInitials(name: string): string {
+  const partName = name.split(' ');
+  return partName.length === 1
+    ? `${partName[0]} `.substr(0, 2)
+    : partName[0][0] + partName[1][0];
 }

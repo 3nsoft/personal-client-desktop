@@ -1,0 +1,53 @@
+<section class="app-chat-list">
+  <div class="app-chat-list__item"
+    ng-class="{'app-chat-list__item-selected': $ctrl.chatIdSelected === chat.chatId}"
+    ng-repeat="chat in $ctrl.chatList | orderBy: '-timestamp' track by chat.chatId"
+    ng-click="$ctrl.selectChat(chat.chatId)">
+
+    <div class="app-chat-list__item--avatar"
+      ng-class="{'hex2Mask': chat.isGroup, 'hexMask': !chat.isGroup}"
+      ng-style="{'background-color': chat.color}">
+      <div ng-if="!chat.isGroup"
+        class="app-chat-list__item--avatar-initials"
+        ng-style="{'color': $ctrl.invertColor(chat.color)}">
+        {{chat.initials}}
+      </div>
+
+      <pcd-icon
+        ng-if="chat.isGroup"
+        class="app-chat-list__item--avatar-icon"
+        icon="group"
+        color="{{$ctrl.invertColor(chat.color)}}"
+        size="16">
+      </pcd-icon>
+    </div>
+
+    <div class="app-chat-list__item--content">
+      <div class="app-chat-list__item--content-name"
+        ng-class="{'app-chat-list__item--content-name-unread': !!chat.numberUnreadMsg}">
+        {{chat.name}}
+      </div>
+      <div class="app-chat-list__item--content-body">
+        <span class="app-chat-list__item--content-timestamp">
+          {{$ctrl.getTimeStr(chat.timestamp)}}
+        </span>
+        <span ng-if="chat.lastMsg"
+          class="app-chat-list__item--content-text"
+          ng-bind-html="chat.lastMsg | embed">
+        </span>
+      </div>
+    </div>
+
+    <div class="app-chat-list__item--info">
+      <div class="app-chat-list__item--info-01">
+        <span ng-if="!!chat.numberUnreadMsg">
+          {{chat.numberUnreadMsg}}
+        </span>
+      </div>
+      <div class="app-chat-list__item--info-02">
+
+      </div>
+    </div>
+
+  </div>
+</section>

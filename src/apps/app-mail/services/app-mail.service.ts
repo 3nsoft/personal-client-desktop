@@ -16,7 +16,7 @@
 */
 
 import { copy, IAngularEvent, IAngularStatic, IRootScopeService } from 'angular';
-import { appMailState, mailSyncedFS, messageSyncedFS } from '../common/app-mail-store';
+import { appMailState, mailSyncedFS } from '../common/app-mail-store';
 import { createNewMailFolderList } from '../../common/helpers';
 import * as MsgMoveSrvModule from './message-move/message-move.service';
 

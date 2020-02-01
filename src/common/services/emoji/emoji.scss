@@ -1,0 +1,98 @@
+@import "../../../config";
+
+.emoji {
+  position: relative;
+  width: 380px;
+  max-height: 95%;
+  height: 95%;
+
+  &__toolbar {
+    position: relative;
+    width: 100%;
+    height: $size-6x;
+    padding: 0 0 0 $size-2x;
+    background-color: $blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &-name {
+      font-size: $font-16;
+      color: $white;
+    }
+
+    .btn-close {
+      min-width: $size-6x;
+      width: $size-6x;
+      min-height: $size-6x;
+      height: $size-6x;
+      padding: 0;
+      margin: 0;
+      z-index: 2;
+    }
+  }
+
+  &__list {
+    position: relative;
+    width: 100%;
+    height: calc(100% - #{$size-8x});
+    overflow-y: auto;
+    background-color: $white !important;
+
+    &-subheader {
+      font-weight: bold;
+      background-color: #eaeaea;
+    }
+
+    &-item {
+      position: relative;
+      min-height: $size-4x;
+      height: $size-4x;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba($blue, 0.54);
+      }
+
+      button {
+        z-index: 100;
+      }
+
+      .md-button, .md-list-item-inner {
+        min-height: $size-4x;
+        height: $size-4x;
+      }
+
+      &__emoji {
+        position: relative;
+        height: $size-4x;
+        margin-right: 10px;
+      }
+
+      &__note {
+        position: relative;
+        height: $size-4x;
+        width: calc(100% - 36px);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: $font-14;
+        color: $grey-a54;
+      }
+
+      &__emoji, &__note {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+  }
+
+}

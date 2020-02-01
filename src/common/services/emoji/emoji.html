@@ -1,0 +1,43 @@
+<md-dialog
+  aria-label="insert emoji"
+  class="emoji"
+>
+  <div class="emoji__toolbar">
+    <span class="emoji__toolbar-name">Emoji List</span>
+    <md-button
+      class="md-icon-button btn-close"
+      aria-label="close modal"
+      ng-click="closeModal()"
+    >
+      <md-tooltip md-direction="left">
+        Cancel
+      </md-tooltip>
+      <pcd-icon icon="close" color="#ffffff"></pcd-icon>
+    </md-button>
+  </div>
+
+  <md-content class="emoji__list">
+    <div ng-repeat="emGr in emGroups">
+      <md-subheader class="emoji__list-subheader">
+        {{::emGr.name}}
+      </md-subheader>
+
+      <md-list>
+        <md-list-item
+          ng-repeat="emoji in emList | filter:{groupId: emGr.id}"
+          ng-click="selectEmoji(emoji)" 
+          class="emoji__list-item"
+        >
+            <div class="emoji__list-item__emoji"
+              ng-bind-html="emoji.symbol | embed">
+            </div>
+            <div class="emoji__list-item__note">
+              {{::emoji.note}}
+            </div>
+        </md-list-item>
+      </md-list>
+
+    </div>
+  </md-content>
+
+</md-dialog>

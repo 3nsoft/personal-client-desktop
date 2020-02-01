@@ -68,6 +68,20 @@
   align-items: stretch;
 }
 
+.apps__toolbar-nav--info {
+  position: absolute;
+  height: 18px;
+  border-radius: 9px;
+  min-width: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $azure;
+  color: $white;
+  font-size: $font-14;
+}
+
 .apps__toolbar-nav--item {
   width: $size-12x;
 }
@@ -80,12 +94,19 @@
   right: 0;
   border: none;
   outline-width: 0;
-  background-color: $azure;
+  background-color: $white;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    background-color: $azure;
+    svg {
+      fill: $white;
+    }
+  }
 }
 
 .apps__content {
