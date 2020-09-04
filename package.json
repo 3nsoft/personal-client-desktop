@@ -36,7 +36,7 @@
     "gulp-typescript": "^4.0.2",
     "gulp-uglify": "^3.0.1",
     "gulp-uglifycss": "^1.1.0",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "rxjs-compat": "^6.2.0",
     "tslint": "^5.10.0",
     "typescript": "^2.9.2",
