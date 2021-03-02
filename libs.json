@@ -1,26 +1,26 @@
 [
   {
     "from": "./node_modules/angular/angular-csp.css",
-    "to": "./public/libs/angular"
+    "to": "./public/app/libs/angular"
   },
   {
     "from": "./node_modules/angular-material/angular-material.min.css",
-    "to": "./public/libs/angular-material"
+    "to": "./public/app/libs/angular-material"
   },
   {
     "from": "./node_modules/ng-embed/dist/ng-embed.min.css",
-    "to": "./public/libs/ng-embed"
+    "to": "./public/app/libs/ng-embed"
   },
   {
     "from": "./node_modules/ng-embed/fonts/*.*",
-    "to": "./public/libs/ng-embed/fonts"
+    "to": "./public/app/libs/ng-embed/fonts"
   },
   {
     "from": "./node_modules/ng-embed/images/*.*",
-    "to": "./public/libs/images"
+    "to": "./public/app/libs/images"
   },
   {
     "from": "./node_modules/angular-ui-notification/dist/angular-ui-notification.min.css",
-    "to": "./public/libs/angular-ui-notification"
+    "to": "./public/app/libs/angular-ui-notification"
   }
 ]

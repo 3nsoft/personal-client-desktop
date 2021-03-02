@@ -14,13 +14,11 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { copy, IAngularStatic, ITimeoutService } from 'angular';
+import { copy, IAngularStatic } from 'angular';
 import { logError } from '../../../common/services/libs/logging';
 import { getAlias, html2text, waitAll } from '../../common/helpers';
 import { appState } from '../../common/services/app-store';
 import { appMailState } from '../common/app-mail-store';
-import * as AppMailServiceModule from './app-mail.service';
 import { SYS_MAIL_FOLDERS } from '../../../common/const';
 import { Message } from '../services/message-manager/message.model';
 
@@ -33,12 +31,8 @@ export function addService(ng: IAngularStatic): void {
 }
 
 export class MessageReceivingService {
-  static $inject = ['$timeout', 'Notification'];
-  constructor(
-    private $timeout: ITimeoutService,
-    private mailSrv: AppMailServiceModule.AppMailService,
-    private Notification: angular.uiNotification.INotificationService,
-  ) {}
+  static $inject = [];
+  constructor() {}
 
   public async refreshInbox(): Promise<void> {
     console.log('Inbox refreshing ...');

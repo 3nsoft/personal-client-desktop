@@ -15,7 +15,6 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 import { copy, equals, IAngularStatic } from 'angular';
-// import { appContactsState } from '../../app-contact/common/app-contact-store';
 import { appMailState } from '../../app-mail/common/app-mail-store';
 import * as AppMailServiceModule from '../../app-mail/services/app-mail.service';
 import { checkMailFoldersForMessages } from '../helpers';

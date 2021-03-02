@@ -13,18 +13,16 @@
 <http://www.gnu.org/licenses/>.
 */
 
-import { IQService, ITimeoutService } from 'angular';
-import { StateParams, StateProvider, UrlRouterProvider } from '@uirouter/angularjs';
+import { StateProvider, UrlService } from '@uirouter/angularjs';
 import { logError } from './services/libs/logging';
 import { appState } from '../apps/common/services/app-store';
 import { appChatState, chat } from '../apps/app-chat/common/app-chat-store';
 import * as AppContactService from '../apps/app-contact/services/app-contact.service';
 import * as AppMailService from '../apps/app-mail/services/app-mail.service';
 import * as MessageSendService from '../apps/app-mail/services/message-send.service';
-import { Chat } from '../apps/app-chat/common/chat';
 
-export function router($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider): void {
-  $urlRouterProvider.otherwise('/');
+export function router($stateProvider: StateProvider, $urlServiceProvider: UrlService): void {
+  $urlServiceProvider.rules.otherwise('/');
 
   $stateProvider
     .state('root', {
@@ -32,12 +30,10 @@ export function router($stateProvider: StateProvider, $urlRouterProvider: UrlRou
       template: `<apps></apps>`,
       resolve: {
         data: [
-          '$timeout',
           AppContactService.AppContactsServiceName,
           AppMailService.AppMailServiceName,
           MessageSendService.MessageSendServiceName,
           async (
-            $timeout: ITimeoutService,
             contactSrv: AppContactService.AppContactsService,
             mailSrv: AppMailService.AppMailService,
             msgSrv: MessageSendService.MessageSendService,

@@ -14,17 +14,9 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
+import angular from 'angular';
 
-import * as angular from 'angular';
-
-export let ModuleName = '3nClient.filter.async';
-
-export function addFilter(ng: angular.IAngularStatic): void {
-  const mod = ng.module(ModuleName, []);
-  mod.filter('async', asyncFilter);
-}
-
-function asyncFilter() {
+export function asyncFilter() {
   const values = {};
   const subscriptions = {};
 

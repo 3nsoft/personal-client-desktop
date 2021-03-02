@@ -1,5 +1,5 @@
 {
-	"users": [0, 1],
+	"users": [0],
 	"mail": {
 	    "existingUsers": [ {
 			"address": "joe.black@3nweb.com"

@@ -14,11 +14,9 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {copy, element, IAngularEvent, IAngularStatic, IScope, ITimeoutService} from 'angular';
 import { appMailState } from '../../common/app-mail-store';
 import * as ConfirmDialogService from '../../../common/services/confirm-dialog.service';
-import * as MailService from '../app-mail.service';
 import * as MsgMoveSrvModule from '../message-move/message-move.service';
 import { createNewMailFolder, generateNewFolderIdAndOrdernum } from '../../common/app-mail-folders.helper';
 import { SYS_MAIL_FOLDERS } from '../../../../common/const';
@@ -50,14 +48,12 @@ export class MailFolderManagerService {
   static $inject = [
     '$mdDialog',
     ConfirmDialogService.ConfirmDialogServiceName,
-    MailService.AppMailServiceName,
     MsgMoveSrvModule.MessageMoveServiceName,
   ];
 
   constructor(
     private $mdDialog: angular.material.IDialogService,
     private confirmSrv: ConfirmDialogService.ConfirmDialogService,
-    private mailService: MailService.AppMailService,
     private msgMoveSrv: MsgMoveSrvModule.MessageMoveService,
   ) {}
 

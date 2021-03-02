@@ -14,7 +14,6 @@
  You should have received a copy of the GNU General Public License along with this program.
  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { IAngularStatic, IComponentOptions } from 'angular';
 import { appChatState, chat } from '../common/app-chat-store';
 import { convertTimestamp, invertColor } from '../../common/helpers';

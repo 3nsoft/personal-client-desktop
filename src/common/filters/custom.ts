@@ -14,16 +14,9 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
+import angular from 'angular';
 
-import * as angular from 'angular';
-export let ModuleName = '3nClient.filter.custom';
-
-export function addFilter(ng: angular.IAngularStatic): void {
-  const mod = ng.module(ModuleName, []);
-  mod.filter('firstUppercase', firstUppercase);
-}
-
-function firstUppercase() {
+export function firstUppercase() {
   return (item: any) => {
     if (!angular.isString(item)) { return item; }
     return `${item[0].toUpperCase()}${item.substring(1)}`;

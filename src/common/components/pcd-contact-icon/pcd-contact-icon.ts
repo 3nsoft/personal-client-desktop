@@ -14,11 +14,11 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { getElementColor } from '../../../apps/common/helpers';
+import { IAngularStatic, IComponentOptions, IScope } from 'angular';
+import { getElementColor } from '../../../apps/common/helpers/forUI';
 export const ModuleName = '3nClient.app.pcd-contact-icon';
 
-export function addComponent(ng: angular.IAngularStatic): void {
+export function addComponent(ng: IAngularStatic): void {
   const mod = ng.module(ModuleName, []);
   mod.component('pcdContactIcon', componentConfig);
 }
@@ -42,7 +42,7 @@ class PcdContactIconComponent {
 
   static $inject = ['$scope'];
   constructor(
-    private $scope: angular.IScope,
+    private $scope: IScope,
   ) {}
 
   $onInit() {
@@ -84,10 +84,9 @@ class PcdContactIconComponent {
     }
     return '';
   }
-
 }
 
-const componentConfig: angular.IComponentOptions = {
+const componentConfig: IComponentOptions = {
   bindings: {
     isGroup: '<',
     size: '<',

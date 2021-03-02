@@ -14,10 +14,10 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
+import { IAngularStatic, IComponentOptions } from 'angular';
 export const ModuleName = '3nClient.app.nav-item';
 
-export function addComponent(ng: angular.IAngularStatic): void {
+export function addComponent(ng: IAngularStatic): void {
   const mod = ng.module(ModuleName, []);
   mod.component('navItem', componentConfig);
 }
@@ -40,7 +40,7 @@ class NavItemComponent {
   public disable: boolean;
 }
 
-const componentConfig: angular.IComponentOptions = {
+const componentConfig: IComponentOptions = {
   bindings: {
     sref: '<',
     name: '<',

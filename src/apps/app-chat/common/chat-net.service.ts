@@ -14,7 +14,6 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { from, merge } from 'rxjs';
 import { filter, flatMap, share, tap } from 'rxjs/operators';
 import { appState } from '../../common/services/app-store';

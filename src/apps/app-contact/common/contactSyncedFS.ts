@@ -15,7 +15,7 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { APP_FILE_NAMES, AppId, APPS } from '../../../common/const';
+import { APP_FILE_NAMES, APPS } from '../../../common/const';
 import { JsonFromFile } from '../../../common/services/fs/commonSyncedFS';
 
 export class ContactSyncedFS {

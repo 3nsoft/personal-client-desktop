@@ -14,7 +14,7 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-import { IAngularStatic, IRootScopeService } from 'angular';
+import { IAngularStatic, IRootScopeService, material } from 'angular';
 
 export let ModuleName = '3nClient.services.confirm-dialog';
 export let ConfirmDialogServiceName = 'confirmDialogService';
@@ -28,7 +28,7 @@ export class ConfirmDialogService {
   static $inject = ['$rootScope', '$mdDialog'];
   constructor(
     private $rootScope: IRootScopeService,
-    private $mdDialog: angular.material.IDialogService,
+    private $mdDialog: material.IDialogService,
   ) {}
 
   public showConfirm<T>(

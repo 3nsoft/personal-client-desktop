@@ -16,8 +16,8 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IAngularStatic } from 'angular';
-import { html2text } from '../../../common/helpers';
+import { IAngularStatic, uiNotification } from 'angular';
+import { html2text } from '../../../common/helpers/forHTML';
 import { logError } from '../../../../common/services/libs/logging';
 
 export const ModuleName = '3nClient.services.message-manager-helpers';
@@ -32,7 +32,7 @@ export class MessageManagerHelpersService {
   static $inject = [ 'Notification' ];
 
   constructor(
-    private Notification: angular.uiNotification.INotificationService,
+    private Notification: uiNotification.INotificationService,
   ) {}
 
   async saveMsgContent(content: client3N.MessageEdited, mode: 'html' | 'text'): Promise<void> {

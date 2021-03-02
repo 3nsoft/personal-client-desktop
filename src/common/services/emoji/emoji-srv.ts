@@ -15,11 +15,11 @@
  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { element, IAngularStatic, IScope } from 'angular';
+import { element, IAngularStatic, IScope, IPromise, material } from 'angular';
 import { emojiGroups, emojiList } from './emoji-list';
 
-export let ModuleName = '3nClient.services.emoji';
-export let EmojiServiceName = 'emojiService';
+export const ModuleName = '3nClient.services.emoji';
+export const EmojiServiceName = 'emojiService';
 
 export function addService(angular: IAngularStatic): void {
   const module = angular.module(ModuleName, []);
@@ -38,16 +38,16 @@ export class Srv {
 
   static $inject = ['$mdDialog'];
   constructor(
-    private $mdDialog: angular.material.IDialogOptions,
+    private $mdDialog: material.IDialogOptions,
   ) {}
 
-  openEmojiList(): angular.IPromise<client3N.Emoji> {
+  openEmojiList(): IPromise<client3N.Emoji> {
     return (this.$mdDialog as any).show({
       parent: element(document.body),
       clickOutsideToClose: true,
       escapeToClose: true,
       templateUrl: './common/services/emoji/emoji.html',
-      controller: ['$scope', '$mdDialog', ($scope: EmojiScope, $mdDialog: angular.material.IDialogService) => {
+      controller: ['$scope', '$mdDialog', ($scope: EmojiScope, $mdDialog: material.IDialogService) => {
         $scope.emGroups = emojiGroups.slice();
         $scope.emList = emojiList.slice();
 

@@ -16,15 +16,8 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-// import { getIcon } from './pcd-icon.helper';
-
+import { IScope, IDirective, IAugmentedJQuery, IAngularStatic } from 'angular';
 export const ModuleName = '3nClient.directive.pcd-icon';
-
-export function addDirective(angular: angular.IAngularStatic): void {
-  const mod = angular.module(ModuleName, []);
-  mod.directive('pcdIcon', PcdIconDirective.instance);
-}
 
 const SHAPES: {[name: string]: string} = {
   'help': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/><path d="M0 0h24v24H0z" fill="none"/></svg>',
@@ -80,15 +73,15 @@ const SHAPES: {[name: string]: string} = {
   'stop': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 6h12v12H6z"/></svg>',
 };
 
-class PcdIconDirective implements angular.IDirective {
+class PcdIconDirective implements IDirective {
 
   restrict = 'E';
 
-  static instance(): angular.IDirective {
+  static instance(): IDirective {
     return new PcdIconDirective();
   }
 
-  link(scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: any) {
+  link(scope: IScope, element: IAugmentedJQuery, attrs: any) {
     console.debug(scope); // tslint:disable-line
     const size: string = attrs['size'] === undefined ? '24' : attrs['size'];
     let shape: string = this.getShape(attrs['icon']);
@@ -107,7 +100,7 @@ class PcdIconDirective implements angular.IDirective {
   }
 
   private createIcon(
-    element: angular.IAugmentedJQuery,
+    element: IAugmentedJQuery,
     shape: string,
     color: string,
     size: string,
@@ -126,4 +119,9 @@ class PcdIconDirective implements angular.IDirective {
     return SHAPES['help'];
   }
 
+}
+
+export function addDirective(angular: IAngularStatic): void {
+  const mod = angular.module(ModuleName, []);
+  mod.directive('pcdIcon', PcdIconDirective.instance);
 }

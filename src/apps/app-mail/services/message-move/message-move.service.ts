@@ -14,8 +14,7 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { copy, element, IAngularStatic, IScope, ITimeoutService } from 'angular';
+import { copy, element, IAngularStatic, IScope, ITimeoutService, material } from 'angular';
 import { appMailState, messageSyncedFS } from '../../common/app-mail-store';
 import { prepareFolderList } from './message-move.helpers';
 import { SYS_MAIL_FOLDERS } from '../../../../common/const';
@@ -41,7 +40,7 @@ export class MessageMoveService {
   static $inject = ['$mdDialog'];
 
   constructor(
-    private $mdDialog: angular.material.IDialogService,
+    private $mdDialog: material.IDialogService,
   ) {}
 
   public openMessageMoveManager(msgKeys: string[] = []): void {
@@ -56,7 +55,7 @@ export class MessageMoveService {
         '$mdConstant',
         '$mdDialog',
         '$timeout',
-        async ($scope: MessageMove, $mdConstant: any, $mdDialog: angular.material.IDialogService, $timeout: ITimeoutService) => {
+        async ($scope: MessageMove, $mdConstant: any, $mdDialog: material.IDialogService, $timeout: ITimeoutService) => {
           $scope.folders = prepareFolderList(appMailState.values.list);
           appMailState
             .change$

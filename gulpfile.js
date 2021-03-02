@@ -57,7 +57,7 @@ const manifest = require(`./${MANIFEST_FILE}`);
 const APP_FOLDER_NAME = manifest.appDomain.split('.').reverse().join('.');
 const MOCK_CONF_FILE = 'mock-conf.json';
 
-const BUILD = "./public";
+const BUILD = "./public/app";
 const ELECTRON = "../core-platform-electron";
 const APP_FOLDER = `${ELECTRON}/build/all/apps/${APP_FOLDER_NAME}`;
 const MOCK_CONFS = `${ELECTRON}/build/all/mock-confs`;
@@ -76,8 +76,10 @@ gulp.task(
 gulp.task(
   "create-lib",
   gulp.series(
-    copy("./src/libs/**/*.*", "./public/libs"),
-    copy("./src/assets/**/*.*", "./public/assets"),
+		copy("./manifest.json", "./public"),
+		copy("./mock-conf.json", "./public"),
+    copy("./src/libs/**/*.*", "./public/app/libs"),
+    copy("./src/assets/**/*.*", "./public/app/assets"),
     (cb) => {
       for (let item of LIBS) {
         gulp.src(item.from).pipe(gulp.dest(item.to));
@@ -89,7 +91,7 @@ gulp.task(
 
 gulp.task(
   "create-html",
-  copy("./src/**/*.html", "./public")
+  copy("./src/**/*.html", "./public/app")
 );
 
 gulp.task("styles", function() {
@@ -104,7 +106,7 @@ gulp.task("concat-css", function () {
 	return gulp.src('./temp/**/*.css')
 		.pipe(concatCss("index.css"))
 		.pipe(gulpif(env === 'production', uglifycss()))
-		.pipe(gulp.dest('./public/'));
+		.pipe(gulp.dest('./public/app/'));
 });
 
 
@@ -112,17 +114,17 @@ gulp.task(
 	"del-html",
 	del(
 		[
-			"./public/*",
-			!"./public/index.js",
-      !"./public/index.css",
-      !"./public/libs",
-      !"./public/assets"
+			"./public/app/*",
+			!"./public/app/index.js",
+      !"./public/app/index.css",
+      !"./public/app/libs",
+      !"./public/app/assets"
 		]
 	)
 );
 
-gulp.task("del-css", del(["./public/index.css"]));
-gulp.task("del-js", del(["./public/index.js"]));
+gulp.task("del-css", del(["./public/app/index.css"]));
+gulp.task("del-js", del(["./public/app/index.js"]));
 
 gulp.task("del-temp", del(["./temp/"]));
 
@@ -163,7 +165,7 @@ gulp.task(
 	"browserify",
 	browserifySubTask(
 		"./temp/index.js",
-		"./public",
+		"./public/app",
 	),
 );
 
@@ -205,6 +207,7 @@ gulp.task("help", function(callback) {
 	callback();
 });
 
-gulp.task("build", gulp.series("del-public", "create-lib", gulp.parallel("create-html", "create-css", "create-js"), "del-temp", "to-electron"));
+// gulp.task("build", gulp.series("del-public", "create-lib", gulp.parallel("create-html", "create-css", "create-js"), "del-temp", "to-electron"));
+gulp.task("build", gulp.series("del-public", "create-lib", gulp.parallel("create-html", "create-css", "create-js"), "del-temp"));
 gulp.task("build:prod", gulp.series("pre-prod", "build"));
 gulp.task("default", gulp.series("help"));

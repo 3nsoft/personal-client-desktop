@@ -14,17 +14,9 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-import * as angular from 'angular';
+import angular from 'angular';
 
-export let ModuleName = '3nClient.filter.toArray';
-export let ToArrayFilterName = 'toArray';
-
-export function addFilter(ng: angular.IAngularStatic): void {
-  const mod = ng.module(ModuleName, []);
-  mod.filter(ToArrayFilterName, toArray);
-}
-
-function toArray() {
+export function toArray() {
   return (obj, addKey) => {
     if (!angular.isObject(obj)) { return obj; }
     if ( addKey === false ) {

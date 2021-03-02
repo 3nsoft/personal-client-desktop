@@ -14,12 +14,10 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { IAngularStatic, IComponentOptions, ITimeoutService } from 'angular';
 import { Subject } from 'rxjs/Subject';
 import { takeUntil } from 'rxjs/operators';
 import { appMailState } from '../common/app-mail-store';
-import * as AppMailServiceModule from '../services/app-mail.service';
 import * as MsgMoveSrvModule from '../services/message-move/message-move.service';
 import * as ConfirmServiceModule from '../../common/services/confirm-dialog.service';
 import { getMessageListByFolder, messageListToArray } from '../common/app-mail-messages.helper';
@@ -47,14 +45,12 @@ class AppMailMessagesComponent {
     '$timeout',
     MsgMoveSrvModule.MessageMoveServiceName,
     ConfirmServiceModule.ConfirmDialogServiceName,
-    AppMailServiceModule.AppMailServiceName,
   ];
 
   constructor(
     private $timeout: ITimeoutService,
     private msgMoveSrv: MsgMoveSrvModule.MessageMoveService,
     private confirmSrv: ConfirmServiceModule.ConfirmDialogService,
-    private appMailSrv: AppMailServiceModule.AppMailService,
   ) {}
 
   $onInit(): void {

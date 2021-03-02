@@ -9,6 +9,7 @@
     "removeComments": true,
     "sourceMap": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "noEmitOnError": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,

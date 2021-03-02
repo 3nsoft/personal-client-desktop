@@ -15,9 +15,8 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IAngularStatic } from 'angular';
-import {appMailState, messageSyncedFS} from '../common/app-mail-store';
-import * as MailServiceModule from './app-mail.service';
+import { IAngularStatic, uiNotification } from 'angular';
+import { appMailState, messageSyncedFS } from '../common/app-mail-store';
 import { SYS_MAIL_FOLDERS } from '../../../common/const';
 
 export const ModuleName = '3nClient.services.attach';
@@ -29,11 +28,10 @@ export function addService(ng: IAngularStatic): void {
 }
 
 export class AttachService {
-  static $inject = [MailServiceModule.AppMailServiceName, 'Notification'];
+  static $inject = ['Notification'];
 
   constructor(
-    private mailSrv: MailServiceModule.AppMailService,
-    private Notification: angular.uiNotification.INotificationService,
+    private Notification: uiNotification.INotificationService,
   ) {}
 
   public async loadFilesFromExternalFS(

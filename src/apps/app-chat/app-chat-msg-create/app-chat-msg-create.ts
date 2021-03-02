@@ -14,7 +14,7 @@
  You should have received a copy of the GNU General Public License along with this program.
  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IAngularStatic, IScope, ITimeoutService } from 'angular';
+import { IAngularStatic, IComponentOptions, ITimeoutService } from 'angular';
 import { appState } from '../../common/services/app-store';
 import { appChatState } from '../common/app-chat-store';
 import { Observable, Subject } from 'rxjs';
@@ -42,9 +42,8 @@ class Controller {
   protected changeProc: SingleProc|undefined = new SingleProc();
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  static $inject = ['$scope', '$timeout', ChatNetSrvMod.ChatNetSrvName, EmojiSrvMod.EmojiServiceName];
+  static $inject = ['$timeout', ChatNetSrvMod.ChatNetSrvName, EmojiSrvMod.EmojiServiceName];
   constructor(
-    private $scope: IScope,
     private $timeout: ITimeoutService,
     private chatNetSrv: ChatNetSrvMod.Srv,
     private emojiSrv: EmojiSrvMod.Srv,
@@ -118,7 +117,7 @@ class Controller {
 
 }
 
-const componentConfig: angular.IComponentOptions = {
+const componentConfig: IComponentOptions = {
   bindings: {
     msgOutStream$: '< msgOutStream',
     msgOutChangeStream$: '< msgOutChangeStream',

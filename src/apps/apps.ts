@@ -15,7 +15,12 @@
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import * as angular from 'angular';
+import {
+  IAngularStatic,
+  IComponentOptions,
+  ITimeoutService,
+  material,
+} from 'angular';
 import { StateService, Transition } from '@uirouter/angularjs';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -31,7 +36,7 @@ import { appChatState } from './app-chat/common/app-chat-store';
 import { appMailState } from './app-mail/common/app-mail-store';
 
 export let ModuleName = '3nClient.apps';
-export function addComponent(ng: angular.IAngularStatic): void {
+export function addComponent(ng: IAngularStatic): void {
   const mod = ng.module(ModuleName, []);
   mod.component('apps', componentConfig);
 }
@@ -55,9 +60,9 @@ class AppsComponent {
   ];
   constructor(
     private $state: StateService,
-    private $timeout: angular.ITimeoutService,
+    private $timeout: ITimeoutService,
     private $transitions: Transition,
-    private $mdSidenav: angular.material.ISidenavService,
+    private $mdSidenav: material.ISidenavService,
     private commonSrv: CommonServiceModule.CommonService,
     private msgReciveSrv: MsgReceivingServiceModule.MessageReceivingService,
     private chatNetSrv: ChatNetServiceModule.Srv,
@@ -201,7 +206,7 @@ class AppsComponent {
 
 }
 
-const componentConfig: angular.IComponentOptions = {
+const componentConfig: IComponentOptions = {
   bindings: {},
   templateUrl: './apps/apps.html',
   controller: AppsComponent,

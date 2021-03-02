@@ -14,15 +14,15 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
+import { IAngularStatic } from 'angular';
 import { appContactsState } from '../common/app-contact-store';
 import { ContactSyncedFS } from '../common/contactSyncedFS';
-import { createNewPersonList } from '../../common/helpers';
+import { createNewPersonList } from '../../common/helpers/forAppContact';
 
 export let ModuleName = '3nClient.services.app-contacts';
 export let AppContactsServiceName = 'appContacstService';
 
-export function addService(angular: angular.IAngularStatic): void {
+export function addService(angular: IAngularStatic): void {
   const module = angular.module(ModuleName, []);
   module.service(AppContactsServiceName, AppContactsService);
 }

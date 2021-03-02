@@ -27,9 +27,7 @@ const APP_DEFAULT_PALETTE = {
 
 export function configApp(
   $mdThemingProvider: material.IThemingProvider,
-  // ngQuillConfigProvider: any,
   squireServiceProvider: any,
-  NotificationProvider: angular.uiNotification.INotificationProvider,
 ): void {
 
   /* add user theme */
@@ -41,24 +39,6 @@ export function configApp(
 
   $mdThemingProvider.setDefaultTheme('myTheme');
   (window as any).mdT = $mdThemingProvider;
-
-  /* config Quill Editor */
-  const toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    [{ 'color': [] }],          // dropdown with defaults from theme
-    ['blockquote', 'code-block'],
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }]
-  ];
-  // const toolbarOptions = [
-  //   [{ 'font': [] }],
-  //   [{ 'align': [] }],
-  //   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  //   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  //   ['blockquote', 'code-block'],
-  //   [{ 'list': 'ordered'}, { 'list': 'bullet' }]
-  // ];
 
   squireServiceProvider.buttonDefaults = {
     header: true,
@@ -73,13 +53,4 @@ export function configApp(
     alignLeft: true,
     alignCenter: true,
   };
-
-  // ngQuillConfigProvider.set({
-  //   modules: {
-  //     toolbar: toolbarOptions,
-  //   },
-  //   theme: 'snow',
-  //   placeholder: 'Type here ...',
-  // });
-
 }

@@ -14,7 +14,6 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
   copy,
   element,
@@ -26,13 +25,10 @@ import {
   ITimeoutService,
 } from 'angular';
 import { appState } from '../../../common/services/app-store';
-import { appContactsState } from '../../../app-contact/common/app-contact-store';
 import { appMailState, messageSyncedFS } from '../../common/app-mail-store';
-import * as ConfirmDialogService from '../../../common/services/confirm-dialog.service';
 import * as MsgSendService from '../message-send.service';
 import * as AttachSrvModule from '../attach.service';
-import * as MessageManagerHelpersServiceModule from './message-manager.helpers.service';
-import { checkAddress, getAlias, getElementColor } from '../../../common/helpers';
+import { checkAddress, getElementColor } from '../../../common/helpers';
 import { Message } from './message.model';
 import { SYS_MAIL_FOLDERS } from '../../../../common/const';
 import {
@@ -84,21 +80,15 @@ export class MessageManagerService {
   static $inject = [
     '$timeout',
     '$mdDialog',
-    ConfirmDialogService.ConfirmDialogServiceName,
     MsgSendService.MessageSendServiceName,
     AttachSrvModule.AttachServiceName,
-    'Notification',
-    MessageManagerHelpersServiceModule.MessageManagerHelpersServiceName,
   ];
 
   constructor(
     private $timeout: ITimeoutService,
     private $mdDialog: angular.material.IDialogService,
-    private confirmSrv: ConfirmDialogService.ConfirmDialogService,
     private msgService: MsgSendService.MessageSendService,
     private attachSrv: AttachSrvModule.AttachService,
-    private Notification: angular.uiNotification.INotificationService,
-    private msgHelpersSrv: MessageManagerHelpersServiceModule.MessageManagerHelpersService,
   ) {}
 
   public openMessageManager(

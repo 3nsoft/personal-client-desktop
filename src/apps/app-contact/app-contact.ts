@@ -14,13 +14,10 @@
  You should have received a copy of the GNU General Public License along with
  this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-// import * as AppContactsServiceModule from './services/app-contact.service';
-// import { appContactsState } from './common/app-contact-store';
-
+import { IAngularStatic, IComponentOptions } from 'angular';
 export const ModuleName = '3nClient.app.contact';
 
-export function addComponent(ng: angular.IAngularStatic): void {
+export function addComponent(ng: IAngularStatic): void {
   const mod = ng.module(ModuleName, []);
   mod.component('appContact', componentConfig);
 }
@@ -32,7 +29,7 @@ class AppContactComponent {
   $onInit(): void {}
 }
 
-const componentConfig: angular.IComponentOptions = {
+const componentConfig: IComponentOptions = {
   bindings: {},
   templateUrl: './apps/app-contact/app-contact.html',
   controller: AppContactComponent,
